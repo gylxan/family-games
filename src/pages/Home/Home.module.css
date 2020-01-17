@@ -1,9 +1,23 @@
 .Home {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 2em 0 2em;
 }
 .Logo {
-  height: 40vmin;
+  height: 15em;
+  width: 15em;
   pointer-events: none;
+}
+
+.Control {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.StartButton {
 }
 
 @media (prefers-reduced-motion: no-preference) {
