@@ -21,6 +21,7 @@
   transition: transform 1s; /* Animation */
   margin: 10px;
   text-shadow: 1px 1px black;
+  font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
 }
 
 .Tile.Active {

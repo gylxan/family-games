@@ -8,9 +8,10 @@
 
 body {
   margin: 0;
-  font-family: 'shark_partyshark_party', 'Roboto', 'Oxygen',
+  font-family: 'montserrat', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,7 +22,11 @@ code {
 }
 
 h1 {
-  font-family: 'shark_partyshark_party', Arial, Helvetica, sans-serif;
+  font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
+}
+
+button {
+  font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
 }
 
 button.MuiButton-containedPrimary {
