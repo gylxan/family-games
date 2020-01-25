@@ -2,9 +2,10 @@ import { GameState } from '../interfaces/Game';
 
 import { AnyAction, Reducer } from 'redux';
 import { GAMES } from '../actions/actionTypes';
+import { getStaticGamesWithColors } from '../helpers/game';
 
 const initialState: GameState = Object.freeze({
-  byName: {},
+  byName: getStaticGamesWithColors(),
 });
 
 const gameReducer: Reducer<GameState> = (state: GameState = initialState, action: AnyAction): GameState => {

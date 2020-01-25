@@ -1,24 +1,19 @@
 import React, { CSSProperties } from 'react';
 import styles from './Overview.module.css';
-import { Game, GAMES } from '../../../interfaces/Game';
-import { generateColor } from '../../../services/color';
+import { Game } from '../../../interfaces/Game';
 import { Button } from '@material-ui/core';
 import { getRandomItem } from '../../../services/array';
 
+export interface Props {
+  games: Game[];
+}
 export interface State {
   activeGame: string | null;
-  coloredGames: Array<GameWithColor>;
 }
 
-export interface GameWithColor extends Game {
-  color: string;
-}
-class Overview extends React.PureComponent<{}, State> {
+class Overview extends React.PureComponent<Props, State> {
   state = {
     activeGame: null,
-    coloredGames: GAMES.map((game: Game) => {
-      return { ...game, color: generateColor() };
-    }),
   };
   interval: undefined | number = undefined;
   timeout: undefined | number = undefined;
@@ -49,7 +44,7 @@ class Overview extends React.PureComponent<{}, State> {
   startInterval = (): void => {
     this.interval = window.setInterval(() => {
       this.setState({
-        activeGame: getRandomItem(this.state.coloredGames).name,
+        activeGame: getRandomItem(this.props.games).name,
       });
     }, 500);
   };
@@ -58,7 +53,7 @@ class Overview extends React.PureComponent<{}, State> {
     return (
       <div className={styles.Container}>
         <div className={styles.Games}>
-          {this.state.coloredGames.map((game: GameWithColor) => {
+          {this.props.games.map((game: Game) => {
             const css: CSSProperties = { backgroundColor: game.color };
             if (game.name === this.state.activeGame) {
               css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;

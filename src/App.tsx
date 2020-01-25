@@ -5,7 +5,7 @@ import { Routes } from './services/routes';
 import Home from './pages/Home';
 import styles from './App.module.css';
 import MasterOverview from './pages/games/master/Overview';
-import PlayerOverview from './pages/games/player/Overview';
+import PlayerOverview from './pages/games/player/index';
 
 const App: React.FC = () => (
   <div className={styles.App}>
