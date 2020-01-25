@@ -19,10 +19,10 @@ const Home: React.FC = () => {
         </Link>
         <Link
           to={clickCounter < 10 ? Routes.Home : `${Routes.Master + Routes.Games}`}
-          className="StartMasterButton"
+          className={styles.StartMasterButton}
           onClick={(): void => setClickCounter(clickCounter + 1)}
         >
-          <Button variant={'contained'} color={'secondary'}>
+          <Button>
             Ich bin Master!
           </Button>
         </Link>

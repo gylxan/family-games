@@ -1,6 +1,14 @@
+@font-face {
+  font-family: 'shark_partyshark_party';
+  src: url('assets/fonts/shark_party-webfont.woff2') format('woff2'),
+       url('assets/fonts/shark_party-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'shark_partyshark_party', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,6 +18,27 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1 {
+  font-family: 'shark_partyshark_party', Arial, Helvetica, sans-serif;
+}
+
+button.MuiButton-containedPrimary {
+  background-color: #B53471;
+  box-shadow: 2px 3px 0 black;
+}
+
+button.MuiButton-containedPrimary:hover {
+  background-color: #ED4C67;
+}
+
+.MuiButton-text {
+  color: white;
+}
+
+button .MuiButton-label {
+  font-family: 'shark_partyshark_party', Arial, Helvetica, sans-serif;
 }
 
 a {

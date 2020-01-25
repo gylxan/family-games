@@ -5,6 +5,7 @@
   width: 100%;
   margin: 0 2em 0 2em;
 }
+
 .Logo {
   height: 15em;
   width: 15em;
@@ -17,7 +18,11 @@
   flex-direction: column;
 }
 
-.StartButton {
+.StartMasterButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {

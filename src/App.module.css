@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: rgb(124,66,143);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  background: radial-gradient(circle, rgba(124,66,143,1) 2%, rgba(94,9,121,1) 35%, rgba(21,3,82,1) 100%);
+
 }
 
 

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   width: 100%;
   margin-bottom: 4em;
 }
@@ -18,6 +19,8 @@
   width: 30vh;
   height: 30vh;
   transition: transform 1s; /* Animation */
+  margin: 10px;
+  text-shadow: 1px 1px black;
 }
 
 .Tile.Active {
