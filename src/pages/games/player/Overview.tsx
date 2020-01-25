@@ -4,12 +4,14 @@ import { Game } from '../../../interfaces/Game';
 import { Button } from '@material-ui/core';
 import { getRandomItem } from '../../../services/array';
 import classNames from 'classnames';
+import { Routes } from '../../../services/routes';
 
 export interface Props {
   games: Game[];
+  push: (url: string) => void;
 }
 export interface State {
-  activeGame: string | null;
+  activeGame: Game | null;
   isStarted: boolean;
   isStopping: boolean;
 }
@@ -49,7 +51,7 @@ class Overview extends React.PureComponent<Props, State> {
   startInterval = (): void => {
     this.interval = window.setInterval(() => {
       this.setState({
-        activeGame: getRandomItem(this.props.games).name,
+        activeGame: getRandomItem(this.props.games),
       });
     }, 250);
   };
@@ -60,20 +62,29 @@ class Overview extends React.PureComponent<Props, State> {
     }
   };
 
+  redirectToGameAfterTimeout = (): void => {
+    const { push } = this.props;
+    const timeout = window.setTimeout(() => {
+      window.clearTimeout(timeout);
+      push(`${Routes.Player}${Routes.Games}${((this.state.activeGame as unknown) as Game).url}`);
+    }, 3000);
+  };
+
   startSlowingInterval = (time: number): void => {
     this.stopSlowingInterval();
     this.slowingInterval = window.setTimeout(() => {
       if (time < MAX_INTERVAL) {
-        this.setState({
-          activeGame: getRandomItem(this.props.games).name,
-        });
         this.startSlowingInterval(time + START_INTERVAL);
+        this.setState({
+          activeGame: getRandomItem(this.props.games),
+        });
       } else {
         this.stopSlowingInterval();
         this.setState({
           isStarted: false,
           isStopping: false,
         });
+        this.redirectToGameAfterTimeout();
       }
     }, time);
   };
@@ -84,7 +95,8 @@ class Overview extends React.PureComponent<Props, State> {
         <div className={styles.Games}>
           {this.props.games.map((game: Game) => {
             const css: CSSProperties = { backgroundColor: game.color };
-            const isActiveGame = game.name === this.state.activeGame;
+            const isActiveGame =
+              this.state.activeGame !== null && game.name === ((this.state.activeGame as unknown) as Game).name;
             if (isActiveGame) {
               css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;
             }
