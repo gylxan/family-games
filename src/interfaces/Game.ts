@@ -29,3 +29,7 @@ export const GAMES: Array<Game> = [
     url: 'what',
   },
 ];
+
+export interface GameState {
+  byName: { [name: string]: Game };
+}
