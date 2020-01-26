@@ -1,6 +1,6 @@
 import { AnyAction, Reducer } from 'redux';
-import { TEAMS } from '../actions/actionTypes';
-import Team from '../interfaces/Team';
+import { TEAMS } from '../actionTypes';
+import Team from '../../interfaces/Team';
 
 export interface TeamState {
   data: Team[];

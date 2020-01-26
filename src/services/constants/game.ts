@@ -1,4 +1,4 @@
-import { Game } from '../interfaces/Game';
+import { Game } from '../../interfaces/Game';
 
 export const STATIC_GAMES: Array<Game> = [
   {

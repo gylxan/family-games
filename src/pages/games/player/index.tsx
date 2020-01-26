@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Overview from './Overview';
-import { getGamesArray } from '../../../selectors/game';
+import { getGamesArray } from '../../../redux/games/selectors';
 import { Game } from '../../../interfaces/Game';
 import { push } from 'connected-react-router';
-import RootState from '../../../interfaces/RootState';
+import RootState from '../../../redux/RootState';
 
 interface Props {
   games: Game[];

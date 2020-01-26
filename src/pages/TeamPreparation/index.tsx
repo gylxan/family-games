@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { updateTeam } from '../../actions/team';
+import { updateTeam } from '../../redux/team/actions';
 import TeamPreparation from './Teampreparation';
-import { getTeamById } from '../../selectors/team';
-import RootState from '../../interfaces/RootState';
+import { getTeamById } from '../../redux/team/selectors';
+import RootState from '../../redux/RootState';
 import Team from '../../interfaces/Team';
 import { Props as TeamPreparationProps } from './Teampreparation';
 import { push } from 'connected-react-router';
