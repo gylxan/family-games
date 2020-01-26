@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import styles from './Overview.module.css';
 import { Game } from '../../../interfaces/Game';
 import { Button } from '@material-ui/core';
-import { getRandomItem } from '../../../services/array';
+import { getRandomItem } from '../../../services/utils/array';
 import classNames from 'classnames';
 import { LinkTo } from '../../../services/routes';
 

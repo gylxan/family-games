@@ -1,5 +1,5 @@
-import { Game } from '../interfaces/Game';
-import RootState from '../interfaces/RootState';
+import { Game } from '../../interfaces/Game';
+import RootState from '../RootState';
 
 export const getGameByName = (state: RootState, name: string): Game => state.game.byName[name];
 

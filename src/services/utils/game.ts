@@ -1,5 +1,5 @@
-import { Game } from '../interfaces/Game';
-import { generateColor } from '../services/color';
+import { Game } from '../../interfaces/Game';
+import { generateColor } from './color';
 import { STATIC_GAMES } from '../constants/game';
 
 export const getStaticGamesWithColors = (): { [name: string]: Game } =>

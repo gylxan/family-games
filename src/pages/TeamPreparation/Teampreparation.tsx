@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TeamPreparation.module.css';
 import { Button, TextField } from '@material-ui/core';
-import { COLORS } from '../../constants/team';
+import { COLORS } from '../../services/constants/team';
 import Team from '../../interfaces/Team';
 import classNames from 'classnames';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -27,6 +27,7 @@ const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
       <div className={styles.Row}>
         <div className={styles.TeamName}>
           <TextField
+            autoFocus
             label="Teamname"
             variant="filled"
             value={team.name}
