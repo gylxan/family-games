@@ -1,0 +1,10 @@
+.Description {
+  width: 80vw;
+  text-align: left;
+  margin-bottom: 2em;
+}
+
+.Description p {
+  margin: 5px;
+  font-family: 'montserrat', Arial, Helvetica, sans-serif;
+}

@@ -29,6 +29,10 @@ button {
   font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
 }
 
+button.MuiButton-contained {
+  font-size: 1em;
+}
+
 button.MuiButton-containedPrimary {
   background-color: #B53471;
   box-shadow: 2px 3px 0 black;
