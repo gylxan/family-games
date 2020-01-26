@@ -8,11 +8,11 @@ export interface Props {
 }
 
 const GameDescription: React.FC<Props> = ({ children, onStart }) => (
-  <>
+  <div className={styles.GameDescription}>
     <div className={styles.Description}>{children}</div>
     <Button variant={'contained'} color={'primary'} onClick={onStart}>
       Alles klar!
     </Button>
-  </>
+  </div>
 );
 export default GameDescription;
