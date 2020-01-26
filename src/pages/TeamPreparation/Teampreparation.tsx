@@ -28,7 +28,7 @@ const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
         <div className={styles.TeamName}>
           <TextField
             label="Teamname"
-            variant="outlined"
+            variant="filled"
             value={team.name}
             onChange={(event): void => updateTeam({ ...team, name: event.currentTarget.value })}
           />
