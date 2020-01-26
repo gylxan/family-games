@@ -16,9 +16,7 @@ const App: React.FC = () => (
       <Route path={Routes.Home} exact>
         <Home />
       </Route>
-      <Route path={Routes.TeamPreparation}>
-        <TeamPreparation />
-      </Route>
+      <Route path={Routes.TeamPreparation} component={TeamPreparation} />
       <Route
         path={Routes.Player}
         render={({ match }): React.ReactNode => (

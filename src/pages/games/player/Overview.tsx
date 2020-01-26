@@ -4,7 +4,7 @@ import { Game } from '../../../interfaces/Game';
 import { Button } from '@material-ui/core';
 import { getRandomItem } from '../../../services/array';
 import classNames from 'classnames';
-import { Routes } from '../../../services/routes';
+import { LinkTo } from '../../../services/routes';
 
 export interface Props {
   games: Game[];
@@ -66,7 +66,7 @@ class Overview extends React.PureComponent<Props, State> {
     const { push } = this.props;
     const timeout = window.setTimeout(() => {
       window.clearTimeout(timeout);
-      push(`${Routes.Player}${Routes.Games}${((this.state.activeGame as unknown) as Game).url}`);
+      push(LinkTo.playerGame(((this.state.activeGame as unknown) as Game).url));
     }, 3000);
   };
 

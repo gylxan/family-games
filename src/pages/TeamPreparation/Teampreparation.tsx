@@ -4,21 +4,32 @@ import { Button, TextField } from '@material-ui/core';
 import { COLORS } from '../../constants/team';
 import Team from '../../interfaces/Team';
 import classNames from 'classnames';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { LinkTo } from '../../services/routes';
 
-export interface Props {
+export interface Props extends RouteComponentProps {
   team: Team;
   updateTeam: (team: Team) => void;
+  push: (url: string) => void;
 }
 
-const TeamPreparation: React.FC<Props> = ({ team, updateTeam }) => {
+const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
+  const handleContinue = (): void => {
+    if (team.id === 2) {
+      push(LinkTo.playerGamesOverview());
+    } else {
+      push(LinkTo.teamPreparation(2));
+    }
+  };
   return (
     <div className={styles.TeamPreparation}>
-      <h1>Wählt euren Teamnamen und eine Farbe aus!</h1>
+      <h1>Team {team.id} wählt euren Namen und eine Farbe aus!</h1>
       <div className={styles.Row}>
         <div className={styles.TeamName}>
           <TextField
             label="Teamname"
             variant="outlined"
+            value={team.name}
             onChange={(event): void => updateTeam({ ...team, name: event.currentTarget.value })}
           />
         </div>
@@ -33,11 +44,11 @@ const TeamPreparation: React.FC<Props> = ({ team, updateTeam }) => {
           ))}
         </div>
       </div>
-      <Button variant={'contained'} color={'primary'}>
+      <Button variant={'contained'} color={'primary'} onClick={handleContinue}>
         Weiter
       </Button>
     </div>
   );
 };
 
-export default TeamPreparation;
+export default withRouter(TeamPreparation);

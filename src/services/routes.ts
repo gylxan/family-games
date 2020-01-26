@@ -6,3 +6,10 @@ export enum Routes {
   Games = '/games',
   MusicGame = '/music',
 }
+
+export const LinkTo = {
+  playerGame: (game: string): string => `${Routes.Player}${Routes.Games}${game}`,
+  playerGamesOverview: (): string => `${Routes.Player}${Routes.Games}`,
+  masterGame: (game: string): string => `${Routes.Master}${Routes.Games}${game}`,
+  teamPreparation: (id: number): string => Routes.TeamPreparation.replace(':id', '' + id),
+};
