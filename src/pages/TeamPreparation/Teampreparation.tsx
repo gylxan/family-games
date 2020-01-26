@@ -22,33 +22,35 @@ const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
     }
   };
   return (
-    <div className={styles.TeamPreparation}>
+    <>
       <h1>Team {team.id} wählt euren Namen und eine Farbe aus!</h1>
-      <div className={styles.Row}>
-        <div className={styles.TeamName}>
-          <TextField
-            autoFocus
-            label="Teamname"
-            variant="filled"
-            value={team.name}
-            onChange={(event): void => updateTeam({ ...team, name: event.currentTarget.value })}
-          />
-        </div>
-        <div className={styles.Colors}>
-          {COLORS.map(color => (
-            <div
-              key={color}
-              className={classNames(styles.ColorTile, { [styles.Active]: color === team.color })}
-              onClick={(): void => updateTeam({ ...team, color })}
-              style={{ backgroundColor: `${color}` }}
+      <div className={styles.TeamPreparation}>
+        <div className={styles.Row}>
+          <div className={styles.TeamName}>
+            <TextField
+              autoFocus
+              label="Teamname"
+              variant="filled"
+              value={team.name}
+              onChange={(event): void => updateTeam({ ...team, name: event.currentTarget.value })}
             />
-          ))}
+          </div>
+          <div className={styles.Colors}>
+            {COLORS.map(color => (
+              <div
+                key={color}
+                className={classNames(styles.ColorTile, { [styles.Active]: color === team.color })}
+                onClick={(): void => updateTeam({ ...team, color })}
+                style={{ backgroundColor: `${color}` }}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <Button variant={'contained'} color={'primary'} onClick={handleContinue}>
+      <Button variant={'contained'} color={'primary'} disabled={!(team.name && team.color)} onClick={handleContinue}>
         Weiter
       </Button>
-    </div>
+    </>
   );
 };
 

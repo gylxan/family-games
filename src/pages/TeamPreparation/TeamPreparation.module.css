@@ -1,5 +1,6 @@
 .TeamPreparation {
-  display: inline-block;
+  margin: 2em 0;
+  max-width: 80vw;
 }
 
 .Row {
@@ -13,25 +14,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 50%;
   padding-right: 25px;
-  width: 30%;
 }
 
 .Colors {
-  width: 40%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 50%;
+  cursor: pointer;
 }
 
 .ColorTile {
-  width: 20vh;
-  height: 20vh;
-  margin-bottom: 6px;
-  margin-top: 6px;
+  width: 10vh;
+  height: 10vh;
+  margin: 6px;
   transition: transform .3s; /* Animation */
 }
 
 .ColorTile.Active {
   transform: scale(1.1);
+  box-shadow: 0 0 0 4px white;
 }
