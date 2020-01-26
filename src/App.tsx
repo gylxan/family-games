@@ -12,7 +12,6 @@ import TeamPointsCounter from './components/TeamPointsCounter';
 
 const App: React.FC = () => (
   <div className={styles.App}>
-    <header className={'Header'} />
     <Switch>
       <Route path={Routes.Home} exact>
         <Home />
