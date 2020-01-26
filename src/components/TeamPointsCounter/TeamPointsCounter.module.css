@@ -5,6 +5,8 @@
   width: 95%;
   margin-top: 20px;
   margin-bottom: 20px;
+  position: absolute;
+  top: 0;
 }
 
 .TeamPoints {

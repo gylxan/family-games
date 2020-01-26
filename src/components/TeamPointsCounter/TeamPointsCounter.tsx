@@ -9,13 +9,13 @@ export interface Props {
 }
 
 const TeamPointsCounter: React.FC<Props> = ({ teams }) => (
-  <div className={styles.TeamPointsCounter}>
+  <header className={styles.TeamPointsCounter}>
     {teams.map(team => (
       <Chip
         key={team.id}
         className={styles.TeamPoints}
-        style={{ backgroundColor: team.color }}
-        icon={<Group />}
+        style={{ backgroundColor: team.color, color: 'white' }}
+        icon={<Group style={{ color: 'white' }} />}
         label={
           <strong>
             {team.name}: {team.points}
@@ -23,7 +23,7 @@ const TeamPointsCounter: React.FC<Props> = ({ teams }) => (
         }
       />
     ))}
-  </div>
+  </header>
 );
 
 export default TeamPointsCounter;
