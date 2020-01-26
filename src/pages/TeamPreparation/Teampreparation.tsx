@@ -23,7 +23,7 @@ const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
   };
   return (
     <>
-      <h1>Team {team.id} wählt euren Namen und eine Farbe aus!</h1>
+      <h1>Team {team.id}, wählt euren Namen und eine Farbe aus!</h1>
       <div className={styles.TeamPreparation}>
         <div className={styles.Row}>
           <div className={styles.TeamName}>
