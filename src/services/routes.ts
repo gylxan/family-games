@@ -5,6 +5,7 @@ export enum Routes {
   Master = '/master',
   Games = '/games',
   MusicGame = '/music',
+  JustOneGame = '/just-one',
 }
 
 export const LinkTo = {

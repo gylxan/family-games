@@ -1,16 +1,6 @@
 .GameDescription {
   animation: fadeIn 5s;
-}
-
-.Description {
-  width: 80vw;
-  text-align: left;
-  margin-bottom: 2em;
-}
-
-.Description p {
-  margin: 5px;
-  font-family: 'montserrat', Arial, Helvetica, sans-serif;
+  padding-bottom: 2em;
 }
 
 @keyframes fadeIn {
@@ -20,4 +10,17 @@
   100% {
     opacity: 1;
   }
+}
+
+.Description {
+  width: 80vw;
+  max-height: 60vh;
+  margin-bottom: 2em;
+  text-align: left;
+  overflow: auto;
+}
+
+.Description p {
+  margin: 5px;
+  font-family: 'montserrat', Arial, Helvetica, sans-serif;
 }

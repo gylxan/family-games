@@ -57,8 +57,13 @@ export const STATIC_GAMES: Array<Game> = [
     alreadyPlayed: false,
   },
   {
-    name: 'Team-Knoten',
-    url: '/team-knoten',
+    name: 'Teambindung',
+    url: '/teambindung',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Just One',
+    url: '/just-one',
     alreadyPlayed: false,
   },
 ];

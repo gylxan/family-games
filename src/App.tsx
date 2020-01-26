@@ -9,6 +9,7 @@ import PlayerOverview from './pages/games/player';
 import PlayerMusicGame from './pages/games/MusicGame/player/MusicGame';
 import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
+import JustOneGame from './pages/games/JustOneGame/player';
 
 const App: React.FC = () => (
   <div className={styles.App}>
@@ -23,6 +24,7 @@ const App: React.FC = () => (
           <>
             <TeamPointsCounter />
             <Switch>
+              <Route path={`${match.path}${Routes.Games}${Routes.JustOneGame}`} component={JustOneGame} />
               <Route path={`${match.path}${Routes.Games}${Routes.MusicGame}`} component={PlayerMusicGame} />
               <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
             </Switch>
