@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './TeamPreparation.module.css';
 import { Button, TextField } from '@material-ui/core';
 import { COLORS } from '../../services/constants/team';
 import Team from '../../interfaces/Team';
@@ -7,13 +6,16 @@ import classNames from 'classnames';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { LinkTo } from '../../services/routes';
 
+import styles from './TeamPreparation.module.css';
+
 export interface Props extends RouteComponentProps {
   team: Team;
   updateTeam: (team: Team) => void;
   push: (url: string) => void;
+  goBack: () => void;
 }
 
-const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
+const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push, goBack }) => {
   const handleContinue = (): void => {
     if (team.id === 2) {
       push(LinkTo.playerGamesOverview());
@@ -47,9 +49,14 @@ const TeamPreparation: React.FC<Props> = ({ team, updateTeam, push }) => {
           </div>
         </div>
       </div>
-      <Button variant={'contained'} color={'primary'} disabled={!(team.name && team.color)} onClick={handleContinue}>
-        Weiter
-      </Button>
+      <div className={styles.ControlBar}>
+        <Button variant={'contained'} color={'secondary'} onClick={goBack}>
+          Zurück
+        </Button>
+        <Button variant={'contained'} color={'primary'} disabled={!(team.name && team.color)} onClick={handleContinue}>
+          Weiter
+        </Button>
+      </div>
     </>
   );
 };

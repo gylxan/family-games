@@ -5,7 +5,7 @@ import { getTeamById } from '../../redux/team/selectors';
 import RootState from '../../redux/RootState';
 import Team from '../../interfaces/Team';
 import { Props as TeamPreparationProps } from './Teampreparation';
-import { push } from 'connected-react-router';
+import { push, goBack } from 'connected-react-router';
 
 interface Props {
   team: Team;
@@ -20,5 +20,6 @@ const mapStateToProps = (rootState: RootState, ownProps: TeamPreparationProps): 
 const mapDispatchToProps = {
   updateTeam,
   push,
+  goBack
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TeamPreparation);

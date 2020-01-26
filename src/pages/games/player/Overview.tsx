@@ -9,6 +9,7 @@ import { LinkTo } from '../../../services/routes';
 export interface Props {
   games: Game[];
   push: (url: string) => void;
+  goBack: () => void;
 }
 export interface State {
   activeGame: Game | null;
@@ -66,7 +67,7 @@ class Overview extends React.PureComponent<Props, State> {
     const { push } = this.props;
     const timeout = window.setTimeout(() => {
       window.clearTimeout(timeout);
-      push(LinkTo.playerGame(((this.state.activeGame as unknown) as Game).url));
+      push(LinkTo.playerGame(this.state.activeGame.url));
     }, 3000);
   };
 
@@ -95,8 +96,7 @@ class Overview extends React.PureComponent<Props, State> {
         <div className={styles.Games}>
           {this.props.games.map((game: Game) => {
             const css: CSSProperties = { backgroundColor: game.color };
-            const isActiveGame =
-              this.state.activeGame !== null && game.name === ((this.state.activeGame as unknown) as Game).name;
+            const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
             if (isActiveGame) {
               css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;
             }
@@ -120,15 +120,20 @@ class Overview extends React.PureComponent<Props, State> {
           })}
         </div>
 
-        <Button
-          className={styles.StartButton}
-          variant={'contained'}
-          color={'primary'}
-          disabled={this.state.isStopping}
-          onClick={!this.state.isStarted ? this.startRandomGameChoose : this.stopRandomGameChoose}
-        >
-          {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
-        </Button>
+        <div className={styles.ControlBar}>
+          <Button variant={'contained'} color={'secondary'} onClick={this.props.goBack}>
+            Zurück
+          </Button>
+          <Button
+            className={styles.StartButton}
+            variant={'contained'}
+            color={'primary'}
+            disabled={this.state.isStopping}
+            onClick={!this.state.isStarted ? this.startRandomGameChoose : this.stopRandomGameChoose}
+          >
+            {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
+          </Button>
+        </div>
       </div>
     );
   }
