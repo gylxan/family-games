@@ -1,0 +1,12 @@
+.TeamPointsCounter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 95%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.TeamPoints {
+  color: white;
+}

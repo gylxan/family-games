@@ -5,9 +5,10 @@ import { Routes } from './services/routes';
 import Home from './pages/Home';
 import styles from './App.module.css';
 import MasterOverview from './pages/games/master/Overview';
-import PlayerOverview from './pages/games/player/index';
+import PlayerOverview from './pages/games/player';
 import PlayerMusicGame from './pages/games/MusicGame/player/MusicGame';
-import TeamPreparation from './pages/TeamPreparation/index';
+import TeamPreparation from './pages/TeamPreparation';
+import TeamPointsCounter from './components/TeamPointsCounter';
 
 const App: React.FC = () => (
   <div className={styles.App}>
@@ -20,10 +21,13 @@ const App: React.FC = () => (
       <Route
         path={Routes.Player}
         render={({ match }): React.ReactNode => (
-          <Switch>
-            <Route path={`${match.path}${Routes.Games}${Routes.MusicGame}`} component={PlayerMusicGame} />
-            <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
-          </Switch>
+          <>
+            <TeamPointsCounter />
+            <Switch>
+              <Route path={`${match.path}${Routes.Games}${Routes.MusicGame}`} component={PlayerMusicGame} />
+              <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
+            </Switch>
+          </>
         )}
       />
       <Route

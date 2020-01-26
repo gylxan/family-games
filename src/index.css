@@ -62,6 +62,13 @@ button .MuiButton-label {
   font-family: 'shark_partyshark_party', Arial, Helvetica, sans-serif;
 }
 
+
+div.MuiChip-root {
+  font-family: 'montserrat', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+}
+
 a {
   text-decoration: none;
 }
