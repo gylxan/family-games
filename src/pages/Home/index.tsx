@@ -12,7 +12,7 @@ const Home: React.FC = () => {
       <h1>Familien-Quiz</h1>
       <img src={logo} className={styles.Logo} alt="logo" />
       <div className={styles.Control}>
-        <Link to={`${Routes.Player + Routes.Games}`}>
+        <Link to={`${Routes.TeamPreparation}/1`}>
           <Button className={styles.StartButton} variant={'contained'} color={'primary'}>
             Starten
           </Button>

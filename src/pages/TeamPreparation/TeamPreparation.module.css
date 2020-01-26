@@ -1,0 +1,37 @@
+.TeamPreparation {
+  display: inline-block;
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.TeamName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 25px;
+  width: 30%;
+}
+
+.Colors {
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ColorTile {
+  width: 20vh;
+  height: 20vh;
+  margin-bottom: 6px;
+  margin-top: 6px;
+  transition: transform .3s; /* Animation */
+}
+
+.ColorTile.Active {
+  transform: scale(1.1);
+}

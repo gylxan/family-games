@@ -1,8 +1,12 @@
-import { GameState } from '../interfaces/Game';
+import { Game } from '../interfaces/Game';
 
 import { AnyAction, Reducer } from 'redux';
 import { GAMES } from '../actions/actionTypes';
 import { getStaticGamesWithColors } from '../helpers/game';
+
+export interface GameState {
+  byName: { [name: string]: Game };
+}
 
 const initialState: GameState = Object.freeze({
   byName: getStaticGamesWithColors(),

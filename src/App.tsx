@@ -7,6 +7,7 @@ import styles from './App.module.css';
 import MasterOverview from './pages/games/master/Overview';
 import PlayerOverview from './pages/games/player/index';
 import PlayerMusicGame from './pages/games/MusicGame/player/MusicGame';
+import TeamPreparation from './pages/TeamPreparation/index';
 
 const App: React.FC = () => (
   <div className={styles.App}>
@@ -14,6 +15,9 @@ const App: React.FC = () => (
     <Switch>
       <Route path={Routes.Home} exact>
         <Home />
+      </Route>
+      <Route path={Routes.TeamPreparation}>
+        <TeamPreparation />
       </Route>
       <Route
         path={Routes.Player}

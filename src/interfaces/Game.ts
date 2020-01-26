@@ -4,7 +4,3 @@ export interface Game {
   color?: string;
   alreadyPlayed: boolean;
 }
-
-export interface GameState {
-  byName: { [name: string]: Game };
-}
