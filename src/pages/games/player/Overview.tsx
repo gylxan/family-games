@@ -66,7 +66,7 @@ class Overview extends React.PureComponent<Props, State> {
     const { push } = this.props;
     const timeout = window.setTimeout(() => {
       window.clearTimeout(timeout);
-      push(LinkTo.playerGame(((this.state.activeGame as unknown) as Game).url));
+      push(LinkTo.playerGame(this.state.activeGame.url));
     }, 3000);
   };
 
@@ -95,8 +95,7 @@ class Overview extends React.PureComponent<Props, State> {
         <div className={styles.Games}>
           {this.props.games.map((game: Game) => {
             const css: CSSProperties = { backgroundColor: game.color };
-            const isActiveGame =
-              this.state.activeGame !== null && game.name === ((this.state.activeGame as unknown) as Game).name;
+            const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
             if (isActiveGame) {
               css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;
             }
