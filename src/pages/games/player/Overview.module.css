@@ -32,3 +32,8 @@
 .Tile.Chosen {
   transform: scale(1.5);
 }
+
+.ControlBar > button:first-of-type {
+  margin-right: 10px;
+}
+

@@ -9,6 +9,7 @@ import { LinkTo } from '../../../services/routes';
 export interface Props {
   games: Game[];
   push: (url: string) => void;
+  goBack: () => void;
 }
 export interface State {
   activeGame: Game | null;
@@ -119,15 +120,20 @@ class Overview extends React.PureComponent<Props, State> {
           })}
         </div>
 
-        <Button
-          className={styles.StartButton}
-          variant={'contained'}
-          color={'primary'}
-          disabled={this.state.isStopping}
-          onClick={!this.state.isStarted ? this.startRandomGameChoose : this.stopRandomGameChoose}
-        >
-          {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
-        </Button>
+        <div className={styles.ControlBar}>
+          <Button variant={'contained'} color={'secondary'} onClick={this.props.goBack}>
+            Zurück
+          </Button>
+          <Button
+            className={styles.StartButton}
+            variant={'contained'}
+            color={'primary'}
+            disabled={this.state.isStopping}
+            onClick={!this.state.isStarted ? this.startRandomGameChoose : this.stopRandomGameChoose}
+          >
+            {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
+          </Button>
+        </div>
       </div>
     );
   }
