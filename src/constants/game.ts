@@ -2,8 +2,8 @@ import { Game } from '../interfaces/Game';
 
 export const STATIC_GAMES: Array<Game> = [
   {
-    name: 'Game 1',
-    url: '/game1',
+    name: 'Holzmarkt',
+    url: '/holzmarkt',
     alreadyPlayed: false,
   },
   {
@@ -17,8 +17,8 @@ export const STATIC_GAMES: Array<Game> = [
     alreadyPlayed: false,
   },
   {
-    name: 'Trinken',
-    url: '/drink',
+    name: 'Looping Louie',
+    url: '/looping-louie',
     alreadyPlayed: false,
   },
   {
@@ -29,6 +29,36 @@ export const STATIC_GAMES: Array<Game> = [
   {
     name: 'What?!?!',
     url: '/what',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Quiz',
+    url: '/quiz',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Tabu',
+    url: '/tabu',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Erbsenzählen',
+    url: '/erbsenzaehlen',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Kegeln',
+    url: '/kegeln',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Turmbau zu Babel',
+    url: '/turmbau-zu-babel',
+    alreadyPlayed: false,
+  },
+  {
+    name: 'Team-Knoten',
+    url: '/team-knoten',
     alreadyPlayed: false,
   },
 ];
