@@ -1,6 +1,7 @@
 .Container {
   display: block;
   width: 100%;
+  padding-top: 40px;
 }
 
 .Games {
@@ -31,5 +32,3 @@
 .Tile.Chosen {
   transform: scale(1.5);
 }
-
-
