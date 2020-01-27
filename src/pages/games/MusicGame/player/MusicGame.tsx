@@ -12,7 +12,7 @@ class MusicGame extends React.PureComponent<Props, State> {
     isStarted: false,
   };
 
-  startGame = () => {
+  startGame = (): void => {
     this.setState({ isStarted: true });
   };
 

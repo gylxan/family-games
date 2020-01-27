@@ -49,7 +49,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
     activeTeam: undefined,
     currentRound: 0,
     currentWord: '',
-    score: []
+    score: [],
   };
 
   availableWords: string[] = [...WORDS];
@@ -59,7 +59,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
     this.setState({
       isStarted: true,
       activeTeam: getRandomItem(this.props.teams),
-      score: this.props.teams.map(() => 0)
+      score: this.props.teams.map(() => 0),
     });
   };
 
@@ -79,7 +79,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
 
   endTurn = (isSuccess: boolean) => {
     let nextCurrentRound = this.state.currentRound;
-  
+
     const scoreIndex = this.props.teams.findIndex((team: Team) => {
       return isSuccess === (team.name === ((this.state.activeTeam as unknown) as Team).name);
     });
@@ -100,7 +100,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
       currentWord: '',
       activeTeam: nextActiveTeam,
       currentRound: Math.min(nextCurrentRound, MAX_ROUNDS - 1),
-      score: updatedScore
+      score: updatedScore,
     });
   };
 
@@ -153,17 +153,20 @@ class JustOneGame extends React.PureComponent<Props, State> {
                     </Button>
                   </>
                 )
-              ) : (
-                this.state.isFinished ? (
-                  <>
-                    Endstand: 
-                    <ul>
-                      {this.props.teams.map((team, index) => {
-                      return (<li key={index}>{team.name}:{this.state.score[index]}</li>);
+              ) : this.state.isFinished ? (
+                <>
+                  Endstand:
+                  <ul>
+                    {this.props.teams.map((team, index) => {
+                      return (
+                        <li key={index}>
+                          {team.name}:{this.state.score[index]}
+                        </li>
+                      );
                     })}
-                    </ul>
-                  </>
-                ) : (
+                  </ul>
+                </>
+              ) : (
                 <>
                   <p>
                     Macht euch bereit:{' '}
@@ -173,7 +176,6 @@ class JustOneGame extends React.PureComponent<Props, State> {
                     Start
                   </Button>
                 </>
-                )
               )}
             </div>
           </>
