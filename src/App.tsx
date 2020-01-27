@@ -6,10 +6,9 @@ import Home from './pages/Home';
 import styles from './App.module.css';
 import MasterOverview from './pages/games/master/Overview';
 import PlayerOverview from './pages/games/player';
-import PlayerMusicGame from './pages/games/MusicGame/player/MusicGame';
 import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
-import JustOneGame from './pages/games/JustOneGame/player';
+import { STATIC_GAMES } from './services/constants/game';
 
 const App: React.FC = () => (
   <div className={styles.App}>
@@ -24,8 +23,13 @@ const App: React.FC = () => (
           <>
             <TeamPointsCounter />
             <Switch>
-              <Route path={`${match.path}${Routes.Games}${Routes.JustOneGame}`} component={JustOneGame} />
-              <Route path={`${match.path}${Routes.Games}${Routes.MusicGame}`} component={PlayerMusicGame} />
+              {STATIC_GAMES.map(game => (
+                <Route
+                  key={`player-${game.name}`}
+                  path={`${match.path}${Routes.Games}${game.url}`}
+                  component={game.component}
+                />
+              ))}
               <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
             </Switch>
           </>
