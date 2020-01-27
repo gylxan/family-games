@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './JustOneGame.module.css';
 import GameDescription from '../../../../components/GameDescription';
+import InputList from '../../../../components/InputList';
 import { getRandomItem, getRandomIndex } from '../../../../services/utils/array';
 import Team from '../../../../interfaces/Team';
 import { Button } from '@material-ui/core';
+import { Check, Clear } from '@material-ui/icons';
 import classNames from 'classnames';
 
 export interface Props {
@@ -142,6 +144,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
                     <p>
                       Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
                     </p>
+                    <InputList edit={true} />
                     <div className={styles.Footer}>
                       <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
                         Fertig
@@ -157,6 +160,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
                         variant={'contained'}
                         onClick={() => this.endTurn(true)}
                       >
+                        <Check style={{ color: 'white' }} />
                         Richtig
                       </Button>
                       <Button
@@ -164,6 +168,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
                         variant={'contained'}
                         onClick={() => this.endTurn(false)}
                       >
+                        <Clear style={{ color: 'white' }} />
                         Falsch
                       </Button>
                     </div>
