@@ -22,16 +22,18 @@ const App: React.FC = () => (
         render={({ match }): React.ReactNode => (
           <>
             <TeamPointsCounter />
-            <Switch>
-              {STATIC_GAMES.map(game => (
-                <Route
-                  key={`player-${game.name}`}
-                  path={`${match.path}${Routes.Games}${game.url}`}
-                  component={game.component}
-                />
-              ))}
-              <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
-            </Switch>
+            <div className={styles.PlayerContent}>
+              <Switch>
+                {STATIC_GAMES.map(game => (
+                  <Route
+                    key={`player-${game.name}`}
+                    path={`${match.path}${Routes.Games}${game.url}`}
+                    component={game.component}
+                  />
+                ))}
+                <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
+              </Switch>
+            </div>
           </>
         )}
       />
