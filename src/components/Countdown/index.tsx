@@ -14,10 +14,16 @@ export interface Props {
   started: boolean;
   time: number;
   onEnd: () => void;
+  startText?: string;
+  onlyStartCountdown?: boolean;
 }
 
 class Countdown extends React.Component<Props, State> {
   countdown = null;
+  static defaultProps = {
+    startText: 'Los!',
+    onlyStartCountdown: false,
+  };
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -33,6 +39,7 @@ class Countdown extends React.Component<Props, State> {
   }
 
   startStartCountdown = (): void => {
+    const { onlyStartCountdown, onEnd } = this.props;
     this.countdown = window.setInterval(() => {
       if (this.state.startCountdown > 0) {
         this.setState(oldState => ({
@@ -40,6 +47,9 @@ class Countdown extends React.Component<Props, State> {
         }));
       } else {
         window.clearInterval(this.countdown);
+        if (onlyStartCountdown) {
+          return onEnd();
+        }
         this.startTimer();
       }
     }, COUNTDOWN_INTERVAL);
@@ -68,7 +78,7 @@ class Countdown extends React.Component<Props, State> {
   };
 
   render(): React.ReactNode {
-    const { started, time } = this.props;
+    const { started, time, startText } = this.props;
     const { startCountdown, countdown } = this.state;
     if (!started) {
       return null;
@@ -89,7 +99,7 @@ class Countdown extends React.Component<Props, State> {
         )}
         {startCountdown === 0 &&
           (countdown === time ? (
-            <span className={classNames(styles.StartCountdown, styles.LongerShow)}>Los!</span>
+            <span className={classNames(styles.StartCountdown, styles.LongerShow)}>{startText}</span>
           ) : (
             <span className="Timer">{this.getFormattedTime()}</span>
           ))}
