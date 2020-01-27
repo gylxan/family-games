@@ -1,3 +1,22 @@
-.JustOneGame {
-  margin-bottom: 1.5em;
+.HeadlineStartedGame {
+  margin-bottom: 0;
+}
+
+.RoundIndicator { 
+  margin: 0 0 2em;
+}
+
+.Footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5em;
+}
+
+.FooterScore {
+  justify-content: space-between;
+}
+
+.Action {
+  display: block;
+  font-size: 2em;
 }

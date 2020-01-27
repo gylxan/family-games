@@ -38,15 +38,44 @@ button.MuiButton-contained {
   font-size: 1em;
 }
 
-button.MuiButton-containedPrimary, button.MuiButton-containedPrimary.Mui-disabled {
-  background-color: #B53471;
+button.MuiButton-contained {
   box-shadow: 2px 3px 0 black;
 }
 
+button.MuiButton-containedPrimary, button.MuiButton-containedPrimary.Mui-disabled {
+  background-color: #B53471;
+}
 
 button.MuiButton-containedPrimary:hover {
   background-color: #ED4C67;
 }
+
+button.MuiButton-containedSecondary, button.MuiButton-containedSecondary.Mui-disabled {
+  background-color: #1B1464;
+}
+
+button.MuiButton-containedSecondary:hover {
+  background-color: #0652DD;
+}
+
+button.MuiButton-containedRight, button.MuiButton-containedRight.Mui-disabled {
+  background-color: #009432;
+  color: white;
+}
+
+button.MuiButton-containedRight:hover {
+  background-color: #00b03b;
+}
+
+button.MuiButton-containedWrong, button.MuiButton-containedWrong.Mui-disabled {
+  background-color: #EA2027;
+  color: white;
+}
+
+button.MuiButton-containedWrong:hover {
+  background-color: #ef575c;
+}
+
 
 button.MuiButton-contained.Mui-disabled {
   box-shadow: none !important;  
