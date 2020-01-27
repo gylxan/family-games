@@ -15,14 +15,14 @@ export interface Props {
   time: number;
   onEnd: () => void;
   startText?: string;
-  onlyStartCountdown?: boolean;
+  onlySmallCountdown?: boolean;
 }
 
 class Countdown extends React.Component<Props, State> {
   countdown = null;
   static defaultProps = {
     startText: 'Los!',
-    onlyStartCountdown: false,
+    onlySmallCountdown: false,
   };
   constructor(props: Props) {
     super(props);
@@ -36,35 +36,43 @@ class Countdown extends React.Component<Props, State> {
     if (!prevProps.started && this.props.started) {
       this.startStartCountdown();
     }
+    if (prevProps.started && !this.props.started) {
+      this.stopCountdown(true);
+    }
   }
 
   startStartCountdown = (): void => {
-    const { onlyStartCountdown, onEnd } = this.props;
+    const { onlySmallCountdown } = this.props;
     this.countdown = window.setInterval(() => {
       if (this.state.startCountdown > 0) {
         this.setState(oldState => ({
           startCountdown: oldState.startCountdown - COUNTDOWN_INTERVAL,
         }));
       } else {
-        window.clearInterval(this.countdown);
-        if (onlyStartCountdown) {
-          return onEnd();
-        }
+        this.stopCountdown(onlySmallCountdown);
         this.startTimer();
       }
     }, COUNTDOWN_INTERVAL);
   };
 
+  stopCountdown = (callOnEnd: boolean): void => {
+    if (this.countdown) {
+      window.clearInterval(this.countdown);
+    }
+    if (callOnEnd) {
+      const { onEnd } = this.props;
+      onEnd();
+    }
+  };
+
   startTimer = (): void => {
-    const { onEnd } = this.props;
     this.countdown = window.setInterval(() => {
       if (this.state.countdown > 0) {
         this.setState(oldState => ({
           countdown: oldState.countdown - COUNTDOWN_INTERVAL,
         }));
       } else {
-        window.clearInterval(this.countdown);
-        onEnd();
+        this.stopCountdown(true);
       }
     }, COUNTDOWN_INTERVAL);
   };
