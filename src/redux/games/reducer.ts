@@ -26,10 +26,22 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
     case GAMES.UPDATE:
       newState = {
         ...state,
-        [action.payload.name]: action.payload,
+        byName: {
+          [action.payload.name]: action.payload,
+        },
       };
       cacheManager.save(newState);
       return newState;
+    case GAMES.SET_ALREADY_PLAYED:
+      return {
+        ...state,
+        byName: {
+          [action.payload.name]: {
+            ...state.byName[action.payload.name],
+            alreadyPlayed: true,
+          },
+        },
+      };
     default:
       return state;
   }
