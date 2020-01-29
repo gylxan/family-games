@@ -5,6 +5,8 @@ import { Button } from '@material-ui/core';
 import { getRandomItem } from '../../../services/utils/array';
 import classNames from 'classnames';
 import { LinkTo } from '../../../services/routes';
+// @ts-ignore
+import tada from '../../../assets/audio/tada.mp3';
 
 export interface Props {
   games: Game[];
@@ -134,6 +136,7 @@ class Overview extends React.PureComponent<Props, State> {
             {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
           </Button>
         </div>
+        {!this.state.isStarted && this.state.activeGame && <audio src={tada} autoPlay />}
       </div>
     );
   }
