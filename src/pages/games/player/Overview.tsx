@@ -54,7 +54,7 @@ class Overview extends React.PureComponent<Props, State> {
   startInterval = (): void => {
     this.interval = window.setInterval(() => {
       this.setState({
-        activeGame: getRandomItem(this.props.games),
+        activeGame: getRandomItem(this.props.games.filter(game => !game.alreadyPlayed)),
       });
     }, 250);
   };
@@ -79,7 +79,7 @@ class Overview extends React.PureComponent<Props, State> {
       if (time < MAX_INTERVAL) {
         this.startSlowingInterval(time + START_INTERVAL);
         this.setState({
-          activeGame: getRandomItem(this.props.games),
+          activeGame: getRandomItem(this.props.games.filter(game => !game.alreadyPlayed)),
         });
       } else {
         this.stopSlowingInterval();
@@ -97,7 +97,10 @@ class Overview extends React.PureComponent<Props, State> {
       <div className={styles.Container}>
         <div className={styles.Games}>
           {this.props.games.map((game: Game) => {
-            const css: CSSProperties = { backgroundColor: game.color };
+            const css: CSSProperties = {
+              backgroundColor: !game.alreadyPlayed ? game.color : 'rgba(0,0,0,0.3)',
+              color: game.alreadyPlayed && 'grey',
+            };
             const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
             if (isActiveGame) {
               css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;

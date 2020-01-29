@@ -20,6 +20,6 @@ const mapStateToProps = (rootState: RootState, ownProps: TeamPreparationProps): 
 const mapDispatchToProps = {
   updateTeam,
   push,
-  goBack
+  goBack,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TeamPreparation);
