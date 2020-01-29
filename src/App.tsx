@@ -9,6 +9,7 @@ import PlayerOverview from './pages/games/player';
 import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
 import { STATIC_GAMES } from './services/constants/game';
+import GamePlayedDetector from './components/GamePlayedDetector';
 
 const App: React.FC = () => (
   <div className={styles.App}>
@@ -22,8 +23,10 @@ const App: React.FC = () => (
         render={({ match }): React.ReactNode => (
           <>
             <TeamPointsCounter />
+            <GamePlayedDetector />
             <div className={styles.PlayerContent}>
               <Switch>
+                <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} exact />
                 {STATIC_GAMES.map(game => (
                   <Route
                     key={`player-${game.name}`}
@@ -31,7 +34,6 @@ const App: React.FC = () => (
                     component={game.component}
                   />
                 ))}
-                <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} />
               </Switch>
             </div>
           </>

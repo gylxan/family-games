@@ -32,16 +32,25 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
       };
       cacheManager.save(newState);
       return newState;
-    case GAMES.SET_ALREADY_PLAYED:
-      return {
+    case GAMES.SET_ALREADY_PLAYED_BY_URL:
+      const game = Object.keys(state.byName)
+        .map(name => state.byName[name])
+        .find(game => game.url === action.payload.url);
+      if (!game) {
+        return state;
+      }
+      newState = {
         ...state,
         byName: {
-          [action.payload.name]: {
-            ...state.byName[action.payload.name],
+          ...state.byName,
+          [game.name]: {
+            ...game,
             alreadyPlayed: true,
           },
         },
       };
+      cacheManager.save(newState);
+      return newState;
     default:
       return state;
   }
