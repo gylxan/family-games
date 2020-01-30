@@ -1,0 +1,18 @@
+.RoundIndicator { 
+  margin: 0 0 2em;
+}
+
+.Footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5em;
+}
+
+
+.FooterRating {
+  justify-content: space-between;
+}
+
+div.Countdown {
+  font-size: 3em;
+}

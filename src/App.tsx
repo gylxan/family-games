@@ -5,6 +5,7 @@ import { Routes } from './services/routes';
 import Home from './pages/Home';
 import styles from './App.module.css';
 import MasterOverview from './pages/games/master/Overview';
+import Pantomime from './pages/games/Pantomime/master';
 import PlayerOverview from './pages/games/player';
 import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
@@ -42,9 +43,10 @@ const App: React.FC = () => (
       <Route
         path={Routes.Master}
         render={({ match }): React.ReactNode => (
-          <>
+          <Switch>
+            <Route path={`${match.path}${Routes.Games}/mimikry`} component={Pantomime} />
             <Route path={`${match.path}${Routes.Games}`} component={MasterOverview} />
-          </>
+          </Switch>
         )}
       />
     </Switch>

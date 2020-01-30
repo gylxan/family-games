@@ -16,6 +16,7 @@ export interface Props {
   onEnd: () => void;
   startText?: string;
   onlySmallCountdown?: boolean;
+  className?: string;
 }
 
 class Countdown extends React.Component<Props, State> {
@@ -30,6 +31,16 @@ class Countdown extends React.Component<Props, State> {
       startCountdown: START_COUNTDOWN,
       countdown: props.time,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.started) {
+      this.startStartCountdown();
+    }
+  }
+
+  componentWillUnmount() {
+    this.stopCountdown(false);
   }
 
   componentDidUpdate(prevProps: Readonly<Props>): void {
@@ -86,13 +97,13 @@ class Countdown extends React.Component<Props, State> {
   };
 
   render(): React.ReactNode {
-    const { started, time, startText } = this.props;
+    const { started, time, startText, className } = this.props;
     const { startCountdown, countdown } = this.state;
     if (!started) {
       return null;
     }
     return (
-      <div className={styles.Countdown}>
+      <div className={classNames(className, styles.Countdown)}>
         {startCountdown > 0 && (
           <div>
             {Array.from(Array(START_COUNTDOWN / 1000), (e, i) => i + 1).map(number => (

@@ -1,6 +1,7 @@
 import { Game } from '../../interfaces/Game';
 import MusicGame from '../../pages/games/MusicGame/player/MusicGame';
 import JustOneGame from '../../pages/games/JustOneGame/player/';
+import Pantomime from '../../pages/games/Pantomime/player/';
 
 export const STATIC_GAMES: Array<Game> = [
   {
@@ -16,10 +17,10 @@ export const STATIC_GAMES: Array<Game> = [
     component: JustOneGame,
   },
   {
-    name: 'Pantomime',
-    url: '/pantomime',
+    name: 'Mimikry',
+    url: '/mimikry',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: Pantomime,
   },
   {
     name: 'Looping Louie',

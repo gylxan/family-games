@@ -3,11 +3,11 @@ import styles from './JustOneGame.module.css';
 import GameDescription from '../../../../components/GameDescription';
 import InputList from '../../../../components/InputList';
 import GameResult from '../../../../components/GameResult';
-import { getRandomItem, getRandomIndex } from '../../../../services/utils/array';
+import { getRandomIndex } from '../../../../services/utils/array';
 import Team from '../../../../interfaces/Team';
 import { Button } from '@material-ui/core';
-import { Check, Clear } from '@material-ui/icons';
 import classNames from 'classnames';
+import GameFlow from '../../../../components/GameFlow';
 
 export interface Props {
   teams: Team[];
@@ -17,15 +17,12 @@ export interface State {
   isStarted: boolean;
   isFinished: boolean;
   isExplaining: boolean;
-  activeTeam: undefined | Team;
-  playedTurns: number;
   currentWord: string;
-  score: number[];
   hints: string[];
+  score: number[];
 }
 
 const MAX_ROUNDS = 2;
-
 const WORDS = [
   'Bier',
   'Schokolade',
@@ -41,7 +38,7 @@ const WORDS = [
   'Dschungel',
   'Nonne',
   'Böller',
-  'Aladding',
+  'Aladdin',
   'Gürtel',
   'Bar',
 ];
@@ -51,11 +48,9 @@ class JustOneGame extends React.PureComponent<Props, State> {
     isStarted: false,
     isFinished: false,
     isExplaining: false,
-    activeTeam: undefined,
-    playedTurns: 0,
     currentWord: '',
-    score: [],
     hints: [],
+    score: [],
   };
 
   availableWords: string[] = [...WORDS];
@@ -63,14 +58,14 @@ class JustOneGame extends React.PureComponent<Props, State> {
   startGame = () => {
     this.setState({
       isStarted: true,
-      activeTeam: getRandomItem(this.props.teams),
-      score: this.props.teams.map(() => 0),
+      isExplaining: true,
     });
   };
 
   startTurn = () => {
     this.setState({
       isExplaining: true,
+      hints: [],
       currentWord: this.availableWords.splice(getRandomIndex(this.availableWords), 1)[0],
     });
   };
@@ -81,35 +76,15 @@ class JustOneGame extends React.PureComponent<Props, State> {
     });
   };
 
-  endTurn = (isSuccess: boolean) => {
-    let nextPlayedTurns = this.state.playedTurns + 1;
-
-    const scoreIndex = this.props.teams.findIndex((team: Team) => {
-      return isSuccess === (team.name === ((this.state.activeTeam as unknown) as Team).name);
-    });
-    const updatedScore = [...this.state.score];
-    updatedScore[scoreIndex]++;
-
-    const nextActiveTeam = this.props.teams.find((team: Team) => {
-      return team.name !== ((this.state.activeTeam as unknown) as Team).name;
-    });
-
-    this.setState({
-      isFinished: nextPlayedTurns / this.props.teams.length === MAX_ROUNDS,
-      currentWord: '',
-      activeTeam: nextActiveTeam,
-      playedTurns: nextPlayedTurns,
-      score: updatedScore,
-      hints: []
-    });
-  };
-
   setHints = (hints: string[]) => {
     this.setState({ hints });
   };
 
-  endGame = () => {
-    console.log('endGame');
+  endGame = (score: number[]) => {
+    this.setState({
+      isFinished: true,
+      score: score
+    });
   };
 
   render(): JSX.Element {
@@ -136,84 +111,51 @@ class JustOneGame extends React.PureComponent<Props, State> {
               Achtung: Alle mehrfachen (identischen) Hinweise werden entfernt.
             </p>
           </GameDescription>
-        ) : (
+        ) : this.state.isFinished ? (
           <>
-            <div>
-              {!this.state.isFinished && (
-                <p className={styles.RoundIndicator}>
-                  Runde {Math.ceil((this.state.playedTurns + 1) / this.props.teams.length)}
-                </p>
-              )}
-              {this.state.currentWord ? (
-                this.state.isExplaining ? (
-                  <>
-                    <p>
-                      Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
-                    </p>
-                    <InputList edit={true} inputs={this.state.hints} updateInputs={this.setHints} />
-                    <div className={styles.Footer}>
-                      <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
-                        Fertig
-                      </Button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <p>
-                      Ratet den Begriff zu diesen Wörtern. <br />
-                      Ihr habt einen Versuch.
-                    </p>
-                    <ul className={styles.Hints}>
-                      {this.state.hints.map((hint: string, index: number) => (
-                        <li key={index}>{hint}</li>
-                      ))}
-                    </ul>
-                    <div className={classNames(styles.Footer, styles.FooterScore)}>
-                      <Button
-                        className="MuiButton-containedRight"
-                        variant={'contained'}
-                        onClick={() => this.endTurn(true)}
-                      >
-                        <Check style={{ color: 'white' }} />
-                        Richtig
-                      </Button>
-                      <Button
-                        className="MuiButton-containedWrong"
-                        variant={'contained'}
-                        onClick={() => this.endTurn(false)}
-                      >
-                        <Clear style={{ color: 'white' }} />
-                        Falsch
-                      </Button>
-                    </div>
-                  </>
-                )
-              ) : this.state.isFinished ? (
+            <GameResult teams={this.props.teams} score={this.state.score} />
+            <div className={styles.Footer}>
+              <Button variant={'contained'} color={'primary'} onClick={this.endGame}>
+                Ok
+              </Button>
+            </div>
+          </>
+        ) : (
+          <GameFlow
+            teams={this.props.teams}
+            rounds={MAX_ROUNDS}
+            isRating={!this.state.isExplaining}
+            onStartTurn={this.startTurn}
+            onEndGame={this.endGame}
+          >
+            {this.state.currentWord && (
+              this.state.isExplaining ? (
                 <>
-                  <GameResult teams={this.props.teams} score={this.state.score}/>
+                  <p>
+                    Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
+                  </p>
+                  <InputList edit={true} inputs={this.state.hints} updateInputs={this.setHints} />
                   <div className={styles.Footer}>
-                    <Button variant={'contained'} color={'primary'} onClick={this.endGame}>
-                      Ok
+                    <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
+                      Fertig
                     </Button>
                   </div>
                 </>
               ) : (
                 <>
                   <p>
-                    Macht euch bereit:{' '}
-                    <strong className={styles.Action}>
-                      {this.state.activeTeam && ((this.state.activeTeam as unknown) as Team).name}
-                    </strong>
+                    Ratet den Begriff zu diesen Wörtern. <br />
+                    Ihr habt einen Versuch.
                   </p>
-                  <div className={styles.Footer}>
-                    <Button variant={'contained'} color={'primary'} onClick={this.startTurn}>
-                      Start
-                    </Button>
-                  </div>
+                  <ul className={styles.Hints}>
+                    {this.state.hints.map((hint: string, index: number) => (
+                      <li key={index}>{hint}</li>
+                    ))}
+                  </ul>
                 </>
-              )}
-            </div>
-          </>
+              )
+            )}
+          </GameFlow>
         )}
       </>
     );
