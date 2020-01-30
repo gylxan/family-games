@@ -1,0 +1,18 @@
+.Score {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.Score li {
+  display: inline-block;
+  padding: 0 1em;
+}
+
+.Score li:first-child {
+  padding-left: 0;
+}
+
+.Score li:last-child {
+  padding-right: 0;
+}

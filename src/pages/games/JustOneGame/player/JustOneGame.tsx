@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './JustOneGame.module.css';
 import GameDescription from '../../../../components/GameDescription';
 import InputList from '../../../../components/InputList';
+import GameResult from '../../../../components/GameResult';
 import { getRandomItem, getRandomIndex } from '../../../../services/utils/array';
 import Team from '../../../../interfaces/Team';
 import { Button } from '@material-ui/core';
@@ -189,16 +190,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
                 )
               ) : this.state.isFinished ? (
                 <>
-                  Endstand
-                  <ul className={styles.Score}>
-                    {this.props.teams.map((team, index) => {
-                      return (
-                        <li key={index}>
-                          <strong>{team.name}</strong><br />{this.state.score[index]}
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  <GameResult teams={this.props.teams} score={this.state.score}/>
                   <div className={styles.Footer}>
                     <Button variant={'contained'} color={'primary'} onClick={this.endGame}>
                       Ok
