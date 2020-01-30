@@ -34,6 +34,10 @@ button {
   font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
 }
 
+button.MuiButton-root:hover {
+  background-color: rgba(255,255,244, 0.3);
+}
+
 button.MuiButton-contained {
   font-size: 1em;
 }
@@ -115,11 +119,27 @@ label.MuiInputLabel-filled.MuiInputLabel-shrink {
   color: rgb(124,66,143);
 }
 
-.MuiInputBase-input.MuiFilledInput-input {
-  padding: 0.8em 0.6rem 0.3em;
-  border-radius: 3px;
+.MuiInputBase-formControl .MuiInputBase-input {
   font-family: 'montserrat', Arial, Helvetica, sans-serif;
   font-size: 1.3em;
+}
+
+.MuiInputBase-formControl.MuiInput-underline .MuiInputBase-input {
+  color: white;
+}
+
+.MuiInputBase-formControl.MuiInput-underline:before,
+.MuiInputBase-formControl.MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-bottom: 2px solid rgba(255,255,244, 0.3);
+}
+
+.MuiInputBase-formControl.MuiInput-underline:after {
+  border-bottom: 2px solid white;
+}
+
+.MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
+  padding: 0.8em 0.6rem 0.3em;
+  border-radius: 3px;
   background: white;
 }
 

@@ -1,4 +1,28 @@
+.Form {
+  
+  width: 80vw;
+}
+
+.InputList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5em;
+}
+
+.MultipleInputs {
+  justify-content: space-between;
+}
+
 .Row {
   display: block;
-  padding: 0.3em;
+  flex-basis: 50%;
+}
+
+.NewInput {
+  width: 50%;
+}
+
+.ClearInput button {
+  color: #EA2027;
 }

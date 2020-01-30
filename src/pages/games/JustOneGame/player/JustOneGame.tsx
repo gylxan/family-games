@@ -20,6 +20,7 @@ export interface State {
   playedTurns: number;
   currentWord: string;
   score: number[];
+  hints: string[];
 }
 
 const MAX_ROUNDS = 2;
@@ -53,6 +54,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
     playedTurns: 0,
     currentWord: '',
     score: [],
+    hints: [],
   };
 
   availableWords: string[] = [...WORDS];
@@ -91,15 +93,18 @@ class JustOneGame extends React.PureComponent<Props, State> {
       return team.name !== ((this.state.activeTeam as unknown) as Team).name;
     });
 
-    console.log(nextPlayedTurns);
-
     this.setState({
       isFinished: nextPlayedTurns / this.props.teams.length === MAX_ROUNDS,
       currentWord: '',
       activeTeam: nextActiveTeam,
       playedTurns: nextPlayedTurns,
       score: updatedScore,
+      hints: []
     });
+  };
+
+  setHints = (hints: string[]) => {
+    this.setState({ hints });
   };
 
   endGame = () => {
@@ -109,9 +114,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
   render(): JSX.Element {
     return (
       <>
-        <h1 className={classNames({ [styles.HeadlineStartedGame]: this.state.isStarted })}>
-          &raquo;Just One&laquo;
-        </h1>
+        <h1 className={classNames({ [styles.HeadlineStartedGame]: this.state.isStarted })}>&raquo;Just One&laquo;</h1>
         {!this.state.isStarted ? (
           <GameDescription onStart={this.startGame}>
             <p>
@@ -136,7 +139,9 @@ class JustOneGame extends React.PureComponent<Props, State> {
           <>
             <div>
               {!this.state.isFinished && (
-                <p className={styles.RoundIndicator}>Runde {Math.ceil((this.state.playedTurns + 1) / this.props.teams.length)}</p>
+                <p className={styles.RoundIndicator}>
+                  Runde {Math.ceil((this.state.playedTurns + 1) / this.props.teams.length)}
+                </p>
               )}
               {this.state.currentWord ? (
                 this.state.isExplaining ? (
@@ -144,7 +149,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
                     <p>
                       Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
                     </p>
-                    <InputList edit={true} />
+                    <InputList edit={true} inputs={this.state.hints} updateInputs={this.setHints} />
                     <div className={styles.Footer}>
                       <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
                         Fertig
@@ -153,7 +158,15 @@ class JustOneGame extends React.PureComponent<Props, State> {
                   </>
                 ) : (
                   <>
-                    <p>Ratet den Begriff zu diesen Wörtern</p>
+                    <p>
+                      Ratet den Begriff zu diesen Wörtern. <br />
+                      Ihr habt einen Versuch.
+                    </p>
+                    <ul className={styles.Hints}>
+                      {this.state.hints.map((hint: string, index: number) => (
+                        <li key={index}>{hint}</li>
+                      ))}
+                    </ul>
                     <div className={classNames(styles.Footer, styles.FooterScore)}>
                       <Button
                         className="MuiButton-containedRight"
@@ -176,12 +189,12 @@ class JustOneGame extends React.PureComponent<Props, State> {
                 )
               ) : this.state.isFinished ? (
                 <>
-                  Endstand:
-                  <ul>
+                  Endstand
+                  <ul className={styles.Score}>
                     {this.props.teams.map((team, index) => {
                       return (
                         <li key={index}>
-                          {team.name}:{this.state.score[index]}
+                          <strong>{team.name}</strong><br />{this.state.score[index]}
                         </li>
                       );
                     })}
@@ -196,7 +209,9 @@ class JustOneGame extends React.PureComponent<Props, State> {
                 <>
                   <p>
                     Macht euch bereit:{' '}
-                    <strong className={styles.Action}>{this.state.activeTeam && ((this.state.activeTeam as unknown) as Team).name}</strong>
+                    <strong className={styles.Action}>
+                      {this.state.activeTeam && ((this.state.activeTeam as unknown) as Team).name}
+                    </strong>
                   </p>
                   <div className={styles.Footer}>
                     <Button variant={'contained'} color={'primary'} onClick={this.startTurn}>

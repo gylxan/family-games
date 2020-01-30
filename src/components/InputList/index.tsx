@@ -1,19 +1,22 @@
 import React from 'react';
 import styles from './InputList.module.css';
 import { TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { Clear } from '@material-ui/icons';
+import classNames from 'classnames';
 
 export interface Props {
   edit: boolean;
+  inputs: string[];
+  updateInputs: (inputs: string[]) => void
 }
 
 export interface State {
-  inputs: string[];
   newValue: string;
 }
 
 class InputList extends React.Component<Props, State> {
   state = {
-    inputs: ['foo'],
     newValue: '',
   };
 
@@ -25,36 +28,49 @@ class InputList extends React.Component<Props, State> {
 
   handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && this.state.newValue) {
+      e.preventDefault();
       this.setState({
         newValue: '',
-        inputs: [...this.state.inputs, this.state.newValue],
       });
+      this.props.updateInputs([...this.props.inputs, this.state.newValue]);
     }
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const updatedInputs = [...this.state.inputs];
+    const updatedInputs = [...this.props.inputs];
     updatedInputs[index] = e.currentTarget.value;
 
-    this.setState({
-      inputs: updatedInputs,
-    });
+    this.props.updateInputs(updatedInputs);
+  };
+
+  removeItem = (index: number) => {
+    const updatedInputs = [...this.props.inputs];
+    updatedInputs.splice(index, 0);
+
+    this.props.updateInputs(updatedInputs);
   };
 
   render(): React.ReactNode {
     return (
-      <form noValidate autoComplete="off">
-        {this.state.inputs.map((value: string, index: number) => (
-          <div className={styles.Row} key={index}>
-            <TextField
-              variant="filled"
-              value={value}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e, index)}
-            />
-          </div>
-        ))}
-        <div className={styles.Row}>
+      <form noValidate autoComplete="off" className={styles.Form}>
+        <div className={classNames(styles.InputList, { [styles.MultipleInputs]: this.props.inputs.length > 1 })}>
+          {this.props.inputs.map((value: string, index: number) => (
+            <div className={styles.Row} key={index}>
+              <TextField
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e, index)}
+              />
+              <span className={styles.ClearInput}>
+                <Button onClick={() => this.removeItem(index)}>
+                  <Clear />
+                </Button>
+              </span>
+            </div>
+          ))}
+        </div>
+        <div>
           <TextField
+            className={styles.NewInput}
             name="newItem"
             variant="filled"
             value={this.state.newValue}
