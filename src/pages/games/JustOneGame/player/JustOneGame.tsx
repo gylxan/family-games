@@ -80,12 +80,16 @@ class JustOneGame extends React.PureComponent<Props, State> {
     this.setState({ hints });
   };
 
-  endGame = (score: number[]) => {
+  showResult = (score: number[]) => {
     this.setState({
       isFinished: true,
       score: score
     });
   };
+
+  endGame = () => {
+    console.log('end');
+  }
 
   render(): JSX.Element {
     return (
@@ -126,7 +130,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
             rounds={MAX_ROUNDS}
             isRating={!this.state.isExplaining}
             onStartTurn={this.startTurn}
-            onEndGame={this.endGame}
+            onEndGame={this.showResult}
           >
             {this.state.currentWord && (
               this.state.isExplaining ? (
