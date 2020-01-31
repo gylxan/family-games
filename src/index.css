@@ -138,9 +138,13 @@ label.MuiInputLabel-filled.MuiInputLabel-shrink {
 }
 
 .MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
-  padding: 0.8em 0.6rem 0.3em;
+  padding: 0.3em 0.6rem;
   border-radius: 3px;
   background: white;
+}
+
+label +.MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
+ padding-top: 0.8em;
 }
 
 .MuiFilledInput-underline:after {

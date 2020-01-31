@@ -8,3 +8,9 @@ export interface Game {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.ComponentType<any>;
 }
+
+export enum GameState {
+  DESCRIPTION,
+  PLAYING,
+  RESULT,
+}

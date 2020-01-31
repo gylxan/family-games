@@ -37,15 +37,15 @@ class GameFlow extends React.PureComponent<Props, State> {
     };
   }
 
-  startTurn = () => {
+  startTurn = (): void => {
     this.setState({
       isTurnStarted: true,
     });
     this.props.onStartTurn();
   };
 
-  endTurn = (isSuccess: boolean) => {
-    let nextPlayedTurns = this.state.playedTurns + 1;
+  endTurn = (isSuccess: boolean): void => {
+    const nextPlayedTurns = this.state.playedTurns + 1;
 
     const scoreIndex = this.props.teams.findIndex((team: Team) => {
       return isSuccess === (team.name === ((this.state.activeTeam as unknown) as Team).name);
@@ -62,7 +62,7 @@ class GameFlow extends React.PureComponent<Props, State> {
         activeTeam: nextActiveTeam,
         playedTurns: nextPlayedTurns,
         score: updatedScore,
-        isTurnStarted: false
+        isTurnStarted: false,
       });
     } else {
       this.props.onEndGame(updatedScore);
@@ -80,7 +80,13 @@ class GameFlow extends React.PureComponent<Props, State> {
             {this.props.children}
             {this.props.isRating && (
               <>
-                <Countdown className={styles.Countdown} started={true} time={60000} onlySmallCountdown={true} onEnd={() => this.endTurn(false)} />
+                <Countdown
+                  className={styles.Countdown}
+                  started={true}
+                  time={60000}
+                  onlySmallCountdown={true}
+                  onEnd={(): void => this.endTurn(false)}
+                />
                 <div className={classNames(styles.Footer, styles.FooterRating)}>
                   <Button className="MuiButton-containedRight" variant={'contained'} onClick={() => this.endTurn(true)}>
                     <Check style={{ color: 'white' }} />
@@ -89,7 +95,7 @@ class GameFlow extends React.PureComponent<Props, State> {
                   <Button
                     className="MuiButton-containedWrong"
                     variant={'contained'}
-                    onClick={() => this.endTurn(false)}
+                    onClick={(): void => this.endTurn(false)}
                   >
                     <Clear style={{ color: 'white' }} />
                     Falsch

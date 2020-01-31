@@ -8,15 +8,15 @@ import Team from '../../../../interfaces/Team';
 import { Button } from '@material-ui/core';
 import classNames from 'classnames';
 import GameFlow from '../../../../components/GameFlow';
+import { GameState } from '../../../../interfaces/Game';
 
 export interface Props {
   teams: Team[];
 }
 
 export interface State {
-  isStarted: boolean;
-  isFinished: boolean;
-  isExplaining: boolean;
+  gameState: GameState;
+  playPhase: Phase;
   currentWord: string;
   hints: string[];
   score: number[];
@@ -43,11 +43,15 @@ const WORDS = [
   'Bar',
 ];
 
+enum Phase {
+  EXPLAINING,
+  GUESSING,
+}
+
 class JustOneGame extends React.PureComponent<Props, State> {
   state = {
-    isStarted: false,
-    isFinished: false,
-    isExplaining: false,
+    gameState: GameState.DESCRIPTION,
+    playPhase: Phase.EXPLAINING,
     currentWord: '',
     hints: [],
     score: [],
@@ -55,112 +59,152 @@ class JustOneGame extends React.PureComponent<Props, State> {
 
   availableWords: string[] = [...WORDS];
 
-  startGame = () => {
+  startGame = (): void => {
     this.setState({
-      isStarted: true,
-      isExplaining: true,
+      gameState: GameState.PLAYING,
     });
   };
 
-  startTurn = () => {
+  startTurn = (): void => {
     this.setState({
-      isExplaining: true,
+      playPhase: Phase.EXPLAINING,
       hints: [],
       currentWord: this.availableWords.splice(getRandomIndex(this.availableWords), 1)[0],
     });
   };
 
-  startGuessing = () => {
+  startGuessing = (): void => {
     this.setState({
-      isExplaining: false,
+      playPhase: Phase.GUESSING,
     });
   };
 
-  setHints = (hints: string[]) => {
+  setHints = (hints: string[]): void => {
     this.setState({ hints });
   };
 
-  showResult = (score: number[]) => {
+  showResult = (score: number[]): void => {
     this.setState({
-      isFinished: true,
-      score: score
+      gameState: GameState.RESULT,
+      score: score,
     });
   };
 
-  endGame = () => {
+  endGame = (): void => {
     console.log('end');
+  };
+
+  renderDescription(): JSX.Element {
+    return (
+      <GameDescription onStart={this.startGame}>
+        <p>
+          <strong>Teilnehmer:</strong> alle (2 x Ratende je Team)
+        </p>
+        <p>
+          <strong>Modus:</strong> Abwechelnd
+        </p>
+        <p>
+          <strong>Rundenzahl je Team:</strong> {MAX_ROUNDS}
+        </p>
+        <p>
+          <strong>Beschreibung:</strong> Die Teams bestimmen 2 Ratende. Den anderen Spielern wird ein Begriff gezeigt,
+          den Sie den Ratenden erklären müssen. Dazu können sie Hinweise in Form <strong>eines Wortes</strong> auf einen
+          Zettel schreiben und den Game Mastern übergeben. Anschließend haben die Ratenden 1 Minute Zeit, den Begriff zu
+          erraten. Dafür haben sie nur einen Versuch.
+          <br />
+          Achtung: Alle mehrfachen (identischen) Hinweise werden entfernt.
+        </p>
+      </GameDescription>
+    );
+  }
+
+  renderGameFlowExplaining(): JSX.Element {
+    return (
+      <>
+        <p>
+          Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
+        </p>
+        <InputList edit={true} inputs={this.state.hints} updateInputs={this.setHints} />
+        <div className={styles.Footer}>
+          <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
+            Fertig
+          </Button>
+        </div>
+      </>
+    );
+  }
+
+  renderGameFlowGuessing(): JSX.Element {
+    return (
+      <>
+        <p>
+          Ratet den Begriff zu diesen Wörtern. <br />
+          Ihr habt einen Versuch.
+        </p>
+        <ul className={styles.Hints}>
+          {this.state.hints.map((hint: string, index: number) => (
+            <li key={index}>{hint}</li>
+          ))}
+        </ul>
+      </>
+    );
+  }
+
+  renderGamePlay(): JSX.Element {
+    return (
+      <GameFlow
+        teams={this.props.teams}
+        rounds={MAX_ROUNDS}
+        isRating={this.state.playPhase === Phase.GUESSING}
+        onStartTurn={this.startTurn}
+        onEndGame={this.showResult}
+      >
+        {this.state.currentWord &&
+          ((): JSX.Element => {
+            switch (this.state.playPhase) {
+              case Phase.EXPLAINING:
+                return this.renderGameFlowExplaining();
+              case Phase.GUESSING:
+                return this.renderGameFlowGuessing();
+              default:
+                return <></>;
+            }
+          })()}
+      </GameFlow>
+    );
+  }
+
+  renderResult(): JSX.Element {
+    return (
+      <>
+        <GameResult teams={this.props.teams} score={this.state.score} />
+        <div className={styles.Footer}>
+          <Button variant={'contained'} color={'primary'} onClick={this.endGame}>
+            Ok
+          </Button>
+        </div>
+      </>
+    );
   }
 
   render(): JSX.Element {
     return (
       <>
-        <h1 className={classNames({ [styles.HeadlineStartedGame]: this.state.isStarted })}>&raquo;Just One&laquo;</h1>
-        {!this.state.isStarted ? (
-          <GameDescription onStart={this.startGame}>
-            <p>
-              <strong>Teilnehmer:</strong> alle (2 x Ratende je Team)
-            </p>
-            <p>
-              <strong>Modus:</strong> Abwechelnd
-            </p>
-            <p>
-              <strong>Rundenzahl je Team:</strong> {MAX_ROUNDS}
-            </p>
-            <p>
-              <strong>Beschreibung:</strong> Die Teams bestimmen 2 Ratende. Den anderen Spielern wird ein Begriff
-              gezeigt, den Sie den Ratenden erklären müssen. Dazu können sie Hinweise in Form{' '}
-              <strong>eines Wortes</strong> auf einen Zettel schreiben und den Game Mastern übergeben. Anschließend
-              haben die Ratenden 1 Minute Zeit, den Begriff zu erraten. Dafür haben sie nur einen Versuch.
-              <br />
-              Achtung: Alle mehrfachen (identischen) Hinweise werden entfernt.
-            </p>
-          </GameDescription>
-        ) : this.state.isFinished ? (
-          <>
-            <GameResult teams={this.props.teams} score={this.state.score} />
-            <div className={styles.Footer}>
-              <Button variant={'contained'} color={'primary'} onClick={this.endGame}>
-                Ok
-              </Button>
-            </div>
-          </>
-        ) : (
-          <GameFlow
-            teams={this.props.teams}
-            rounds={MAX_ROUNDS}
-            isRating={!this.state.isExplaining}
-            onStartTurn={this.startTurn}
-            onEndGame={this.showResult}
-          >
-            {this.state.currentWord && (
-              this.state.isExplaining ? (
-                <>
-                  <p>
-                    Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
-                  </p>
-                  <InputList edit={true} inputs={this.state.hints} updateInputs={this.setHints} />
-                  <div className={styles.Footer}>
-                    <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
-                      Fertig
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <p>
-                    Ratet den Begriff zu diesen Wörtern. <br />
-                    Ihr habt einen Versuch.
-                  </p>
-                  <ul className={styles.Hints}>
-                    {this.state.hints.map((hint: string, index: number) => (
-                      <li key={index}>{hint}</li>
-                    ))}
-                  </ul>
-                </>
-              )
-            )}
-          </GameFlow>
-        )}
+        <h1 className={classNames({ [styles.HeadlineStartedGame]: this.state.gameState !== GameState.DESCRIPTION })}>
+          &raquo;Just One&laquo;
+        </h1>
+        {((): JSX.Element => {
+          switch (this.state.gameState) {
+            case GameState.DESCRIPTION:
+              return this.renderDescription();
+            case GameState.PLAYING:
+              return this.renderGamePlay();
+            case GameState.RESULT:
+              return this.renderResult();
+            default:
+              return <></>;
+          }
+        })()}
       </>
     );
   }
