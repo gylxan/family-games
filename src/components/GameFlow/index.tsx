@@ -2,17 +2,15 @@ import React from 'react';
 import styles from './GameFlow.module.css';
 import { getRandomItem } from '../../services/utils/array';
 import Team from '../../interfaces/Team';
-import Countdown from '../Countdown';
+import Scoring from '../Scoring';
 
 import { Button } from '@material-ui/core';
-import { Check, Clear } from '@material-ui/icons';
-import classNames from 'classnames';
 
 export interface Props {
   teams: Team[];
   rounds: number;
   children: React.ReactNode;
-  isRating: boolean;
+  showScoring: boolean;
   onEndGame: (result: number[]) => void;
   onStartTurn: () => void;
 }
@@ -69,6 +67,28 @@ class GameFlow extends React.PureComponent<Props, State> {
     }
   };
 
+  renderPreparing(): JSX.Element {
+    return (
+      <>
+        <p>
+          Macht euch bereit:{' '}
+          <strong className={styles.Action}>
+            {this.state.activeTeam && ((this.state.activeTeam as unknown) as Team).name}
+          </strong>
+        </p>
+        <div className={styles.Footer}>
+          <Button variant={'contained'} color={'primary'} onClick={this.startTurn}>
+            Start
+          </Button>
+        </div>
+      </>
+    );
+  }
+
+  renderScoring(): JSX.Element {
+    return <></>;
+  }
+
   render(): JSX.Element {
     return (
       <>
@@ -78,46 +98,10 @@ class GameFlow extends React.PureComponent<Props, State> {
         {this.state.isTurnStarted ? (
           <>
             {this.props.children}
-            {this.props.isRating && (
-              <>
-                <Countdown
-                  className={styles.Countdown}
-                  started={true}
-                  time={60000}
-                  onlySmallCountdown={true}
-                  onEnd={(): void => this.endTurn(false)}
-                />
-                <div className={classNames(styles.Footer, styles.FooterRating)}>
-                  <Button className="MuiButton-containedRight" variant={'contained'} onClick={() => this.endTurn(true)}>
-                    <Check style={{ color: 'white' }} />
-                    Richtig
-                  </Button>
-                  <Button
-                    className="MuiButton-containedWrong"
-                    variant={'contained'}
-                    onClick={(): void => this.endTurn(false)}
-                  >
-                    <Clear style={{ color: 'white' }} />
-                    Falsch
-                  </Button>
-                </div>
-              </>
-            )}
+            {this.props.showScoring && <Scoring onScored={this.endTurn} />}
           </>
         ) : (
-          <>
-            <p>
-              Macht euch bereit:{' '}
-              <strong className={styles.Action}>
-                {this.state.activeTeam && ((this.state.activeTeam as unknown) as Team).name}
-              </strong>
-            </p>
-            <div className={styles.Footer}>
-              <Button variant={'contained'} color={'primary'} onClick={this.startTurn}>
-                Start
-              </Button>
-            </div>
-          </>
+          <>{this.renderPreparing()}</>
         )}
       </>
     );

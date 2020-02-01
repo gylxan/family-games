@@ -8,7 +8,7 @@ import classNames from 'classnames';
 export interface Props {
   edit: boolean;
   inputs: string[];
-  updateInputs: (inputs: string[]) => void
+  updateInputs: (inputs: string[]) => void;
 }
 
 export interface State {
@@ -20,13 +20,13 @@ class InputList extends React.Component<Props, State> {
     newValue: '',
   };
 
-  handleNewChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleNewChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({
       newValue: e.currentTarget.value,
     });
   };
 
-  handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter' && this.state.newValue) {
       e.preventDefault();
       this.setState({
@@ -36,16 +36,16 @@ class InputList extends React.Component<Props, State> {
     }
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number): void => {
     const updatedInputs = [...this.props.inputs];
     updatedInputs[index] = e.currentTarget.value;
 
     this.props.updateInputs(updatedInputs);
   };
 
-  removeItem = (index: number) => {
+  removeItem = (index: number): void => {
     const updatedInputs = [...this.props.inputs];
-    updatedInputs.splice(index, 0);
+    updatedInputs.splice(index, 1);
 
     this.props.updateInputs(updatedInputs);
   };
@@ -58,10 +58,10 @@ class InputList extends React.Component<Props, State> {
             <div className={styles.Row} key={index}>
               <TextField
                 value={value}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e, index)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => this.handleChange(e, index)}
               />
               <span className={styles.ClearInput}>
-                <Button onClick={() => this.removeItem(index)}>
+                <Button onClick={(): void => this.removeItem(index)}>
                   <Clear />
                 </Button>
               </span>

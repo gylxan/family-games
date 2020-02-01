@@ -155,7 +155,7 @@ class JustOneGame extends React.PureComponent<Props, State> {
       <GameFlow
         teams={this.props.teams}
         rounds={MAX_ROUNDS}
-        isRating={this.state.playPhase === Phase.GUESSING}
+        showScoring={this.state.playPhase === Phase.GUESSING}
         onStartTurn={this.startTurn}
         onEndGame={this.showResult}
       >

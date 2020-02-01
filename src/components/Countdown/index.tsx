@@ -33,13 +33,13 @@ class Countdown extends React.Component<Props, State> {
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     if (this.props.started) {
       this.startStartCountdown();
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.stopCountdown(false);
   }
 
