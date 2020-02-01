@@ -1,111 +1,25 @@
-import React from 'react';
-import styles from './GameFlow.module.css';
-import { getRandomItem } from '../../services/utils/array';
+import GameFlow from './GameFlow';
+import RootState from '../../redux/RootState';
 import Team from '../../interfaces/Team';
-import Scoring from '../Scoring';
-
-import { Button } from '@material-ui/core';
-
-export interface Props {
+import { connect } from 'react-redux';
+import { updateTeam } from '../../redux/team/actions';
+import {push} from 'connected-react-router';
+import { LinkTo } from '../../services/routes';
+interface Props {
   teams: Team[];
-  rounds: number;
-  children: React.ReactNode;
-  showScoring: boolean;
-  onEndGame: (result: number[]) => void;
-  onStartTurn: () => void;
 }
 
-export interface State {
-  isFinished: boolean;
-  activeTeam: undefined | Team;
-  playedTurns: number;
-  isTurnStarted: boolean;
-  score: number[];
+interface DispatchProps {
+  onEndGame: (teams: Team[]) => void;
 }
-
-class GameFlow extends React.PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      activeTeam: getRandomItem(this.props.teams),
-      isFinished: false,
-      playedTurns: 0,
-      isTurnStarted: false,
-      score: this.props.teams.map(() => 0),
-    };
-  }
-
-  startTurn = (): void => {
-    this.setState({
-      isTurnStarted: true,
-    });
-    this.props.onStartTurn();
+const mapStateToProps = (state: RootState): Props => ({ teams: state.team.data });
+const mapDispatchToProps = (dispatch): DispatchProps => {
+  return {
+    onEndGame: (teams: Team[]): void => {
+      console.warn(teams);
+      teams.forEach(team => dispatch(updateTeam(team)));
+      dispatch(push(LinkTo.playerGamesOverview()));
+    },
   };
-
-  endTurn = (isSuccess: boolean): void => {
-    const nextPlayedTurns = this.state.playedTurns + 1;
-
-    const scoreIndex = this.props.teams.findIndex((team: Team) => {
-      return isSuccess === (team.name === ((this.state.activeTeam as unknown) as Team).name);
-    });
-    const updatedScore = [...this.state.score];
-    updatedScore[scoreIndex]++;
-
-    if (nextPlayedTurns / this.props.teams.length < this.props.rounds) {
-      const nextActiveTeam = this.props.teams.find((team: Team) => {
-        return team.name !== ((this.state.activeTeam as unknown) as Team).name;
-      });
-
-      this.setState({
-        activeTeam: nextActiveTeam,
-        playedTurns: nextPlayedTurns,
-        score: updatedScore,
-        isTurnStarted: false,
-      });
-    } else {
-      this.props.onEndGame(updatedScore);
-    }
-  };
-
-  renderPreparing(): JSX.Element {
-    return (
-      <>
-        <p>
-          Macht euch bereit:{' '}
-          <strong className={styles.Action}>
-            {this.state.activeTeam && ((this.state.activeTeam as unknown) as Team).name}
-          </strong>
-        </p>
-        <div className={styles.Footer}>
-          <Button variant={'contained'} color={'primary'} onClick={this.startTurn}>
-            Start
-          </Button>
-        </div>
-      </>
-    );
-  }
-
-  renderScoring(): JSX.Element {
-    return <></>;
-  }
-
-  render(): JSX.Element {
-    return (
-      <>
-        <p className={styles.RoundIndicator}>
-          Runde {Math.ceil((this.state.playedTurns + 1) / this.props.teams.length)}
-        </p>
-        {this.state.isTurnStarted ? (
-          <>
-            {this.props.children}
-            {this.props.showScoring && <Scoring onScored={this.endTurn} />}
-          </>
-        ) : (
-          <>{this.renderPreparing()}</>
-        )}
-      </>
-    );
-  }
-}
-
-export default GameFlow;
+};
+export default connect(mapStateToProps, mapDispatchToProps)(GameFlow);

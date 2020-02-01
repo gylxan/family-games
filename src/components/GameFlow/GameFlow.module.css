@@ -1,3 +1,7 @@
+.GameFlow {
+  min-width: 60vw;
+}
+
 .RoundIndicator { 
   margin: 0 0 2em;
 }

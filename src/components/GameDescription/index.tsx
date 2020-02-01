@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 export interface Props {
   children: React.ReactNode;
-  onStart: () => void;
+  onStart?: () => void;
 }
 
 const GameDescription: React.FC<Props> = ({ children, onStart }) => (
