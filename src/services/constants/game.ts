@@ -2,6 +2,7 @@ import { Game } from '../../interfaces/Game';
 import MusicGame from '../../pages/games/MusicGame/player/MusicGame';
 import JustOneGame from '../../pages/games/JustOneGame/player/';
 import Pantomime from '../../pages/games/Pantomime/player/';
+import Blur from "../../pages/games/Blur/player/Blur";
 
 export const STATIC_GAMES: Array<Game> = [
   {
@@ -33,6 +34,12 @@ export const STATIC_GAMES: Array<Game> = [
     url: '/music',
     alreadyPlayed: false,
     component: MusicGame,
+  },
+  {
+    name: 'Wischi Waschi',
+    url: '/blur',
+    alreadyPlayed: false,
+    component: Blur,
   },
   {
     name: 'What?!?!',
