@@ -12,4 +12,8 @@ export default class CacheManager<DataType> {
   save(data: DataType): void {
     localStorage.setItem(this.storageKey as string, JSON.stringify(data));
   }
+
+  delete(): void {
+    localStorage.removeItem(this.storageKey as string);
+  }
 }
