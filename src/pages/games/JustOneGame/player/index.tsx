@@ -141,7 +141,9 @@ class JustOneGame extends React.PureComponent<State> {
         <h1 className={classNames({ [styles.HeadlineStartedGame]: true })}>&raquo;Just One&laquo;</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
+          countdown={60}
           showScoring={this.state.playPhase === PlayingPhase.GUESSING}
+          showCountdown={this.state.playPhase === PlayingPhase.GUESSING}
           onStartPlaying={this.startPlaying}
           descriptionComponent={this.renderDescription()}
           playingComponent={this.renderGamePlay()}

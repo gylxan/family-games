@@ -9,16 +9,23 @@ import { GameState } from '../../interfaces/Game';
 import { getOtherTeam } from '../../services/utils/team';
 import { Props as GameDescriptionProps } from '../GameDescription';
 import GameResult from '../GameResult';
+import Countdown from '../Countdown';
 
 export interface Props {
   teams: Team[];
   rounds: number;
   showScoring?: boolean;
+  showCountdown?: boolean;
   gameMode?: GameMode;
-  onEndGame: (teams: Team[]) => void;
-  onStartPlaying: () => void;
+  countdown?: number;
+  showStartCountdown?: boolean;
   descriptionComponent: React.ReactElement<GameDescriptionProps>;
   playingComponent: React.ReactNode;
+  onEndGame: (teams: Team[]) => void;
+  onStartPlaying: () => void;
+  onPausePlaying?: () => void;
+  onContinuePlaying?: () => void;
+  onCountdown?: () => void;
 }
 
 export enum GameMode {
@@ -43,6 +50,7 @@ class GameFlow extends React.PureComponent<Props, State> {
   static defaultProps: Partial<Props> = {
     gameMode: GameMode.BATTLE,
     showScoring: true,
+    showCountdown: true,
   };
 
   constructor(props: Props) {
@@ -142,13 +150,24 @@ class GameFlow extends React.PureComponent<Props, State> {
   }
 
   renderPlayTurn = (): JSX.Element => {
-    const { playingComponent, teams, showScoring } = this.props;
+    const { playingComponent, teams, showScoring, countdown, onCountdown, showCountdown } = this.props;
     const { activeTeam } = this.state;
 
     return (
       <>
         {playingComponent}
-        {showScoring && <Scoring onScored={this.endTurn} teams={teams} activeTeamId={activeTeam.id} />}
+        {!!countdown && showCountdown && (
+          <Countdown
+            started={true}
+            className={styles.Countdown}
+            time={countdown * 1000}
+            countdownCallback={onCountdown}
+            onEnd={(): void => this.endTurn(!!activeTeam ? this.getNextActiveTeam().id : undefined)}
+          />
+        )}
+        {showScoring && (
+          <Scoring onScored={this.endTurn} teams={teams} activeTeamId={!!activeTeam ? activeTeam.id : undefined} />
+        )}
       </>
     );
   };

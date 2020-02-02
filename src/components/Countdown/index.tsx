@@ -8,14 +8,16 @@ const COUNTDOWN_INTERVAL = 1000;
 export interface State {
   startCountdown: number;
   countdown: number;
+  isPaused: boolean;
 }
 
 export interface Props {
   started: boolean;
   time: number;
-  onEnd: () => void;
   startText?: string;
   onlySmallCountdown?: boolean;
+  onEnd: () => void;
+  countdownCallback?: () => void;
   className?: string;
 }
 
@@ -30,6 +32,7 @@ class Countdown extends React.Component<Props, State> {
     this.state = {
       startCountdown: START_COUNTDOWN,
       countdown: props.time,
+      isPaused: false,
     };
   }
 
@@ -53,15 +56,20 @@ class Countdown extends React.Component<Props, State> {
   }
 
   startStartCountdown = (): void => {
-    const { onlySmallCountdown } = this.props;
+    const { onlySmallCountdown, countdownCallback } = this.props;
     this.countdown = window.setInterval(() => {
       if (this.state.startCountdown > 0) {
+        if (onlySmallCountdown) {
+          !!countdownCallback && countdownCallback();
+        }
         this.setState(oldState => ({
           startCountdown: oldState.startCountdown - COUNTDOWN_INTERVAL,
         }));
       } else {
         this.stopCountdown(onlySmallCountdown);
-        this.startTimer();
+        if (!onlySmallCountdown) {
+          this.startTimer();
+        }
       }
     }, COUNTDOWN_INTERVAL);
   };
@@ -76,9 +84,21 @@ class Countdown extends React.Component<Props, State> {
     }
   };
 
+  pauseCountdown = (): void => {
+    this.stopCountdown(false);
+    this.setState({
+      isPaused: true,
+    });
+  };
+
   startTimer = (): void => {
+    const { countdownCallback } = this.props;
+    this.setState({
+      isPaused: false,
+    });
     this.countdown = window.setInterval(() => {
       if (this.state.countdown > 0) {
+        !!countdownCallback && countdownCallback();
         this.setState(oldState => ({
           countdown: oldState.countdown - COUNTDOWN_INTERVAL,
         }));
@@ -98,12 +118,15 @@ class Countdown extends React.Component<Props, State> {
 
   render(): React.ReactNode {
     const { started, time, startText, className } = this.props;
-    const { startCountdown, countdown } = this.state;
+    const { startCountdown, countdown, isPaused } = this.state;
     if (!started) {
       return null;
     }
     return (
-      <div className={classNames(className, styles.Countdown)}>
+      <div
+        className={classNames(className, styles.Countdown)}
+        onClick={!isPaused ? this.pauseCountdown : this.startTimer}
+      >
         {startCountdown > 0 && (
           <div>
             {Array.from(Array(START_COUNTDOWN / 1000), (e, i) => i + 1).map(number => (

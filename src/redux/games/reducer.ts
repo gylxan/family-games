@@ -6,6 +6,7 @@ import { getStaticGamesWithColors } from '../../services/utils/game';
 import CacheManager from '../../services/CacheManager';
 
 const cacheManager = new CacheManager<GameState>('games');
+cacheManager.delete();
 const cachedData = cacheManager.load();
 
 export interface GameState {
