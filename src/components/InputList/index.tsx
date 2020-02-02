@@ -27,12 +27,14 @@ class InputList extends React.Component<Props, State> {
   };
 
   handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key === 'Enter' && this.state.newValue) {
+    if (e.key === 'Enter') {
       e.preventDefault();
-      this.setState({
-        newValue: '',
-      });
-      this.props.updateInputs([...this.props.inputs, this.state.newValue]);
+      if (this.state.newValue) {
+        this.setState({
+          newValue: '',
+        });
+        this.props.updateInputs([...this.props.inputs, this.state.newValue]);
+      }
     }
   };
 
