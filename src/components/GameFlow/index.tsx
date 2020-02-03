@@ -20,11 +20,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
   return {
     onEndGame: (teams: Team[]): void => {
       teams.forEach(team => dispatch(updateTeam(team)));
-      if (!hasAllGamesPlayed(store.getState())) {
-        dispatch(push(LinkTo.playerGamesOverview()));
-      } else {
-        dispatch(push(Routes.AwardCeremony));
-      }
+
     },
   };
 };

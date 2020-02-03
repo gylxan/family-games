@@ -11,6 +11,7 @@ import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
 import { STATIC_GAMES } from './services/constants/game';
 import GamePlayedDetector from './components/GamePlayedDetector';
+import AwardCeremony from './pages/AwardCeremony';
 
 const App: React.FC = () => (
   <div className={styles.App}>
@@ -19,6 +20,7 @@ const App: React.FC = () => (
         <Home />
       </Route>
       <Route path={Routes.TeamPreparation} component={TeamPreparation} />
+      <Route path={Routes.AwardCeremony} component={AwardCeremony} />
       <Route
         path={Routes.Player}
         render={({ match }): React.ReactNode => (
