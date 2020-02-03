@@ -8,6 +8,11 @@ interface Props {
 interface State {
   showStartText: boolean;
 }
+const CANVAS_WIDTH = 600;
+const CANVAS_HEIGHT = 600;
+
+const MAX_AWARDS = 3;
+const PLATEAU_WIDTH = 150;
 
 class AwardCeremony extends React.PureComponent<Props, State> {
   constructor(props) {
@@ -17,6 +22,7 @@ class AwardCeremony extends React.PureComponent<Props, State> {
     };
     this.startTimeout();
   }
+
   canvas = React.createRef<HTMLCanvasElement>();
   timeout = null;
 
@@ -26,7 +32,7 @@ class AwardCeremony extends React.PureComponent<Props, State> {
         showStartText: false,
       });
       window.clearTimeout(this.timeout);
-    }, 50);
+    }, 20);
   };
 
   componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<State>): void {
@@ -34,37 +40,50 @@ class AwardCeremony extends React.PureComponent<Props, State> {
       this.drawAwardCeremony();
     }
   }
+  getTeamsByPoints = (): { [points: number]: Team[] } => {
+    return this.props.teams.reduce(
+      (prev, team) => ({
+        ...prev,
+        [team.points]: [...(prev[team.points] || []), team],
+      }),
+      {},
+    );
+  };
+
+  getAwardsToShow = (): number => {
+    return Math.min(Object.keys(this.getTeamsByPoints()).length, MAX_AWARDS);
+  };
 
   drawAwardCeremony = (): void => {
     const { teams } = this.props;
-    teams.sort((teamA, teamB) => teamB.points - teamA.points);
+    const teamsByPoints = this.getTeamsByPoints();
+    const awardsToShow = this.getAwardsToShow();
 
     const ctx = this.canvas.current.getContext('2d');
-    ctx.beginPath();
-    ctx.fillStyle = '#9c9c9c';
-    ctx.fillRect(100, 400, 150, 100);
-    ctx.fillStyle = '#000000';
-    ctx.fillStyle = '#d1d1d1';
-    ctx.fillRect(250, 380, 150, 120);
-    if (teams.length > 2) {
+    for (let i = 0; i < awardsToShow; i++) {
+      console.log(ctx);
+      ctx.beginPath();
       ctx.fillStyle = '#9c9c9c';
-      ctx.fillRect(400, 420, 150, 80);
+      ctx.fillRect(i * PLATEAU_WIDTH, 400 - i * 20, PLATEAU_WIDTH, 100 + i * 20);
+      ctx.closePath();
+      ctx.beginPath();
+      ctx.fillStyle = '#535353';
+      ctx.font = '36pt Arial';
+      ctx.fillText(`${awardsToShow - i}`, i * PLATEAU_WIDTH - PLATEAU_WIDTH / 2, 400 + i * 50);
+      ctx.closePath();
     }
-    ctx.fillStyle = '#535353';
-    ctx.font = '36pt sans-serif';
-    ctx.fillText('1', 310, 450);
-    ctx.fillText('2', 162, 465);
-    if (teams.length > 2) {
-      ctx.fillText('3', 465, 480);
-    }
-    console.log(teams);
   };
 
   render(): JSX.Element {
     return this.state.showStartText ? (
       <h1 className={classNames('animated', 'fadeIn', 'slow')}>Kommen wir zur Siegerehrung!</h1>
     ) : (
-      <canvas className={classNames('animated', 'fadeIn', 'slow')} ref={this.canvas} width={640} height={500} />
+      <canvas
+        className={classNames('animated', 'fadeIn', 'slow')}
+        ref={this.canvas}
+        width={this.getAwardsToShow() * PLATEAU_WIDTH}
+        height={CANVAS_HEIGHT}
+      />
     );
   }
 }
