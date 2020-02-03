@@ -4,9 +4,10 @@ import { Game } from '../../../interfaces/Game';
 import { Button } from '@material-ui/core';
 import { getRandomItem } from '../../../services/utils/array';
 import classNames from 'classnames';
-import { LinkTo } from '../../../services/routes';
+import { LinkTo, Routes } from '../../../services/routes';
 // @ts-ignore
 import tada from '../../../assets/audio/tada.mp3';
+import { hasAllGamesPlayed } from '../../../services/utils/game';
 
 export interface Props {
   games: Game[];
@@ -28,6 +29,13 @@ class Overview extends React.PureComponent<Props, State> {
   };
   interval: undefined | number = undefined;
   slowingInterval: undefined | number = undefined;
+
+  componentDidMount(): void {
+    const { games, push } = this.props;
+    if (hasAllGamesPlayed(games)) {
+      push(Routes.AwardCeremony);
+    }
+  }
 
   startRandomGameChoose = (): void => {
     this.setState({

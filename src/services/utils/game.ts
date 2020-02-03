@@ -10,3 +10,6 @@ export const getStaticGamesWithColors = (): { [name: string]: Game } =>
     }),
     {},
   );
+
+export const hasAllGamesPlayed = (games: Game[]): boolean =>
+  games.map(game => game.alreadyPlayed).reduce((prev, current) => prev && current, true);
