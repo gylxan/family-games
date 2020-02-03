@@ -1,8 +1,9 @@
 .GameFlow {
   min-width: 60vw;
+  position: relative;
 }
 
-.RoundIndicator { 
+.RoundIndicator {
   margin: 0 0 2em;
 }
 
@@ -15,3 +16,10 @@
 div.Countdown {
   font-size: 3em;
 }
+
+.CountdownBetweenTeams {
+  composes: Countdown from '../Countdown/Countdown.module.css';
+  position: absolute;
+  width: 100%;
+}
+

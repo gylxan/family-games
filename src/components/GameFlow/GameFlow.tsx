@@ -10,12 +10,14 @@ import { getOtherTeam } from '../../services/utils/team';
 import { Props as GameDescriptionProps } from '../GameDescription';
 import GameResult from '../GameResult';
 import Countdown from '../Countdown';
+import classNames from 'classnames';
 
 export interface Props {
   teams: Team[];
   rounds: number;
   showScoring?: boolean;
   showCountdown?: boolean;
+  showRoundIndicator?: boolean;
   gameMode?: GameMode;
   countdown?: number;
   showStartCountdown?: boolean;
@@ -25,7 +27,7 @@ export interface Props {
   onStartPlaying: () => void;
   onPausePlaying?: () => void;
   onContinuePlaying?: () => void;
-  onCountdown?: () => void;
+  onCountdown?: (secondsRemaining: number) => void;
 }
 
 export enum GameMode {
@@ -51,6 +53,7 @@ class GameFlow extends React.PureComponent<Props, State> {
     gameMode: GameMode.BATTLE,
     showScoring: true,
     showCountdown: true,
+    showRoundIndicator: true,
   };
 
   constructor(props: Props) {
@@ -159,7 +162,7 @@ class GameFlow extends React.PureComponent<Props, State> {
         {!!countdown && showCountdown && (
           <Countdown
             started={true}
-            className={styles.Countdown}
+            className={classNames(styles.Countdown, { [styles.CountdownBetweenTeams]: !activeTeam })}
             time={countdown * 1000}
             countdownCallback={onCountdown}
             onEnd={(): void => this.endTurn(!!activeTeam ? this.getNextActiveTeam().id : undefined)}
@@ -173,11 +176,16 @@ class GameFlow extends React.PureComponent<Props, State> {
   };
 
   renderTurn = (): JSX.Element => {
+    const { showRoundIndicator } = this.props;
+    const isPreparingTurnPhase = this.state.turnPhase === TurnPhase.PREPARING;
+
     const currentTurn = Math.ceil(this.getCurrentRoundNumber());
     return (
       <>
-        <p className={styles.RoundIndicator}>Runde {currentTurn}</p>
-        {this.state.turnPhase === TurnPhase.PREPARING ? this.renderPreparing() : this.renderPlayTurn()}
+        {(showRoundIndicator || (!showRoundIndicator && isPreparingTurnPhase)) && (
+          <p className={styles.RoundIndicator}>Runde {currentTurn}</p>
+        )}
+        {isPreparingTurnPhase ? this.renderPreparing() : this.renderPlayTurn()}
       </>
     );
   };
