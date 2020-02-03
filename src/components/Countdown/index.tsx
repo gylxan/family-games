@@ -17,7 +17,7 @@ export interface Props {
   startText?: string;
   onlySmallCountdown?: boolean;
   onEnd: () => void;
-  countdownCallback?: () => void;
+  countdownCallback?: (secondsRemaining: number) => void;
   className?: string;
 }
 
@@ -55,12 +55,14 @@ class Countdown extends React.Component<Props, State> {
     }
   }
 
+  getRemainingSeconds = (countdown: number): number => (countdown - COUNTDOWN_INTERVAL) / 1000;
+
   startStartCountdown = (): void => {
     const { onlySmallCountdown, countdownCallback } = this.props;
     this.countdown = window.setInterval(() => {
       if (this.state.startCountdown > 0) {
         if (onlySmallCountdown) {
-          !!countdownCallback && countdownCallback();
+          !!countdownCallback && countdownCallback(this.getRemainingSeconds(this.state.startCountdown));
         }
         this.setState(oldState => ({
           startCountdown: oldState.startCountdown - COUNTDOWN_INTERVAL,
@@ -98,7 +100,7 @@ class Countdown extends React.Component<Props, State> {
     });
     this.countdown = window.setInterval(() => {
       if (this.state.countdown > 0) {
-        !!countdownCallback && countdownCallback();
+        !!countdownCallback && countdownCallback(this.getRemainingSeconds(this.state.countdown));
         this.setState(oldState => ({
           countdown: oldState.countdown - COUNTDOWN_INTERVAL,
         }));
