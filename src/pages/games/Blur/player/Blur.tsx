@@ -2,19 +2,15 @@ import React from 'react';
 import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
 import { getRandomIndex } from '../../../../services/utils/array';
 import Team from '../../../../interfaces/Team';
-import logo from '../../../../assets/images/logo.png';
 import fox from '../../../../assets/images/fox.jpg';
+import kicker from '../../../../assets/images/kicker.jpg';
+import fliegenpilz from '../../../../assets/images/fliegenpilz.jpg';
+import traktor from '../../../../assets/images/traktor.jpg';
+import kuh from '../../../../assets/images/kuh.jpg';
 
 import styles from './Blur.module.css';
-import { Button } from '@material-ui/core';
 import GameFlow from '../../../../components/GameFlow';
 
-export enum GameState {
-  Explaining,
-  Started,
-  Paused,
-  Finished,
-}
 export interface Props {
   teams: Team[];
 }
@@ -25,13 +21,11 @@ export interface State {
   currentBlur: number;
 }
 
-const BLUR_STEPS_MIN = 2;
-
 const MAX_ROUNDS = 5;
 
 const COUNTDOWN_IN_SECONDS = 60;
 
-const IMAGES = [logo, fox];
+const IMAGES = [fox, kicker, fliegenpilz, traktor, kuh];
 
 class Blur extends React.PureComponent<Props, State> {
   state = {
@@ -57,7 +51,7 @@ class Blur extends React.PureComponent<Props, State> {
     });
   };
 
-  handleCountdown = (): void => {
+  handleCountdown = (secondsRemaining: number): void => {
     this.setState(prevProps => ({
       ...prevProps,
       currentBlur: prevProps.currentBlur - 1,
@@ -98,8 +92,8 @@ class Blur extends React.PureComponent<Props, State> {
         </p>
         <p>
           <strong>Beschreibung:</strong> Es werden verschwommene Bilder von Objekten gezeigt. Diese werden innerhalb
-          <strong> einer Minute</strong> immer klarer. Dabei gilt es die Objekte auf den Bildern so schnell wie möglich
-          zu erraten. Das erste Team, welches den Begriff errät erhält einen Punkt.
+          <strong> einer Minute</strong> immer klarer. Die Objekte auf den Bildern müssen so schnell wie möglich erraten
+          werden. Das erste Team, welches den Begriff errät erhält einen Punkt.
         </p>
       </GameDescription>
     );
@@ -111,6 +105,7 @@ class Blur extends React.PureComponent<Props, State> {
         rounds={5}
         countdown={60}
         showScoring
+        showRoundIndicator={false}
         descriptionComponent={this.renderGameDescription()}
         playingComponent={this.renderGame()}
         onStartPlaying={this.startNextTurn}
