@@ -4,10 +4,7 @@ import Team from '../../interfaces/Team';
 import { connect } from 'react-redux';
 import { updateTeam } from '../../redux/team/actions';
 import { push } from 'connected-react-router';
-import { LinkTo, Routes } from '../../services/routes';
-import { hasAllGamesPlayed } from '../../redux/games/selectors';
-import { store } from '../../redux/createStore';
-
+import { LinkTo } from '../../services/routes';
 interface Props {
   teams: Team[];
 }
@@ -20,7 +17,7 @@ const mapDispatchToProps = (dispatch): DispatchProps => {
   return {
     onEndGame: (teams: Team[]): void => {
       teams.forEach(team => dispatch(updateTeam(team)));
-
+      dispatch(push(LinkTo.playerGamesOverview()));
     },
   };
 };
