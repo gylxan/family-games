@@ -6,6 +6,10 @@
   margin: 0 2em 0 2em;
 }
 
+.Title {
+  display: inline-flex;
+}
+
 .Logo {
   height: 15em;
   width: 15em;
@@ -25,21 +29,6 @@
   background: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .Logo {
-    animation: LogoSpin infinite 20s linear;
-  }
-}
-
 .Link {
   color: #61dafb;
-}
-
-@keyframes LogoSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
