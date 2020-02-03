@@ -12,19 +12,27 @@ const Home: React.FC = () => {
   const [clickCounter, setClickCounter] = useState(0);
   return (
     <div className={styles.Home}>
-      <div className={classNames(styles.Title, 'animated', 'rubberBand', 'slow', 'delay-5s')}>
-        <h1 className={classNames('animated', 'bounceInDown', 'slow')}>Fa</h1>
-        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-1s')}>mi</h1>
-        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-2s')}>lien</h1>
-        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-3s')}>-</h1>
-        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-4s')}>Quiz</h1>
+      <div className={classNames(styles.Title, 'animated', 'rubberBand', 'slow', 'delay-13s')}>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow')}>F</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-1s')}>a</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-2s')}>m</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-3s')}>i</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-4s')}>l</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-5s')}>i</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-6s')}>e</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-7s')}>n</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-8s')}>-</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-9s')}>Q</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-10s')}>u</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-11s')}>i</h1>
+        <h1 className={classNames('animated', 'bounceInDown', 'slow', 'delay-12s')}>z</h1>
       </div>
       <img
         src={logo}
-        className={classNames(styles.Logo, 'animated', 'jackInTheBox', 'slower', 'delay-5s')}
+        className={classNames(styles.Logo, 'animated', 'jackInTheBox', 'slower', 'delay-14s')}
         alt="logo"
       />
-      <div className={styles.Control}>
+      <div className={classNames(styles.Control, 'animated', 'fadeIn', 'slower', 'delay-15s')}>
         <Link to={LinkTo.teamPreparation(1)}>
           <Button className={styles.StartButton} variant={'contained'} color={'primary'}>
             Starten
