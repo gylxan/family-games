@@ -18,7 +18,7 @@ export const STATIC_GAMES: Array<Game> = [
     component: JustOneGame,
   },
   {
-    name: 'Körperklaus',
+    name: 'Körper-klaus',
     url: '/koerper-klaus',
     alreadyPlayed: false,
     component: Pantomime,

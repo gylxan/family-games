@@ -4,7 +4,6 @@ import GameDescription from '../../../../components/GameDescription';
 import InputList from '../../../../components/InputList';
 import { getRandomIndex } from '../../../../services/utils/array';
 import { Button } from '@material-ui/core';
-import classNames from 'classnames';
 import GameFlow from '../../../../components/GameFlow/';
 import { Props as GameDescriptionProps } from '../../../../components/GameDescription';
 import { GameMode } from '../../../../components/GameFlow/GameFlow';
@@ -138,7 +137,7 @@ class JustOneGame extends React.PureComponent<State> {
   render(): JSX.Element {
     return (
       <>
-        <h1 className={classNames({ [styles.HeadlineStartedGame]: true })}>&raquo;Just One&laquo;</h1>
+        <h1>&raquo;Just One&laquo;</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
           countdown={60}

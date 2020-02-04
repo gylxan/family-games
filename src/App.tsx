@@ -46,7 +46,7 @@ const App: React.FC = () => (
         path={Routes.Master}
         render={({ match }): React.ReactNode => (
           <Switch>
-            <Route path={`${match.path}${Routes.Games}/mimikry`} component={Pantomime} />
+            <Route path={`${match.path}${Routes.Games}/koerper-klaus`} component={Pantomime} />
             <Route path={`${match.path}${Routes.Games}`} component={MasterOverview} />
           </Switch>
         )}

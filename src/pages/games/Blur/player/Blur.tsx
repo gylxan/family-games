@@ -102,7 +102,7 @@ class Blur extends React.PureComponent<Props, State> {
   render(): JSX.Element {
     return (
       <GameFlow
-        rounds={5}
+        rounds={MAX_ROUNDS}
         countdown={60}
         showScoring
         showRoundIndicator={false}

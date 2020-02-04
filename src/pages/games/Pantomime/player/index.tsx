@@ -1,10 +1,57 @@
-import Pantomime from './Pantomime';
-import { connect } from 'react-redux';
-import Team from '../../../../interfaces/Team';
-import RootState from '../../../../redux/RootState';
+import React from 'react';
+import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
+import GameFlow from '../../../../components/GameFlow';
 
-interface Props {
-  teams: Team[];
+import { GameMode } from '../../../../components/GameFlow/GameFlow';
+
+const MAX_ROUNDS = 2;
+
+class Pantomime extends React.PureComponent {
+  startNextTurn = (): void => {
+  };
+
+  renderGame = (): JSX.Element => {
+    return <></>;
+  };
+
+  renderGameDescription = (): React.ReactElement<GameDescriptionProps> => {
+    return (
+      <GameDescription>
+        <p>
+          <strong>Teilnehmer:</strong> alle (1 Körperklaus je Runde)
+        </p>
+        <p>
+          <strong>Modus:</strong> Abwechselnd
+        </p>
+        <p>
+          <strong>Rundenzahl:</strong> {MAX_ROUNDS}
+        </p>
+        <p>
+          <strong>Beschreibung:</strong> Der Körperklaus erhält einen geheimen Begriff. Diesen Begriff stellt er seinen
+          Teammitgliedern innerhalb einer Minute unter vollem Körpereinsatz dar. Es dürfen keine Hilfsmittel verwendet
+          werden.
+        </p>
+      </GameDescription>
+    );
+  };
+
+  render(): JSX.Element {
+    return (
+      <>
+        <h1>Körperklaus</h1>
+        <GameFlow
+          rounds={MAX_ROUNDS}
+          countdown={60}
+          showScoring
+          showRoundIndicator={false}
+          descriptionComponent={this.renderGameDescription()}
+          playingComponent={this.renderGame()}
+          onStartPlaying={this.startNextTurn}
+          gameMode={GameMode.ROUNDS}
+        />
+      </>
+    );
+  }
 }
-const mapStateToProps = (state: RootState): Props => ({ teams: state.team.data });
-export default connect(mapStateToProps)(Pantomime);
+
+export default Pantomime;
