@@ -6,7 +6,7 @@ import { LinkTo, Routes } from '../../services/routes';
 // @ts-ignore
 import looneyTunesIntro from '../../assets/audio/looney_tunes_intro.mp3';
 import classNames from 'classnames';
-import ColorCircles, {CIRCLE_COLORS} from './ColorCircles';
+import ColorCircles, { CIRCLE_COLORS } from './ColorCircles';
 const TITLE = 'Familien-Quiz';
 const Home: React.FC = () => {
   const [clickCounter, setClickCounter] = useState(0);
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
       >
         {TITLE.split('').map((char, index) => (
           <h1
-            key={char}
+            key={index}
             className={classNames('animated', 'bounceInDown')}
             style={{ animationDelay: `${startAnimationTime + index * 0.5}s` }}
           >
