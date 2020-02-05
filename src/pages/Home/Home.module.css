@@ -8,6 +8,8 @@
 
 .Title {
   display: inline-flex;
+  position: absolute;
+  z-index: 10;
 }
 
 .Logo {
@@ -18,8 +20,12 @@
 
 .Control {
   margin-top: 2em;
+  position: absolute;
+  z-index: 1;
+  bottom: 1em;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .StartMasterButton {
