@@ -30,6 +30,12 @@ const Home: React.FC = () => {
         ))}
       </div>
       <ColorCircles />
+      <span
+        className={classNames(styles.QuestionMark, 'animated', 'zoomIn', 'slower')}
+        style={{ animationDelay: `${titleAnimationEndTime + 2}s` }}
+      >
+        ?
+      </span>
       <div
         className={classNames(styles.Control, 'animated', 'fadeIn', 'slower')}
         style={{ animationDelay: `${titleAnimationEndTime + 3}s` }}
