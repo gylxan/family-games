@@ -19,17 +19,17 @@
 }
 
 .Colors {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  --space: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 10vh);
+  grid-column-gap: var(--space);
+  grid-row-gap: var(--space);
   width: 50%;
   cursor: pointer;
 }
 
 .ColorTile {
-  width: 10vh;
   height: 10vh;
-  margin: 6px;
   transition: transform 0.3s; /* Animation */
 }
 
