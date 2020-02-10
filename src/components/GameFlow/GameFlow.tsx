@@ -24,7 +24,7 @@ export interface Props {
   descriptionComponent: React.ReactElement<GameDescriptionProps>;
   playingComponent: React.ReactNode;
   onEndGame: (teams: Team[]) => void;
-  onStartPlaying: () => void;
+  onStartPlaying?: () => void;
   onPausePlaying?: () => void;
   onContinuePlaying?: () => void;
   onCountdown?: (secondsRemaining: number) => void;
@@ -90,7 +90,10 @@ class GameFlow extends React.PureComponent<Props, State> {
     this.setState({
       turnPhase: TurnPhase.PLAYING,
     });
-    this.props.onStartPlaying();
+    
+    if (this.props.onStartPlaying) {
+      this.props.onStartPlaying();
+    }
   };
 
   getCurrentRoundNumber = (): number => {
@@ -144,7 +147,7 @@ class GameFlow extends React.PureComponent<Props, State> {
           )}
         </p>
         <div className={styles.Footer}>
-          <Button variant={'contained'} color={'primary'} onClick={this.startPlaying}>
+          <Button autoFocus variant={'contained'} color={'primary'} onClick={this.startPlaying}>
             Start
           </Button>
         </div>

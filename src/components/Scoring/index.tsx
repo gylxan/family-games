@@ -16,16 +16,20 @@ const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId }) => (
   <div className={styles.FooterRating}>
     {!!activeTeamId ? (
       <>
-        <Button className="MuiButton-containedRight" variant={'contained'} onClick={(): void => onScored(activeTeamId)}>
-          <Check style={{ color: 'white' }} />
+        <Button
+          className="MuiButton-containedRight"
+          variant={'contained'}
+          onClick={(): void => onScored(activeTeamId)}
+          startIcon={<Check />}
+        >
           Richtig
         </Button>
         <Button
           className="MuiButton-containedWrong"
           variant={'contained'}
           onClick={(): void => onScored(getOtherTeam(teams, activeTeamId).id)}
+          startIcon={<Clear />}
         >
-          <Clear style={{ color: 'white' }} />
           Falsch
         </Button>
       </>
@@ -38,8 +42,8 @@ const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId }) => (
             color="primary"
             className={styles.TeamButton}
             onClick={(): void => onScored(team.id)}
+            startIcon={<Check />}
           >
-            <Check style={{ color: 'white' }} />
             {team.name}
           </Button>
         ))}
