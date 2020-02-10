@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       </div>
       <ColorCircles />
       <span
-        className={classNames(styles.QuestionMark, 'animated', 'zoomIn', 'slower')}
+        className={classNames(styles.QuestionMark, 'animated', 'rotateIn', 'slower')}
         style={{ animationDelay: `${titleAnimationEndTime + 2}s` }}
       >
         ?
@@ -41,7 +41,7 @@ const Home: React.FC = () => {
         style={{ animationDelay: `${titleAnimationEndTime + 3}s` }}
       >
         <Link to={LinkTo.teamPreparation(1)}>
-          <Button className={styles.StartButton} variant={'contained'} color={'primary'}>
+          <Button className={styles.StartButton} variant={'contained'} color={'primary'} autoFocus>
             Starten
           </Button>
         </Link>
