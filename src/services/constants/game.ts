@@ -1,8 +1,8 @@
 import { Game } from '../../interfaces/Game';
-import MusicGame from '../../pages/games/MusicGame/player/MusicGame';
+import MusicGame from '../../pages/games/MusicGame/player';
 import JustOneGame from '../../pages/games/JustOneGame/player/';
-import Pantomime from '../../pages/games/Pantomime/player/';
-import Blur from "../../pages/games/Blur/player/Blur";
+import Pantomime from '../../pages/games/PantomimeGame/player/';
+import Blur from '../../pages/games/Blur/player/Blur';
 
 export const STATIC_GAMES: Array<Game> = [
   {

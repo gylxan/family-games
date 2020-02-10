@@ -7,12 +7,6 @@ import { GameMode } from '../../../../components/GameFlow/GameFlow';
 const MAX_ROUNDS = 2;
 
 class Pantomime extends React.PureComponent {
-  startNextTurn = (): void => {
-  };
-
-  renderGame = (): JSX.Element => {
-    return <></>;
-  };
 
   renderGameDescription = (): React.ReactElement<GameDescriptionProps> => {
     return (
@@ -43,10 +37,8 @@ class Pantomime extends React.PureComponent {
           rounds={MAX_ROUNDS}
           countdown={60}
           showScoring
-          showRoundIndicator={false}
           descriptionComponent={this.renderGameDescription()}
-          playingComponent={this.renderGame()}
-          onStartPlaying={this.startNextTurn}
+          playingComponent={<></>}
           gameMode={GameMode.ROUNDS}
         />
       </>
