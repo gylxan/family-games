@@ -153,6 +153,14 @@ label +.MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
   display: none;
 }
 
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary {
+  background: rgba(255,255,244, 0.3);
+}
+
+.MuiLinearProgress-root.MuiLinearProgress-colorPrimary .MuiLinearProgress-barColorPrimary {
+ background: #FFC312;
+}
+
 .delay-1
 .delay-6s {
   animation-delay: 6s;
