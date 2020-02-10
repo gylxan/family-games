@@ -4,22 +4,21 @@
 }
 
 .Games {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  width: 100%;
+  --space-column: 20px;
+  --space-row: var(--space-column);
+  display: grid;
+  grid-template-columns: repeat(5, 26vh);
+  grid-gap: var(--space-row) var(--space-column);
   margin-bottom: 4em;
+  justify-content: center;
 }
 
 .Tile {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25vh;
-  height: 25vh;
+  height: 26vh;
   transition: transform 1s; /* Animation */
-  margin: 10px;
   text-shadow: 1px 1px black;
   font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
 }
@@ -35,4 +34,3 @@
 .ControlBar > button:first-of-type {
   margin-right: 10px;
 }
-
