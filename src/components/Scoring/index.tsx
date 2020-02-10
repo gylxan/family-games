@@ -10,9 +10,10 @@ export interface Props {
   onScored: (teamId: null | number) => void;
   teams: Team[];
   activeTeamId?: number;
+  showSkipOption: boolean;
 }
 
-const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId }) => (
+const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId, showSkipOption }) => (
   <div className={styles.FooterRating}>
     {!!activeTeamId ? (
       <>
@@ -47,6 +48,11 @@ const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId }) => (
             {team.name}
           </Button>
         ))}
+        {showSkipOption && (
+          <Button className={styles.SkipButton} onClick={(): void => onScored(null)}>
+            <Clear style={{ color: 'white' }} />
+          </Button>
+        )}
       </>
     )}
   </div>

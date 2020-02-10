@@ -175,7 +175,12 @@ class GameFlow extends React.PureComponent<Props, State> {
           />
         )}
         {showScoring && (
-          <Scoring onScored={this.endTurn} teams={teams} activeTeamId={!!activeTeam ? activeTeam.id : undefined} />
+          <Scoring
+            onScored={this.endTurn}
+            teams={teams}
+            activeTeamId={!!activeTeam ? activeTeam.id : undefined}
+            showSkipOption={!(countdown && showCountdown) && !activeTeam}
+          />
         )}
       </>
     );
