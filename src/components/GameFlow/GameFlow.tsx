@@ -25,8 +25,7 @@ export interface Props {
   playingComponent: React.ReactNode;
   onEndGame: (teams: Team[]) => void;
   onStartPlaying?: () => void;
-  onPausePlaying?: () => void;
-  onContinuePlaying?: () => void;
+  onEndTurn?: () => void;
   onCountdown?: (secondsRemaining: number) => void;
 }
 
@@ -129,6 +128,10 @@ class GameFlow extends React.PureComponent<Props, State> {
       this.setState({
         gameState: GameState.RESULT,
       });
+    }
+
+    if (this.props.onEndTurn) {
+      this.props.onEndTurn();
     }
   };
 

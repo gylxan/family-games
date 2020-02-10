@@ -42,9 +42,14 @@ class MusicGame extends React.PureComponent<State> {
 
   startPlaying = (): void => {
     this.audio.src = this.tracks.splice(getRandomIndex(this.tracks), 1)[0];
-    this.setState({
-      isAudioPlaying: false,
-    });
+    this.toggleAudio();
+  };
+
+  endAudio = (): void => {
+    if (!this.audio.paused) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+    }
   };
 
   toggleAudio = (): void => {
@@ -64,6 +69,7 @@ class MusicGame extends React.PureComponent<State> {
       <>
         <Button
           autoFocus
+          disableRipple
           className={classNames(styles.PlayButton, { [styles.PlayButtonPlaying]: this.state.isAudioPlaying })}
           onClick={this.toggleAudio}
         >
@@ -87,10 +93,13 @@ class MusicGame extends React.PureComponent<State> {
           <strong>Modus:</strong> Battle
         </p>
         <p>
-          <strong>Beschreibung:</strong> Den Teams werden abwechselnd die ersten 10 Sekunden eines Hits der 70er / 80er
-          / 90er vorgespielt. Das Team hat 30 Sekunden um eine Antwort zu geben.
+          <strong>Beschreibung:</strong> In jeder Runde wird max. eine Minute eines Hits der 70er, 80er oder 90er
+          vorgespielt. Wer das Lied erkennt drückt auf den Buzzer. Daraufhin wird das Lied pausiert und das Team, das
+          als erstes gebuzzt hat, darf eine Antwort geben. Für eine richtige Antwort erhält das Team einen Punkt und die
+          Runde ist beendet. Bei einer falschen Antwort, erhält das gegnerische Team die Möglichkeit zu lösen. Können
+          oder wollen beide Teams nicht auflösen, läuft das Lied weiter.
           <br />
-          Es werden 8 Runden gespielt.
+          Es werden {MAX_ROUNDS} Runden gespielt.
         </p>
       </GameDescription>
     );
@@ -105,6 +114,7 @@ class MusicGame extends React.PureComponent<State> {
             rounds={MAX_ROUNDS}
             showScoring
             onStartPlaying={this.startPlaying}
+            onEndTurn={this.endAudio}
             descriptionComponent={this.renderGameDescription()}
             playingComponent={this.renderGamePlay()}
             gameMode={GameMode.BATTLE}
