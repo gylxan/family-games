@@ -2,22 +2,20 @@ import React from 'react';
 import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
 import { getRandomIndex } from '../../../../services/utils/array';
 import Team from '../../../../interfaces/Team';
-import fox from '../../../../assets/images/fox.jpg';
-import kicker from '../../../../assets/images/kicker.jpg';
-import fliegenpilz from '../../../../assets/images/fliegenpilz.jpg';
-import traktor from '../../../../assets/images/traktor.jpg';
-import kuh from '../../../../assets/images/kuh.jpg';
 
 import styles from './Blur.module.css';
 import GameFlow from '../../../../components/GameFlow';
+import { LinearProgress } from '@material-ui/core';
+import { getBlurImages } from '../../../../services/utils/firebaseStorage';
 
 export interface Props {
   teams: Team[];
 }
 
 export interface State {
-  currentImage: any;
-  availableImages: any[];
+  currentImage: string;
+  availableImages: string[];
+  hasImagesLoaded: boolean;
   currentBlur: number;
 }
 
@@ -25,13 +23,25 @@ const MAX_ROUNDS = 5;
 
 const COUNTDOWN_IN_SECONDS = 60;
 
-const IMAGES = [fox, kicker, fliegenpilz, traktor, kuh];
-
 class Blur extends React.PureComponent<Props, State> {
   state = {
+    hasImagesLoaded: false,
     currentImage: null,
-    availableImages: IMAGES,
+    availableImages: [],
     currentBlur: COUNTDOWN_IN_SECONDS,
+  };
+
+  componentDidMount(): void {
+    this.loadImages();
+  }
+
+  loadImages = (): void => {
+    getBlurImages().then(images => {
+      this.setState({
+        availableImages: images,
+        hasImagesLoaded: true,
+      });
+    });
   };
 
   startNextTurn = (): void => {
@@ -100,6 +110,9 @@ class Blur extends React.PureComponent<Props, State> {
   };
 
   render(): JSX.Element {
+    if (!this.state.hasImagesLoaded) {
+      return <LinearProgress />;
+    }
     return (
       <GameFlow
         rounds={MAX_ROUNDS}
