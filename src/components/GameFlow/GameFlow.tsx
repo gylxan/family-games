@@ -90,7 +90,7 @@ class GameFlow extends React.PureComponent<Props, State> {
     this.setState({
       turnPhase: TurnPhase.PLAYING,
     });
-    
+
     if (this.props.onStartPlaying) {
       this.props.onStartPlaying();
     }
