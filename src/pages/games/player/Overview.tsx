@@ -141,7 +141,9 @@ class Overview extends React.PureComponent<Props, State> {
             className={styles.StartButton}
             variant={'contained'}
             color={'primary'}
-            disabled={this.state.isStopping}
+            disabled={
+              this.state.isStopping || (!this.state.isStarted && !this.state.isStopping && !!this.state.activeGame)
+            }
             onClick={!this.state.isStarted ? this.startRandomGameChoose : this.stopRandomGameChoose}
           >
             {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
