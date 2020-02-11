@@ -74,19 +74,18 @@ class Estimate extends React.PureComponent<Props, State> {
 
   handleCheckValues = (): void => {
     let winningIds = [];
-    let value, difference, nearestDifference;
-    console.log(this.state.values, this.state.currentQuestion);
+    let value, difference, nearestDifference, teamIdAsNumber;
     Object.keys(this.state.values).forEach(teamId => {
+      teamIdAsNumber = Number(teamId);
       value = parseFloat(this.state.values[teamId].replace(',', '.')) * 1000;
       difference = Math.abs(value - this.state.currentQuestion.answer * 1000);
       if (!nearestDifference || difference < nearestDifference) {
-        winningIds = [teamId];
+        winningIds = [teamIdAsNumber];
         nearestDifference = difference;
       } else if (difference === nearestDifference) {
-        winningIds = [...winningIds, teamId];
+        winningIds = [...winningIds, teamIdAsNumber];
       }
     });
-    console.log(winningIds);
     this.setState({
       showAnswer: true,
       winningIds,
@@ -97,7 +96,6 @@ class Estimate extends React.PureComponent<Props, State> {
 
   renderGame = (): JSX.Element => {
     const { teams } = this.props;
-    console.log(this.state.winningIds);
     return (
       <div className={styles.Game}>
         <span>Frage: {this.state.currentQuestion && this.state.currentQuestion.question}</span>
@@ -105,7 +103,7 @@ class Estimate extends React.PureComponent<Props, State> {
           {teams.map((team, index) => (
             <TextField
               autoFocus={index === 0}
-              error={this.state.winningIds.length >= 1 && this.state.winningIds.indexOf(`${team.id}`) === -1}
+              error={this.state.winningIds.length >= 1 && !this.state.winningIds.includes(team.id)}
               key={team.id}
               placeholder={team.name}
               onChange={(event): void => this.handleValueChange(team.id, event.currentTarget.value)}
@@ -146,7 +144,7 @@ class Estimate extends React.PureComponent<Props, State> {
   render(): JSX.Element {
     return (
       <>
-        <h1>Rate oder Rate</h1>
+        <h1>Schätze</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
           showScoring
