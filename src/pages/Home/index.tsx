@@ -52,8 +52,8 @@ const Home: React.FC = () => {
         >
           <Button>Ich bin Master!</Button>
         </Link>
-        <audio src={looneyTunesIntro} autoPlay />
       </div>
+      <audio src={looneyTunesIntro} autoPlay />
     </div>
   );
 };
