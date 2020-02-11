@@ -38,13 +38,13 @@ export const STATIC_GAMES: Array<Game> = [
   },
   {
     name: 'Wischi Waschi',
-    url: '/blur',
+    url: '/wischi-waschi',
     alreadyPlayed: false,
     component: Blur,
   },
   {
     name: 'Schätze',
-    url: '/estimate',
+    url: '/schaetze',
     alreadyPlayed: false,
     component: Estimate,
   },
@@ -63,12 +63,6 @@ export const STATIC_GAMES: Array<Game> = [
   {
     name: 'Just One',
     url: '/just-one',
-    alreadyPlayed: false,
-    component: JustOneGame,
-  },
-  {
-    name: 'Wischi Waschi',
-    url: '/wischi-waschi',
     alreadyPlayed: false,
     component: JustOneGame,
   },
