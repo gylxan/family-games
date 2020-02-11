@@ -1,5 +1,27 @@
 .InputContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px
+  margin-top: 20px;
+}
+
+.Question {
+  margin-bottom: 1em;
+}
+
+.Tip {
+  font-size: 0.8em;
+}
+
+.Answer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.ButtonContainer {
+  margin-top: 2em;
+}
+
+.ButtonContainer > *:not(:last-child) {
+  margin-right: 2em;
 }

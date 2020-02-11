@@ -17,11 +17,14 @@ export interface State {
   showAnswer: boolean;
   values: { [id: number]: string };
   winningIds: number[];
+  tipsToShow: number;
 }
 
 interface Question {
   question: string;
   answer: number;
+  answerText?: string;
+  tips?: string[];
 }
 
 const QUESTIONS: Question[] = [
@@ -29,11 +32,33 @@ const QUESTIONS: Question[] = [
     question: 'Wie viele Milliarden Menschen leben in China?',
     answer: 1.386,
   },
+  {
+    question: 'Wie viele Bienenarten gibt es in Europa?',
+    answer: 700,
+    answerText: 'Alleine 500 Bienenarten sind in Deutschland heimisch!',
+    tips: ['Im ca. gleichen Jahr wurde Dubrovnik gegründet'],
+  },
+  {
+    question: 'Wie viel Stunden Videomaterial werden pro Minute auf Youtube hochgeladen?',
+    answer: 400,
+    answerText: 'Würde man sie nacheinander anschauen, wäre man 16 Tage und Nächte beschäftigt.',
+  },
+
+  {
+    question: 'Mit wie viel km/h fliegt die ISS um die Erde?',
+    answer: 28000,
+    tips: ['Für eine Umrundung benötigt die ISS rund 90 Minuten.', ' In Euro könnte man davon zwei Kleinwagen kaufen'],
+  },
+  {
+    question: 'Wie viele Buchstaben hat das hawaiianische Alphabet?',
+    answer: 12,
+    answerText:
+      'Das hawaiianische Alphabet ist das Kürzeste der Welt und besteht nur aus den Buchstaben a, e, i, o, u, p, k, m, n, w, l, h.',
+    tips: ['Ein Fußball-Team hat weniger Spieler', 'Ein normales Geodreieck hat mehr Centimeter'],
+  },
 ];
 
 const MAX_ROUNDS = 5;
-
-const COUNTDOWN_IN_SECONDS = 60;
 
 class Estimate extends React.PureComponent<Props, State> {
   state = {
@@ -42,6 +67,7 @@ class Estimate extends React.PureComponent<Props, State> {
     availableQuestions: QUESTIONS,
     values: {},
     winningIds: [],
+    tipsToShow: 0,
   };
 
   startNextTurn = (): void => {
@@ -50,6 +76,7 @@ class Estimate extends React.PureComponent<Props, State> {
       showAnswer: false,
       values: {},
       winningIds: [],
+      tipsToShow: 0,
     });
   };
 
@@ -92,13 +119,25 @@ class Estimate extends React.PureComponent<Props, State> {
     });
   };
 
-  handleCountdown = (secondsRemaining: number): void => {};
+  handleShowTip = (): void => {
+    this.setState({
+      tipsToShow: this.state.tipsToShow + 1,
+    });
+  };
 
   renderGame = (): JSX.Element => {
     const { teams } = this.props;
+    if (!this.state.currentQuestion) {
+      return null;
+    }
     return (
       <div className={styles.Game}>
-        <span>Frage: {this.state.currentQuestion && this.state.currentQuestion.question}</span>
+        <span className={styles.Question}>Frage: {this.state.currentQuestion.question}</span>
+        {Array.from({ length: this.state.tipsToShow }).map((value, key) => (
+          <div key={'tip-' + key} className={styles.Tip}>
+            {this.state.currentQuestion.tips[key]}
+          </div>
+        ))}
         <div className={styles.InputContainer}>
           {teams.map((team, index) => (
             <TextField
@@ -111,11 +150,21 @@ class Estimate extends React.PureComponent<Props, State> {
           ))}
         </div>
         {this.state.showAnswer ? (
-          <span>Lösung: {this.state.currentQuestion.answer}</span>
+          <div className={styles.Answer}>
+            <span>Lösung: {this.state.currentQuestion.answer}</span>
+            {this.state.currentQuestion.answerText && <span>{this.state.currentQuestion.answerText}</span>}
+          </div>
         ) : (
-          <Button color={'primary'} variant={'contained'} onClick={this.handleCheckValues}>
-            Prüfen
-          </Button>
+          <div className={styles.ButtonContainer}>
+            <Button color={'primary'} variant={'contained'} onClick={this.handleCheckValues}>
+              Prüfen
+            </Button>
+            {!!this.state.currentQuestion.tips && this.state.tipsToShow < this.state.currentQuestion.tips.length && (
+              <Button color={'primary'} variant={'contained'} onClick={this.handleShowTip}>
+                Tipp
+              </Button>
+            )}
+          </div>
         )}
       </div>
     );
@@ -151,7 +200,6 @@ class Estimate extends React.PureComponent<Props, State> {
           descriptionComponent={this.renderGameDescription()}
           playingComponent={this.renderGame()}
           onStartPlaying={this.startNextTurn}
-          onCountdown={this.handleCountdown}
         />
       </>
     );
