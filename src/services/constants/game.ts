@@ -43,7 +43,7 @@ export const STATIC_GAMES: Array<Game> = [
     component: Blur,
   },
   {
-    name: 'Rate oder Rate',
+    name: 'Schätze',
     url: '/estimate',
     alreadyPlayed: false,
     component: Estimate,
