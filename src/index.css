@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'shark_partyshark_party';
   src: url('assets/fonts/shark_party-webfont.woff2') format('woff2'),
-       url('assets/fonts/shark_party-webfont.woff') format('woff');
+    url('assets/fonts/shark_party-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,17 +14,15 @@ body {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(124,66,143);
+  background-color: rgb(124, 66, 143);
   font-size: calc(10px + 2vmin);
-  background: radial-gradient(circle, rgba(124,66,143,1) 2%, rgba(94,9,121,1) 35%, rgba(21,3,82,1) 100%);
+  background: radial-gradient(circle, rgba(124, 66, 143, 1) 2%, rgba(94, 9, 121, 1) 35%, rgba(21, 3, 82, 1) 100%);
   color: white;
   text-align: center;
-
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 h1 {
@@ -37,7 +35,7 @@ button {
 }
 
 button.MuiButton-root:hover {
-  background-color: rgba(255,255,244, 0.3);
+  background-color: rgba(255, 255, 244, 0.3);
 }
 
 button.MuiButton-contained {
@@ -48,23 +46,26 @@ button.MuiButton-contained {
   box-shadow: 2px 3px 0 black;
 }
 
-button.MuiButton-containedPrimary, button.MuiButton-containedPrimary.Mui-disabled {
-  background-color: #B53471;
+button.MuiButton-containedPrimary,
+button.MuiButton-containedPrimary.Mui-disabled {
+  background-color: #b53471;
 }
 
 button.MuiButton-containedPrimary:hover {
-  background-color: #ED4C67;
+  background-color: #ed4c67;
 }
 
-button.MuiButton-containedSecondary, button.MuiButton-containedSecondary.Mui-disabled {
-  background-color: #1B1464;
+button.MuiButton-containedSecondary,
+button.MuiButton-containedSecondary.Mui-disabled {
+  background-color: #1b1464;
 }
 
 button.MuiButton-containedSecondary:hover {
-  background-color: #0652DD;
+  background-color: #0652dd;
 }
 
-button.MuiButton-containedRight, button.MuiButton-containedRight.Mui-disabled {
+button.MuiButton-containedRight,
+button.MuiButton-containedRight.Mui-disabled {
   background-color: #009432;
   color: white;
 }
@@ -73,8 +74,9 @@ button.MuiButton-containedRight:hover {
   background-color: #00b03b;
 }
 
-button.MuiButton-containedWrong, button.MuiButton-containedWrong.Mui-disabled {
-  background-color: #EA2027;
+button.MuiButton-containedWrong,
+button.MuiButton-containedWrong.Mui-disabled {
+  background-color: #ea2027;
   color: white;
 }
 
@@ -82,9 +84,8 @@ button.MuiButton-containedWrong:hover {
   background-color: #ef575c;
 }
 
-
 button.MuiButton-contained.Mui-disabled {
-  box-shadow: none !important;  
+  box-shadow: none !important;
   color: rgba(255, 255, 255, 0.3);
   opacity: 0.5;
 }
@@ -97,11 +98,9 @@ button .MuiButton-label {
   font-family: 'shark_partyshark_party', Arial, Helvetica, sans-serif;
 }
 
-
 div.MuiChip-root {
-  font-family: 'montserrat', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: 'montserrat', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 a {
@@ -118,7 +117,7 @@ label.MuiInputLabel-filled {
 
 label.MuiInputLabel-filled.MuiInputLabel-shrink {
   transform: translate(0.5rem, 0.4em) scale(0.7);
-  color: rgb(124,66,143);
+  color: rgb(124, 66, 143);
 }
 
 .MuiInputBase-formControl .MuiInputBase-input {
@@ -132,7 +131,7 @@ label.MuiInputLabel-filled.MuiInputLabel-shrink {
 
 .MuiInputBase-formControl.MuiInput-underline:before,
 .MuiInputBase-formControl.MuiInput-underline:hover:not(.Mui-disabled):before {
-  border-bottom: 2px solid rgba(255,255,244, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 244, 0.3);
 }
 
 .MuiInputBase-formControl.MuiInput-underline:after {
@@ -145,8 +144,8 @@ label.MuiInputLabel-filled.MuiInputLabel-shrink {
   background: white;
 }
 
-label +.MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
- padding-top: 0.8em;
+label + .MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
+  padding-top: 0.8em;
 }
 
 .MuiFilledInput-underline:after {
@@ -154,42 +153,9 @@ label +.MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
 }
 
 .MuiLinearProgress-root.MuiLinearProgress-colorPrimary {
-  background: rgba(255,255,244, 0.3);
+  background: rgba(255, 255, 244, 0.3);
 }
 
 .MuiLinearProgress-root.MuiLinearProgress-colorPrimary .MuiLinearProgress-barColorPrimary {
- background: #FFC312;
-}
-
-.delay-1
-.delay-6s {
-  animation-delay: 6s;
-}
-
-.delay-7s {
-  animation-delay: 7s;
-}
-.delay-8s {
-  animation-delay: 8s;
-}
-.delay-9s {
-  animation-delay: 9s;
-}
-.delay-10s {
-  animation-delay: 10s;
-}
-.delay-11s {
-  animation-delay: 11s;
-}
-.delay-12s {
-  animation-delay: 12s;
-}
-.delay-13s {
-  animation-delay: 13s;
-}
-.delay-14s {
-  animation-delay: 14s;
-}
-.delay-15s {
-  animation-delay: 15s;
+  background: #ffc312;
 }
