@@ -3,6 +3,7 @@ import MusicGame from '../../pages/games/MusicGame/player';
 import JustOneGame from '../../pages/games/JustOneGame/player/';
 import Pantomime from '../../pages/games/PantomimeGame/player/';
 import Blur from '../../pages/games/Blur/player/Blur';
+import Estimate from '../../pages/games/Estimate/player/';
 
 export const STATIC_GAMES: Array<Game> = [
   {
@@ -42,10 +43,10 @@ export const STATIC_GAMES: Array<Game> = [
     component: Blur,
   },
   {
-    name: 'What?!?!',
-    url: '/what',
+    name: 'Rate oder Rate',
+    url: '/estimate',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: Estimate,
   },
   {
     name: 'Turmbau zu Babel',
