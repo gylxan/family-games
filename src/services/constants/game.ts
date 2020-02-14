@@ -69,9 +69,22 @@ export const STATIC_GAMES: Array<Game> = [
     component: JustOneGame,
   },
   {
-    name: 'Papierfleugzeug',
+    name: 'Papier-Flugzeug',
     url: '/papier-flugzeug',
     alreadyPlayed: false,
     component: PaperPlane,
   },
+];
+
+export const COLORS = [
+  '#FFC312',
+  '#EE5A24',
+  '#EA2027',
+  '#FDA7DF',
+  '#D980FA',
+  '#B53471',
+  '#0652DD',
+  '#1B1464',
+  '#12CBC4',
+  '#009432',
 ];

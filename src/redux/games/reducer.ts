@@ -2,7 +2,7 @@ import { Game } from '../../interfaces/Game';
 
 import { AnyAction, Reducer } from 'redux';
 import { GAMES } from '../actionTypes';
-import { getStaticGamesWithColors } from '../../services/utils/game';
+import { getRandomGamesWithColors } from '../../services/utils/game';
 import CacheManager from '../../services/CacheManager';
 
 const cacheManager = new CacheManager<GameState>('games');
@@ -17,7 +17,7 @@ const initialState: GameState = Object.freeze(
   cachedData !== null
     ? cachedData
     : {
-        byName: getStaticGamesWithColors(),
+        byName: getRandomGamesWithColors(),
       },
 );
 
