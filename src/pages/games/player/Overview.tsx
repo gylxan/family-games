@@ -62,7 +62,7 @@ class Overview extends React.PureComponent<Props, State> {
   startInterval = (): void => {
     this.interval = window.setInterval(() => {
       this.setState({
-        activeGame: getRandomItem(this.props.games.filter(game => !game.alreadyPlayed)),
+        activeGame: this.getRandomGame(),
       });
     }, 250);
   };
@@ -72,6 +72,8 @@ class Overview extends React.PureComponent<Props, State> {
       window.clearTimeout(this.slowingInterval);
     }
   };
+
+  getRandomGame = (): Game => getRandomItem(this.props.games.filter(game => !game.alreadyPlayed));
 
   redirectToGameAfterTimeout = (): void => {
     const { push } = this.props;
@@ -87,7 +89,7 @@ class Overview extends React.PureComponent<Props, State> {
       if (time < MAX_INTERVAL) {
         this.startSlowingInterval(time + START_INTERVAL);
         this.setState({
-          activeGame: getRandomItem(this.props.games.filter(game => !game.alreadyPlayed)),
+          activeGame: this.getRandomGame(),
         });
       } else {
         this.stopSlowingInterval();
