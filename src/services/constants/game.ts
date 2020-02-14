@@ -5,6 +5,7 @@ import Pantomime from '../../pages/games/PantomimeGame/player/';
 import Blur from '../../pages/games/Blur/player/Blur';
 import Estimate from '../../pages/games/Estimate/player/';
 import LoopingLouie from '../../pages/games/LoopingLouie/player';
+import PaperPlane from '../../pages/games/PaperPlane/player';
 
 export const STATIC_GAMES: Array<Game> = [
   {
@@ -66,5 +67,11 @@ export const STATIC_GAMES: Array<Game> = [
     url: '/just-one',
     alreadyPlayed: false,
     component: JustOneGame,
+  },
+  {
+    name: 'Papierfleugzeug',
+    url: '/papier-flugzeug',
+    alreadyPlayed: false,
+    component: PaperPlane,
   },
 ];
