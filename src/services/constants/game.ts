@@ -1,5 +1,5 @@
 import { Game } from '../../interfaces/Game';
-import MusicGame from '../../pages/games/MusicGame/player';
+import JukeBox from '../../pages/games/JukeBox/player';
 import JustOneGame from '../../pages/games/JustOneGame/player/';
 import Pantomime from '../../pages/games/PantomimeGame/player/';
 import Blur from '../../pages/games/Blur/player/Blur';
@@ -32,10 +32,10 @@ export const STATIC_GAMES: Array<Game> = [
     component: LoopingLouie,
   },
   {
-    name: 'Musik',
-    url: '/music',
+    name: 'Juke-Box',
+    url: '/jukebox',
     alreadyPlayed: false,
-    component: MusicGame,
+    component: JukeBox,
   },
   {
     name: 'Wischi Waschi',

@@ -10,7 +10,7 @@ import { GameMode } from '../../../../components/GameFlow/GameFlow';
 import { getStorageElementURLs } from '../../../../services/utils/firebaseStorage';
 import { getRandomIndex } from '../../../../services/utils/array';
 
-import styles from './MusicGame.module.css';
+import styles from './JukeBox.module.css';
 
 const MAX_ROUNDS = 2;
 
@@ -19,7 +19,7 @@ export interface State {
   isAudioPlaying: boolean;
 }
 
-class MusicGame extends React.PureComponent<State> {
+class JukeBox extends React.PureComponent<State> {
   state = {
     hasData: false,
     isAudioPlaying: false,
@@ -127,4 +127,4 @@ class MusicGame extends React.PureComponent<State> {
   }
 }
 
-export default MusicGame;
+export default JukeBox;
