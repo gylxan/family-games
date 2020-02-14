@@ -4,6 +4,7 @@ import JustOneGame from '../../pages/games/JustOneGame/player/';
 import Pantomime from '../../pages/games/PantomimeGame/player/';
 import Blur from '../../pages/games/Blur/player/Blur';
 import Estimate from '../../pages/games/Estimate/player/';
+import LoopingLouie from '../../pages/games/LoopingLouie/player';
 
 export const STATIC_GAMES: Array<Game> = [
   {
@@ -28,7 +29,7 @@ export const STATIC_GAMES: Array<Game> = [
     name: 'Looping Louie',
     url: '/looping-louie',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: LoopingLouie,
   },
   {
     name: 'Musik',
