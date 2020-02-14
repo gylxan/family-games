@@ -16,9 +16,6 @@ import AwardCeremony from './pages/AwardCeremony';
 const App: React.FC = () => (
   <div className={styles.App}>
     <Switch>
-      <Route path={Routes.Home} exact>
-        <Home />
-      </Route>
       <Route path={Routes.TeamPreparation} component={TeamPreparation} />
       <Route path={Routes.AwardCeremony} component={AwardCeremony} />
       <Route
@@ -51,6 +48,9 @@ const App: React.FC = () => (
           </Switch>
         )}
       />
+      <Route path={Routes.Home}>
+        <Home />
+      </Route>
     </Switch>
   </div>
 );
