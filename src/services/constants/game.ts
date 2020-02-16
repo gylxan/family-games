@@ -7,9 +7,11 @@ import Estimate from '../../pages/games/Estimate/player/';
 import LoopingLouie from '../../pages/games/LoopingLouie/player';
 import PaperPlane from '../../pages/games/PaperPlane/player';
 
+export const HOLZMARKT_NAME = 'Holzmarkt';
+
 export const STATIC_GAMES: Array<Game> = [
   {
-    name: 'Holzmarkt',
+    name: HOLZMARKT_NAME,
     url: '/holzmarkt',
     alreadyPlayed: false,
     component: JustOneGame,
