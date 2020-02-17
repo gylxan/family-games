@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { LinkTo, Routes } from '../../services/routes';
-// @ts-ignore
-import looneyTunesIntro from '../../assets/audio/looney_tunes_intro.mp3';
 import classNames from 'classnames';
 import ColorCircles, { CIRCLE_COLORS } from './ColorCircles';
-const TITLE = 'Familien-Quiz';
+import { getIntroAudios } from '../../services/utils/firebaseStorage';
+const TITLE = 'Familien-Spiele';
 const Home: React.FC = () => {
   const [clickCounter, setClickCounter] = useState(0);
+  const [introAudio, setIntroAudio] = useState(null);
+
+  useEffect(() => {
+    getIntroAudios().then(audios => audios.length && setIntroAudio(audios[0]));
+  }, []);
 
   const startAnimationTime = (CIRCLE_COLORS.length + 1) * 0.5;
   const titleAnimationEndTime = startAnimationTime + TITLE.length * 0.5;
@@ -53,7 +57,7 @@ const Home: React.FC = () => {
           <Button>Ich bin Master!</Button>
         </Link>
       </div>
-      <audio src={looneyTunesIntro} autoPlay />
+      {introAudio && <audio src={introAudio} autoPlay />}
     </div>
   );
 };

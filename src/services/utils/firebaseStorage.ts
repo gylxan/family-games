@@ -23,3 +23,5 @@ export const getStorageElementURLs = (path): Promise<string[]> => {
 };
 
 export const getBlurImages = (): Promise<string[]> => getStorageElementURLs('images/blur');
+
+export const getIntroAudios = (): Promise<string[]> => getStorageElementURLs('audio/intro');
