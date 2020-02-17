@@ -1,0 +1,22 @@
+.Awards {
+  display: flex;
+  flex-direction: row;
+}
+
+.Award {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.AwardGround {
+  background-color: #bdbdbd;
+  color: #6f6f6f;
+}
+
+svg.Trophy {
+  font-size: 20rem;
+  fill: #ffc304;
+}
