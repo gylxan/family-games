@@ -5,9 +5,8 @@ import { Button } from '@material-ui/core';
 import { getRandomItem } from '../../../services/utils/array';
 import classNames from 'classnames';
 import { LinkTo, Routes } from '../../../services/routes';
-// @ts-ignore
-import tada from '../../../assets/audio/tada.mp3';
 import { hasAllGamesPlayed } from '../../../services/utils/game';
+import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
 
 export interface Props {
   games: Game[];
@@ -16,6 +15,7 @@ export interface Props {
 }
 export interface State {
   activeGame: Game | null;
+  audio: string | null;
   isStarted: boolean;
   isStopping: boolean;
 }
@@ -23,6 +23,7 @@ const START_INTERVAL = 100;
 const MAX_INTERVAL = 1100;
 class Overview extends React.PureComponent<Props, State> {
   state = {
+    audio: null,
     activeGame: null,
     isStarted: false,
     isStopping: false,
@@ -34,7 +35,15 @@ class Overview extends React.PureComponent<Props, State> {
     const { games, push } = this.props;
     if (hasAllGamesPlayed(games)) {
       push(Routes.AwardCeremony);
+      return;
     }
+    getGameOverviewAudios().then(
+      audios =>
+        audios.length &&
+        this.setState({
+          audio: audios[0],
+        }),
+    );
   }
 
   startRandomGameChoose = (): void => {
@@ -151,7 +160,9 @@ class Overview extends React.PureComponent<Props, State> {
             {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
           </Button>
         </div>
-        {!this.state.isStarted && this.state.activeGame && <audio src={tada} autoPlay />}
+        {!this.state.isStarted && this.state.activeGame && this.state.audio && (
+          <audio src={this.state.audio} autoPlay />
+        )}
       </div>
     );
   }
