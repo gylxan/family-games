@@ -21,9 +21,8 @@ const Description: React.FC<DescriptionProps> = ({ onStart }) => (
     </p>
     <p>
       <strong>Beschreibung:</strong> Alle Spieler basteln aus einem Din A4-Zettel ein Papierflugzeug. <br />
-      Bitte schreibt zudem euren Namen auf die Zettel! <br />
       Danach stellen sich draußen alle an einer Linie und werfen nacheinander ihre Flugzeuge so weit wie möglich. Das
-      Teasm, dessen Spieler den Papierflieger am Weitesten geworfen hat, gewinnt die Runde.
+      Team, dessen Spieler das Papierflugzeug am Weitesten geworfen hat, gewinnt die Runde.
     </p>
   </GameDescription>
 );
