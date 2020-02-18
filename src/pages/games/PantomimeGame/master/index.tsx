@@ -1,18 +1,51 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
+import { getRandomIndex } from '../../../../services/utils/array';
 
-export interface Props {}
+const WORDS = [
+  'Lichterkette',
+  'Treppenhaus',
+  'Gießkanne',
+  'Drehbuch',
+  'Schaukelpferd',
+  'Geschenkpapier',
+  'Rasierschaum',
+  'Lampenfassung',
+  'U-Boot',
+  'Glühwein',
+];
 
 export interface State {
+  currentWord: string;
 }
 
-class Pantomime extends React.PureComponent<Props, State> {
-  
+class Pantomime extends React.PureComponent<State> {
+  availableWords: string[] = [...WORDS];
+
+  getRandomWord = (): string => {
+    return this.availableWords.splice(getRandomIndex(this.availableWords), 1)[0];
+  };
+
+  state = {
+    currentWord: this.getRandomWord(),
+  };
+
+  next = (): void => {
+    this.setState({
+      currentWord: this.getRandomWord(),
+    });
+  };
 
   render(): JSX.Element {
     return (
       <>
-        <h1>Mimikry</h1>
-        Hello World
+        <h1>Körperklaus</h1>
+        <p>
+          Dein Begriff: <strong>{this.state.currentWord}</strong>
+        </p>
+        <Button autoFocus variant={'contained'} color={'primary'} onClick={this.next}>
+          Nächstes
+        </Button>
       </>
     );
   }
