@@ -7,20 +7,24 @@ import classNames from 'classnames';
 import { LinkTo, Routes } from '../../../services/routes';
 import { hasAllGamesPlayed } from '../../../services/utils/game';
 import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
+import { HOLZMARKT_NAME } from '../../../services/constants/game';
 
 export interface Props {
   games: Game[];
   push: (url: string) => void;
   goBack: () => void;
 }
+
 export interface State {
   activeGame: Game | null;
   audio: string | null;
   isStarted: boolean;
   isStopping: boolean;
 }
+
 const START_INTERVAL = 100;
 const MAX_INTERVAL = 1100;
+
 class Overview extends React.PureComponent<Props, State> {
   state = {
     audio: null,
@@ -82,7 +86,14 @@ class Overview extends React.PureComponent<Props, State> {
     }
   };
 
-  getRandomGame = (): Game => getRandomItem(this.props.games.filter(game => !game.alreadyPlayed));
+  getRandomGame = (): Game => {
+    let notPlayedGames = this.props.games.filter(game => !game.alreadyPlayed);
+    // Filter the holzmarkt game until we have played at least the halve of all games∏
+    if (notPlayedGames.length > this.props.games.length / 2) {
+      notPlayedGames = notPlayedGames.filter(game => game.name !== HOLZMARKT_NAME);
+    }
+    return getRandomItem(notPlayedGames);
+  };
 
   redirectToGameAfterTimeout = (): void => {
     const { push } = this.props;
