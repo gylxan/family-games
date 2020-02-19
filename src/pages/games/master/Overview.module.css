@@ -1,0 +1,15 @@
+.Overview .MuiTypography-body1 {
+  font-size: 2rem;
+}
+
+.List {
+  background-color: #b53471;
+}
+
+.ButtonContainer {
+  margin-top: 2em;
+}
+
+.ButtonContainer > *:not(:last-of-type) {
+  margin-right: 2em;
+}

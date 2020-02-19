@@ -159,3 +159,8 @@ label + .MuiInputBase-formControl .MuiInputBase-input.MuiFilledInput-input {
 .MuiLinearProgress-root.MuiLinearProgress-colorPrimary .MuiLinearProgress-barColorPrimary {
   background: #ffc312;
 }
+
+.MuiListItemText-root span.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1 {
+  font-family: 'shark_partyshark_party', 'montserrat', Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}

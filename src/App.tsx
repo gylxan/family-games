@@ -4,8 +4,7 @@ import './App.module.css';
 import { Routes } from './services/routes';
 import Home from './pages/Home';
 import styles from './App.module.css';
-import MasterOverview from './pages/games/master/Overview';
-import Pantomime from './pages/games/PantomimeGame/master';
+import MasterOverview from './pages/games/master';
 import PlayerOverview from './pages/games/player';
 import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
@@ -43,7 +42,13 @@ const App: React.FC = () => (
         path={Routes.Master}
         render={({ match }): React.ReactNode => (
           <Switch>
-            <Route path={`${match.path}${Routes.Games}/koerper-klaus`} component={Pantomime} />
+            {STATIC_GAMES.filter(game => !!game.masterComponent).map(game => (
+              <Route
+                key={`master-${game.name}`}
+                path={`${match.path}${Routes.Games}${game.url}`}
+                component={game.masterComponent}
+              />
+            ))}
             <Route path={`${match.path}${Routes.Games}`} component={MasterOverview} />
           </Switch>
         )}

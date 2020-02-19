@@ -2,6 +2,7 @@ import { Game } from '../../interfaces/Game';
 import JukeBox from '../../pages/games/JukeBox/player';
 import JustOneGame from '../../pages/games/JustOneGame/player/';
 import Pantomime from '../../pages/games/PantomimeGame/player/';
+import PantomimeMaster from '../../pages/games/PantomimeGame/master/';
 import Blur from '../../pages/games/Blur/player/Blur';
 import Estimate from '../../pages/games/Estimate/player/';
 import LoopingLouie from '../../pages/games/LoopingLouie/player';
@@ -27,6 +28,7 @@ export const STATIC_GAMES: Array<Game> = [
     url: '/koerper-klaus',
     alreadyPlayed: false,
     component: Pantomime,
+    masterComponent: PantomimeMaster,
   },
   {
     name: 'Looping Louie',

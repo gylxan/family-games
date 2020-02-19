@@ -7,6 +7,8 @@ export interface Game {
   alreadyPlayed: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.ComponentType<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  masterComponent?: React.ComponentType<any>;
 }
 
 export enum GameState {
