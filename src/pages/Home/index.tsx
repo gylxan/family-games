@@ -54,7 +54,9 @@ const Home: React.FC = () => {
           className={styles.StartMasterButton}
           onClick={(): void => setClickCounter(clickCounter + 1)}
         >
-          <Button>Ich bin Master!</Button>
+          <Link to={LinkTo.masterGamesOverview()}>
+            <Button>Ich bin Master!</Button>
+          </Link>
         </Link>
       </div>
       {introAudio && <audio src={introAudio} autoPlay />}
