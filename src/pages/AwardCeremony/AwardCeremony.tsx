@@ -23,7 +23,6 @@ class AwardCeremony extends React.PureComponent<Props, State> {
     this.startTimeout();
   }
 
-  canvas = React.createRef<HTMLCanvasElement>();
   timeout = null;
 
   startTimeout = (): void => {
@@ -32,7 +31,7 @@ class AwardCeremony extends React.PureComponent<Props, State> {
         showStartText: false,
       });
       window.clearTimeout(this.timeout);
-    }, 20);
+    }, 3000);
   };
 
   getTeamsByPoints = (): { [points: string]: Team[] } => {
@@ -56,12 +55,21 @@ class AwardCeremony extends React.PureComponent<Props, State> {
     return (
       <div className={styles.Awards}>
         {Array.from({ length: awardsToShow }).map((value, key) => {
+          const place = awardsToShow - key;
           return (
-            <div key={key} className={styles.Award}>
-              {teamsByPoints[teamsByPointsKeys[awardsToShow - (key + 1)]].map(team => team.name)}
-              <EmojiEventsSharp className={styles.Trophy} fontSize={'inherit'} />
+            <div key={key} className={classNames(styles.Award, 'animated', 'fadeIn', 'slow')}>
+              <div
+                className={classNames(styles.NameAndTrophy, 'animated', 'fadeIn', 'slow')}
+                style={{ animationDelay: `${key + 1}s` }}
+              >
+                {teamsByPoints[teamsByPointsKeys[awardsToShow - (key + 1)]].map(team => team.name)}
+                <EmojiEventsSharp
+                  className={classNames(styles.Trophy, styles[`TrophyPlace${place}`])}
+                  fontSize={'inherit'}
+                />
+              </div>
               <div className={styles.AwardGround} style={{ height: `${key + 2}em` }}>
-                {awardsToShow - key}
+                {place}
                 <br />
               </div>
             </div>

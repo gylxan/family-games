@@ -11,12 +11,28 @@
   font-size: 2em;
 }
 
+.NameAndTrophy {
+  display: flex;
+  flex-direction: column;
+}
+
 .AwardGround {
-  background-color: #bdbdbd;
-  color: #6f6f6f;
+  background-color: #969696;
+  color: #ececec;
 }
 
 svg.Trophy {
   font-size: 20rem;
+}
+
+svg.TrophyPlace1 {
   fill: #ffc304;
+}
+
+svg.TrophyPlace2 {
+  fill: #D7D7D7;
+}
+
+svg.TrophyPlace3 {
+  fill: #AD8A56;
 }
