@@ -7,6 +7,7 @@ import Blur from '../../pages/games/Blur/player/Blur';
 import Estimate from '../../pages/games/Estimate/player/';
 import LoopingLouie from '../../pages/games/LoopingLouie/player';
 import PaperPlane from '../../pages/games/PaperPlane/player';
+import Tower from '../../pages/games/Tower';
 
 export const HOLZMARKT_NAME = 'Holzmarkt';
 
@@ -58,7 +59,7 @@ export const STATIC_GAMES: Array<Game> = [
     name: 'Turmbau zu Babel',
     url: '/turmbau-zu-babel',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: Tower,
   },
   {
     name: 'Tetris',

@@ -1,5 +1,6 @@
 .Countdown {
   font-size: 10em;
+  line-height: 1.2;
   cursor: pointer;
 }
 

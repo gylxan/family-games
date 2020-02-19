@@ -15,6 +15,7 @@ import classNames from 'classnames';
 export interface Props {
   teams: Team[];
   rounds: number;
+  pointsPerRound?: number;
   showScoring?: boolean;
   showCountdown?: boolean;
   showRoundIndicator?: boolean;
@@ -53,6 +54,7 @@ class GameFlow extends React.PureComponent<Props, State> {
     showScoring: true,
     showCountdown: true,
     showRoundIndicator: true,
+    pointsPerRound: 1,
   };
 
   constructor(props: Props) {
@@ -107,7 +109,7 @@ class GameFlow extends React.PureComponent<Props, State> {
 
   setTeamPoints = (teamId: number): void => {
     const score = this.state.score;
-    score.set(teamId, score.get(teamId) + 1);
+    score.set(teamId, score.get(teamId) + this.props.pointsPerRound);
     this.setState({
       score,
     });
