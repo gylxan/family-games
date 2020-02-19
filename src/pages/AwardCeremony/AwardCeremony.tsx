@@ -4,21 +4,35 @@ import Team from '../../interfaces/Team';
 import { EmojiEventsSharp } from '@material-ui/icons';
 
 import styles from './AwardCeremony.module.css';
+import Confetti, { ConfettiConfig } from 'react-dom-confetti';
 
 interface Props {
   teams: Team[];
 }
 interface State {
   showStartText: boolean;
+  showConfetti: boolean;
 }
 
 const MAX_AWARDS = 3;
+
+const CONFETTI_CONFIG: ConfettiConfig = {
+  angle: 90,
+  spread: 154,
+  startVelocity: 40,
+  elementCount: 300,
+  dragFriction: 0.07,
+  duration: 6000,
+  stagger: 30,
+  colors: ['#a864fd', '#29cdff', '#78ff44', '#ff718d', '#fdff6a'],
+};
 
 class AwardCeremony extends React.PureComponent<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
       showStartText: true,
+      showConfetti: false,
     };
     this.startTimeout();
   }
@@ -31,7 +45,17 @@ class AwardCeremony extends React.PureComponent<Props, State> {
         showStartText: false,
       });
       window.clearTimeout(this.timeout);
+      this.startConfettiTimeout();
     }, 3000);
+  };
+
+  startConfettiTimeout = (): void => {
+    this.timeout = window.setTimeout(() => {
+      this.setState({
+        showConfetti: true,
+      });
+      window.clearTimeout(this.timeout);
+    }, (this.getAwardsToShow() + 1) * 1000);
   };
 
   getTeamsByPoints = (): { [points: string]: Team[] } => {
@@ -67,6 +91,7 @@ class AwardCeremony extends React.PureComponent<Props, State> {
                   className={classNames(styles.Trophy, styles[`TrophyPlace${place}`])}
                   fontSize={'inherit'}
                 />
+                {teamsByPointsKeys[awardsToShow - (key + 1)]} Punkte
               </div>
               <div className={styles.AwardGround} style={{ height: `${key + 2}em` }}>
                 {place}
@@ -83,7 +108,10 @@ class AwardCeremony extends React.PureComponent<Props, State> {
     return this.state.showStartText ? (
       <h1 className={classNames('animated', 'fadeIn', 'slow')}>Kommen wir zur Siegerehrung!</h1>
     ) : (
-      this.renderAwards()
+      <>
+        {this.renderAwards()}
+        <Confetti active={this.state.showConfetti} config={CONFETTI_CONFIG} />
+      </>
     );
   }
 }
