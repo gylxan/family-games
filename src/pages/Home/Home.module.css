@@ -15,9 +15,11 @@
 }
 
 .QuestionMark {
+  cursor: default;
   position: absolute;
   font-size: 12em;
   font-weight: bold;
+  user-select: none;
 }
 
 .Control {

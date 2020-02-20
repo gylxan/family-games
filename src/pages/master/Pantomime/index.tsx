@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { getRandomIndex } from '../../../../services/utils/array';
+import { getRandomIndex } from '../../../services/utils/array';
 
 const WORDS = [
   'Lichterkette',

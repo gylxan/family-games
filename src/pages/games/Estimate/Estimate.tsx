@@ -1,10 +1,10 @@
 import React from 'react';
-import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
-import { getRandomIndex } from '../../../../services/utils/array';
-import Team from '../../../../interfaces/Team';
+import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
+import { getRandomIndex } from '../../../services/utils/array';
+import Team from '../../../interfaces/Team';
 
 import styles from './Estimate.module.css';
-import GameFlow from '../../../../components/GameFlow';
+import GameFlow from '../../../components/GameFlow';
 import { Button, TextField } from '@material-ui/core';
 
 export interface Props {

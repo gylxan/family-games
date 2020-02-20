@@ -1,13 +1,12 @@
 import React from 'react';
-import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
-import GameFlow from '../../../../components/GameFlow';
+import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
+import GameFlow from '../../../components/GameFlow';
 
-import { GameMode } from '../../../../components/GameFlow/GameFlow';
+import { GameMode } from '../../../components/GameFlow/GameFlow';
 
 const MAX_ROUNDS = 2;
 
 class Pantomime extends React.PureComponent {
-
   renderGameDescription = (): React.ReactElement<GameDescriptionProps> => {
     return (
       <GameDescription>

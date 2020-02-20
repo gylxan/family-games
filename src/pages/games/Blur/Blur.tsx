@@ -1,12 +1,12 @@
 import React from 'react';
-import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
-import { getRandomIndex } from '../../../../services/utils/array';
-import Team from '../../../../interfaces/Team';
+import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
+import { getRandomIndex } from '../../../services/utils/array';
+import Team from '../../../interfaces/Team';
 
 import styles from './Blur.module.css';
-import GameFlow from '../../../../components/GameFlow';
+import GameFlow from '../../../components/GameFlow';
 import { LinearProgress } from '@material-ui/core';
-import { getBlurImages } from '../../../../services/utils/firebaseStorage';
+import { getBlurImages } from '../../../services/utils/firebaseStorage';
 
 export interface Props {
   teams: Team[];
@@ -61,7 +61,7 @@ class Blur extends React.PureComponent<Props, State> {
     });
   };
 
-  handleCountdown = (secondsRemaining: number): void => {
+  handleCountdown = (): void => {
     this.setState(prevProps => ({
       ...prevProps,
       currentBlur: prevProps.currentBlur - 1,

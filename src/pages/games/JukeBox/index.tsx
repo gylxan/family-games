@@ -3,12 +3,12 @@ import { Button, LinearProgress } from '@material-ui/core';
 import { PlayCircleFilled, PauseCircleFilled } from '@material-ui/icons';
 import classNames from 'classnames';
 
-import GameDescription, { Props as GameDescriptionProps } from '../../../../components/GameDescription';
-import GameFlow from '../../../../components/GameFlow';
-import { GameMode } from '../../../../components/GameFlow/GameFlow';
+import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
+import GameFlow from '../../../components/GameFlow';
+import { GameMode } from '../../../components/GameFlow/GameFlow';
 
-import { getStorageElementURLs } from '../../../../services/utils/firebaseStorage';
-import { getRandomIndex } from '../../../../services/utils/array';
+import { getStorageElementURLs } from '../../../services/utils/firebaseStorage';
+import { getRandomIndex } from '../../../services/utils/array';
 
 import styles from './JukeBox.module.css';
 

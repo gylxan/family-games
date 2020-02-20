@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './JustOneGame.module.css';
-import GameDescription from '../../../../components/GameDescription';
-import InputList from '../../../../components/InputList';
-import { getRandomIndex } from '../../../../services/utils/array';
 import { Button } from '@material-ui/core';
-import GameFlow from '../../../../components/GameFlow/';
-import { Props as GameDescriptionProps } from '../../../../components/GameDescription';
-import { GameMode } from '../../../../components/GameFlow/GameFlow';
+import GameDescription from '../../../components/GameDescription';
+import InputList from '../../../components/InputList';
+import { getRandomIndex } from '../../../services/utils/array';
+import GameFlow from '../../../components/GameFlow/';
+import { Props as GameDescriptionProps } from '../../../components/GameDescription';
+import { GameMode } from '../../../components/GameFlow/GameFlow';
+import styles from './JustOneGame.module.css';
 
 export interface State {
   playPhase: PlayingPhase;

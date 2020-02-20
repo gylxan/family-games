@@ -1,13 +1,13 @@
 import { Game } from '../../interfaces/Game';
-import JukeBox from '../../pages/games/JukeBox/player';
-import JustOneGame from '../../pages/games/JustOneGame/player/';
-import Pantomime from '../../pages/games/PantomimeGame/player/';
-import PantomimeMaster from '../../pages/games/PantomimeGame/master/';
-import Blur from '../../pages/games/Blur/player/Blur';
-import Estimate from '../../pages/games/Estimate/player/';
-import LoopingLouie from '../../pages/games/LoopingLouie/player';
-import PaperPlane from '../../pages/games/PaperPlane/player';
 import Tower from '../../pages/games/Tower';
+import JustOne from '../../pages/games/JustOne';
+import Pantomime from '../../pages/games/Pantomime';
+import PantomimeMaster from '../../pages/master/Pantomime';
+import LoopingLouie from '../../pages/games/LoopingLouie';
+import JukeBox from '../../pages/games/JukeBox';
+import Blur from '../../pages/games/Blur/Blur';
+import Estimate from '../../pages/games/Estimate';
+import PaperPlane from '../../pages/games/PaperPlane';
 
 export const HOLZMARKT_NAME = 'Holzmarkt';
 
@@ -16,13 +16,13 @@ export const STATIC_GAMES: Array<Game> = [
     name: HOLZMARKT_NAME,
     url: '/holzmarkt',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: JustOne,
   },
   {
     name: 'EXIT',
     url: '/exit',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: JustOne,
   },
   {
     name: 'Körper-klaus',
@@ -65,13 +65,13 @@ export const STATIC_GAMES: Array<Game> = [
     name: 'Tetris',
     url: '/tetris',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: JustOne,
   },
   {
     name: 'Just One',
     url: '/just-one',
     alreadyPlayed: false,
-    component: JustOneGame,
+    component: JustOne,
   },
   {
     name: 'Papier-Flugzeug',

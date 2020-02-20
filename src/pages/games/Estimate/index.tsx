@@ -1,7 +1,7 @@
-import Estimate from './Estimate';
-import RootState from '../../../../redux/RootState';
-import Team from '../../../../interfaces/Team';
 import { connect } from 'react-redux';
+import Estimate from './Estimate';
+import RootState from '../../../redux/RootState';
+import Team from '../../../interfaces/Team';
 interface Props {
   teams: Team[];
 }

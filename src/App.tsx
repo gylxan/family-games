@@ -4,8 +4,8 @@ import './App.module.css';
 import { Routes } from './services/routes';
 import Home from './pages/Home';
 import styles from './App.module.css';
-import MasterOverview from './pages/games/master';
-import PlayerOverview from './pages/games/player';
+import PlayerOverview from './pages/games/Overview';
+import MasterOverview from './pages/master/Overview';
 import TeamPreparation from './pages/TeamPreparation';
 import TeamPointsCounter from './components/TeamPointsCounter';
 import { STATIC_GAMES } from './services/constants/game';
@@ -18,20 +18,16 @@ const App: React.FC = () => (
       <Route path={Routes.TeamPreparation} component={TeamPreparation} />
       <Route path={Routes.AwardCeremony} component={AwardCeremony} />
       <Route
-        path={Routes.Player}
+        path={Routes.Games}
         render={({ match }): React.ReactNode => (
           <>
             <TeamPointsCounter />
             <GamePlayedDetector />
             <div className={styles.PlayerContent}>
               <Switch>
-                <Route path={`${match.path}${Routes.Games}`} component={PlayerOverview} exact />
+                <Route path={`${match.path}`} component={PlayerOverview} exact />
                 {STATIC_GAMES.map(game => (
-                  <Route
-                    key={`player-${game.name}`}
-                    path={`${match.path}${Routes.Games}${game.url}`}
-                    component={game.component}
-                  />
+                  <Route key={`player-${game.name}`} path={`${match.path}${game.url}`} component={game.component} />
                 ))}
               </Switch>
             </div>
@@ -43,13 +39,9 @@ const App: React.FC = () => (
         render={({ match }): React.ReactNode => (
           <Switch>
             {STATIC_GAMES.filter(game => !!game.masterComponent).map(game => (
-              <Route
-                key={`master-${game.name}`}
-                path={`${match.path}${Routes.Games}${game.url}`}
-                component={game.masterComponent}
-              />
+              <Route key={`master-${game.name}`} path={`${match.path}${game.url}`} component={game.masterComponent} />
             ))}
-            <Route path={`${match.path}${Routes.Games}`} component={MasterOverview} />
+            <Route path={`${match.path}`} component={MasterOverview} />
           </Switch>
         )}
       />

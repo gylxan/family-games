@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, List, ListItem, ListItemText } from '@material-ui/core';
 import { STATIC_GAMES } from '../../../services/constants/game';
-import { Routes } from '../../../services/routes';
+import { LinkTo } from '../../../services/routes';
 import styles from './Overview.module.css';
 
 export interface Props {
@@ -17,17 +17,17 @@ const Overview: React.FC<Props> = ({ push }) => {
             <ListItemText
               inset
               primary={game.name}
-              onClick={(): void => push(`${Routes.Master}${Routes.Games}${game.url}`)}
+              onClick={(): void => push(LinkTo.masterGame(game.url))}
               className={styles.ListItemText}
             />
           </ListItem>
         ))}
       </List>
       <div className={styles.ButtonContainer}>
-        <Button color="primary" variant="contained" onClick={(): void => push(`${Routes.Home}`)}>
+        <Button color="primary" variant="contained" onClick={(): void => push(LinkTo.home())}>
           Startseite
         </Button>
-        <Button color="primary" variant="contained" onClick={(): void => push(`${Routes.Player}${Routes.Games}`)}>
+        <Button color="primary" variant="contained" onClick={(): void => push(LinkTo.playerGamesOverview())}>
           Zur Spieleübersicht
         </Button>
       </div>

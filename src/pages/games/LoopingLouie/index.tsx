@@ -1,7 +1,7 @@
 import React from 'react';
-import GameDescription from '../../../../components/GameDescription';
-import GameFlow from '../../../../components/GameFlow';
-import { GameMode } from '../../../../components/GameFlow/GameFlow';
+import GameDescription from '../../../components/GameDescription';
+import GameFlow from '../../../components/GameFlow';
+import { GameMode } from '../../../components/GameFlow/GameFlow';
 
 export const MAX_ROUNDS = 5;
 
