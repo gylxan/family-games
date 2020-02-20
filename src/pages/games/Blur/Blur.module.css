@@ -3,18 +3,18 @@
 }
 
 .Game {
-  width: 100%;
+  display: inline-block;
   overflow: hidden;
-  max-width: 80vw;
-  height: 65vh;
+  box-shadow: 2px 3px 0 black;
+  border: 4px solid white;
 }
 
 .BlurImage {
+  min-width: 10vw;
   width: auto;
   display: block;
-  max-height: 100%;
-  box-shadow: 2px 3px 0 black;
-  border: 4px solid white;
+  max-width: 80vw;
+  max-height: 65vh;
   box-sizing: border-box;
   margin: auto;
 }
