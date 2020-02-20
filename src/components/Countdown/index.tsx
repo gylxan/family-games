@@ -59,6 +59,9 @@ class Countdown extends React.Component<Props, State> {
 
   startStartCountdown = (): void => {
     const { onlySmallCountdown, countdownCallback } = this.props;
+    this.setState({
+      isPaused: false,
+    });
     this.countdown = window.setInterval(() => {
       if (this.state.startCountdown > 0) {
         if (onlySmallCountdown) {
@@ -91,6 +94,14 @@ class Countdown extends React.Component<Props, State> {
     this.setState({
       isPaused: true,
     });
+  };
+
+  continueCountdown = (): void => {
+    if (this.state.startCountdown > 0) {
+      this.startStartCountdown();
+    } else {
+      this.startTimer();
+    }
   };
 
   startTimer = (): void => {
@@ -127,7 +138,7 @@ class Countdown extends React.Component<Props, State> {
     return (
       <div
         className={classNames(className, styles.Countdown)}
-        onClick={!isPaused ? this.pauseCountdown : this.startTimer}
+        onClick={!isPaused ? this.pauseCountdown : this.continueCountdown}
       >
         {startCountdown > 0 && (
           <div>
