@@ -137,7 +137,7 @@ class JustOneGame extends React.PureComponent<State> {
   render(): JSX.Element {
     return (
       <>
-        <h1>&raquo;Just One&laquo;</h1>
+        <h1>Nur Eins</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
           countdown={60}

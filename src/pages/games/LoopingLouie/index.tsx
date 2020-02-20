@@ -30,7 +30,7 @@ const Description: React.FC<DescriptionProps> = ({ onStart }) => (
 
 const LoopingLouie: React.FC = () => (
   <>
-    <h1>Looping Louie</h1>
+    <h1>Hühner schubsen</h1>
     <GameFlow
       gameMode={GameMode.BATTLE}
       rounds={MAX_ROUNDS}
