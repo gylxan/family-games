@@ -32,7 +32,7 @@ class JukeBox extends React.PureComponent<State> {
   }
 
   loadTracks = (): void => {
-    getStorageElementURLs('audio').then(audioURLs => {
+    getStorageElementURLs('audio/juke-box').then(audioURLs => {
       this.tracks = audioURLs;
       this.setState({
         hasData: true,

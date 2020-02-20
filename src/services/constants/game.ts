@@ -39,7 +39,7 @@ export const STATIC_GAMES: Array<Game> = [
   },
   {
     name: 'Juke-Box',
-    url: '/jukebox',
+    url: '/juke-box',
     alreadyPlayed: false,
     component: JukeBox,
   },

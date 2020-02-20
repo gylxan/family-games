@@ -115,7 +115,7 @@ class Blur extends React.PureComponent<Props, State> {
     }
     return (
       <>
-        <h1 className={styles.Title}>Wischi-Waschi</h1>
+        <h1 className={styles.Title}>Wischi Waschi</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
           countdown={60}
