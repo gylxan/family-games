@@ -1,8 +1,20 @@
+.Title {
+  margin-top: -1em;
+}
+
 .Game {
   width: 100%;
+  overflow: hidden;
+  max-width: 80vw;
+  height: 65vh;
 }
 
 .BlurImage {
-  height: 65vh;
-  max-height: 65vh;
+  width: auto;
+  display: block;
+  max-height: 100%;
+  box-shadow: 2px 3px 0 black;
+  border: 4px solid white;
+  box-sizing: border-box;
+  margin: auto;
 }
