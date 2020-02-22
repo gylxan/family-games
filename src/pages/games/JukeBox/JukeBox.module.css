@@ -35,7 +35,7 @@ button.PlayButtonPlaying:before {
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.3);
   }
   50% {
-    box-shadow: 0 0 0 4px #F79F1F;
+    box-shadow: 0 0 0 4px #A3CB38;
   }
   100% {
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.3);
@@ -47,7 +47,7 @@ button.PlayButtonPlaying:before {
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.3);
   }
   50% {
-    box-shadow: 0 0 0 4px #EE5A24;
+    box-shadow: 0 0 0 4px #0652DD;
   }
   100% {
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.3);
