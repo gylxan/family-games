@@ -5,6 +5,7 @@ import { getTetrisImage } from '../../services/utils/firebaseStorage';
 
 interface Props {
   timer: number;
+  onEnd: () => void;
 }
 
 interface State {
@@ -73,8 +74,10 @@ class Spinner extends React.Component<Props, State> {
   };
 
   tick = (): void => {
+    const { onEnd } = this.props;
     if (this.state.timeRemaining <= 0) {
       clearInterval(this.timer);
+      onEnd();
     } else {
       this.moveBackground();
     }

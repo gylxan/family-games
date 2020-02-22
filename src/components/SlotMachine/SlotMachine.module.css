@@ -1,16 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Cairo');
 
 .Container {
-  display: flex;
-  flex-direction: column;
 }
 .SlotMachine {
   overflow: hidden;
   padding: 2em;
   display: flex;
   transition: 0.3s transform;
-  transform: scale(0.5);
-  margin-top: -8em;
 }
 
 .SlotMachine::after {
