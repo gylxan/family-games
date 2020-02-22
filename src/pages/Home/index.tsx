@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { LinkTo, Routes } from '../../services/routes';
+import { LinkTo } from '../../services/routes';
 import classNames from 'classnames';
 import ColorCircles, { CIRCLE_COLORS } from './ColorCircles';
 import { getIntroAudios } from '../../services/utils/firebaseStorage';
+
 const TITLE = 'Familien-Spiele';
 const Home: React.FC = () => {
-  const [clickCounter, setClickCounter] = useState(0);
   const [introAudio, setIntroAudio] = useState(null);
 
   useEffect(() => {
@@ -49,14 +49,8 @@ const Home: React.FC = () => {
             Starten
           </Button>
         </Link>
-        <Link
-          to={clickCounter < 10 ? Routes.Home : `${Routes.Master + Routes.Games}`}
-          className={styles.StartMasterButton}
-          onClick={(): void => setClickCounter(clickCounter + 1)}
-        >
-          <Link to={LinkTo.masterGamesOverview()}>
-            <Button>Ich bin Master!</Button>
-          </Link>
+        <Link to={LinkTo.masterGamesOverview()} className={styles.StartMasterButton}>
+          <Button>Ich bin Master!</Button>
         </Link>
       </div>
       {introAudio && <audio src={introAudio} autoPlay />}
