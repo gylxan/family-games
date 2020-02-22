@@ -201,8 +201,8 @@ class Estimate extends React.PureComponent<Props, State> {
           <strong>Rundenzahl:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong>Beschreibung:</strong> Es werden Schätzfragen gestellt, die es gilt zu beantworten! Schreibt die
-          Antworten auf einen Zettel und gebt sie den Quizmastern.
+          <strong>Beschreibung:</strong> Es werden Schätzfragen gestellt, die es gilt zu beantworten! Beratschlagt euch mit eurem Team und
+          schreibt die Antwort auf Zetteln, die ihr den Quizmastern gebt.
         </p>
       </GameDescription>
     );

@@ -14,7 +14,7 @@ export interface State {
   hints: string[];
 }
 
-const MAX_ROUNDS = 1;
+const MAX_ROUNDS = 3;
 const WORDS = [
   'Bier',
   'Schokolade',
@@ -34,6 +34,8 @@ const WORDS = [
   'Gürtel',
   'Bar',
 ];
+
+const COUNTDOWN_IN_SECONDS = 60;
 
 enum PlayingPhase {
   EXPLAINING,
@@ -82,8 +84,9 @@ class JustOneGame extends React.PureComponent<State> {
         <p>
           <strong>Beschreibung:</strong> Die Teams bestimmen 2 Ratende. Den anderen Spielern wird ein Begriff gezeigt,
           den Sie den Ratenden erklären müssen. Dazu können sie Hinweise in Form <strong>eines Wortes</strong> auf einen
-          Zettel schreiben und den Game Mastern übergeben. Anschließend haben die Ratenden 1 Minute Zeit, den Begriff zu
-          erraten. Dafür haben sie nur einen Versuch.
+          Zettel schreiben und den Game Mastern übergeben. Anschließend haben die Ratenden{' '}
+          <strong>{COUNTDOWN_IN_SECONDS / 60} Minute</strong> Zeit, den Begriff zu erraten. Dafür haben sie nur einen
+          Versuch.
           <br />
           Achtung: Alle mehrfachen (identischen) Hinweise werden entfernt.
         </p>
@@ -140,7 +143,7 @@ class JustOneGame extends React.PureComponent<State> {
         <h1>Nur Eins</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
-          countdown={60}
+          countdown={COUNTDOWN_IN_SECONDS}
           showScoring={this.state.playPhase === PlayingPhase.GUESSING}
           showCountdown={this.state.playPhase === PlayingPhase.GUESSING}
           onStartPlaying={this.startPlaying}
