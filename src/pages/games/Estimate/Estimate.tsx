@@ -56,6 +56,24 @@ const QUESTIONS: Question[] = [
       'Das hawaiianische Alphabet ist das Kürzeste der Welt und besteht nur aus den Buchstaben a, e, i, o, u, p, k, m, n, w, l, h.',
     tips: ['Ein Fußball-Team hat weniger Spieler', 'Ein normales Geodreieck hat mehr Centimeter'],
   },
+  {
+    question: 'Wie viele Einkerbungen hat ein Golfball?',
+    answer: 336,
+    tips: ['Wir haben mehr Tage pro Jahr'],
+  },
+  {
+    question: 'Wie viel darf ein Boxer der Fliegengewichtsklasse maximal wiegen?',
+    answer: 51,
+    tips: ['Es sind weniger Kilo als der Älteste von uns alt ist'],
+  },
+  {
+    question: 'Ein ausgewachsener Mensch besitzt 206 Knochen, aber mit wie vielen werden wir geboren?',
+    answer: 350,
+    tips: [
+      'Babys haben viele weiche Knochen',
+      'Das Zusammenwachsen der Knochen ist im Alter von 20 bis 25 Jahren abgeschlossen',
+    ],
+  },
 ];
 
 const MAX_ROUNDS = 5;
