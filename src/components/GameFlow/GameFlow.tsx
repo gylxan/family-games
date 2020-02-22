@@ -11,6 +11,7 @@ import { Props as GameDescriptionProps } from '../GameDescription';
 import GameResult from '../GameResult';
 import Countdown from '../Countdown';
 import classNames from 'classnames';
+import { PanTool } from '@material-ui/icons';
 
 export interface Props {
   teams: Team[];
@@ -22,6 +23,7 @@ export interface Props {
   gameMode?: GameMode;
   countdown?: number;
   showStartCountdown?: boolean;
+  teamsLoseOnTimeEnd?: boolean;
   descriptionComponent: React.ReactElement<GameDescriptionProps>;
   playingComponent: React.ReactNode;
   onEndGame: (teams: Team[]) => void;
@@ -46,6 +48,7 @@ export interface State {
   turnPhase: TurnPhase;
   gameState: GameState;
   score: Map<number, number>;
+  showStop: boolean;
 }
 
 class GameFlow extends React.PureComponent<Props, State> {
@@ -54,6 +57,7 @@ class GameFlow extends React.PureComponent<Props, State> {
     showScoring: true,
     showCountdown: true,
     showRoundIndicator: true,
+    teamsLoseOnTimeEnd: true,
     pointsPerRound: 1,
   };
 
@@ -65,6 +69,7 @@ class GameFlow extends React.PureComponent<Props, State> {
       turnPhase: TurnPhase.PREPARING,
       score: new Map(props.teams.map(team => [team.id, 0])),
       gameState: GameFlow.getNextGameState(null),
+      showStop: false,
     };
   }
 
@@ -119,6 +124,9 @@ class GameFlow extends React.PureComponent<Props, State> {
     if (!!teamId) {
       this.setTeamPoints(teamId);
     }
+    this.setState({
+      showStop: false,
+    });
 
     if (this.getCurrentRoundNumber() < this.props.rounds) {
       this.setState({
@@ -161,21 +169,41 @@ class GameFlow extends React.PureComponent<Props, State> {
   }
 
   renderPlayTurn = (): JSX.Element => {
-    const { playingComponent, teams, showScoring, countdown, onCountdown, showCountdown } = this.props;
+    const {
+      playingComponent,
+      teams,
+      showScoring,
+      countdown,
+      onCountdown,
+      showCountdown,
+      teamsLoseOnTimeEnd,
+    } = this.props;
     const { activeTeam } = this.state;
 
     return (
       <>
         {playingComponent}
-        {!!countdown && showCountdown && (
-          <Countdown
-            started={true}
-            className={classNames(styles.Countdown, { [styles.CountdownBetweenTeams]: !activeTeam })}
-            time={countdown * 1000}
-            countdownCallback={onCountdown}
-            onEnd={(): void => this.endTurn(!!activeTeam ? this.getNextActiveTeam().id : undefined)}
-          />
-        )}
+        {!!countdown &&
+          showCountdown &&
+          (!this.state.showStop ? (
+            <Countdown
+              started={true}
+              className={classNames(styles.Countdown, { [styles.CountdownBetweenTeams]: !activeTeam })}
+              time={countdown * 1000}
+              countdownCallback={onCountdown}
+              onEnd={(): void => {
+                if (teamsLoseOnTimeEnd) {
+                  this.endTurn(!!activeTeam ? this.getNextActiveTeam().id : undefined);
+                } else {
+                  this.setState({
+                    showStop: true,
+                  });
+                }
+              }}
+            />
+          ) : (
+            <PanTool className={styles.Stop} style={{ color: 'white' }} />
+          ))}
         {showScoring && (
           <Scoring
             onScored={this.endTurn}
