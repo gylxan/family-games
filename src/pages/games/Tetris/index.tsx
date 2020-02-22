@@ -5,7 +5,6 @@ import GameFlow from '../../../components/GameFlow';
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
 import styles from './Tetris.module.css';
-import classNames from 'classnames';
 
 export interface Props {}
 
@@ -20,12 +19,6 @@ const COUNTDOWN_IN_MINUTES = 5;
 class Tetris extends React.PureComponent {
   state = {
     countdown: undefined,
-  };
-
-  end = (): void => {
-    this.setState({
-      isTimeUp: true,
-    });
   };
 
   renderGameDescription = (): React.ReactElement<GameDescriptionProps> => {

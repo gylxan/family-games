@@ -40,8 +40,8 @@ class Tower extends React.PureComponent<{}, State> {
         </p>
         <p>
           <strong>Beschreibung:</strong> Ihr wollt hoch hinaus! Dafür hat jedes Team 54 Holzblöcke und{' '}
-          {TIME_IN_SECS / 60} Minuten Zeit. Das Team mit dem höchsten gewinnt <strong>5 Punkte</strong>. Der Turm muss
-          natürlich lang genug stehen, um gemessen werden zu können.
+          {TIME_IN_SECS / 60} Minuten Zeit. Das Team mit dem höchsten Turm gewinnt <strong>5 Punkte</strong>. Der Turm
+          muss natürlich lang genug stehen, um gemessen werden zu können.
         </p>
       </GameDescription>
     );

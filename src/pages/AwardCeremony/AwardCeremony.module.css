@@ -11,14 +11,20 @@
   font-size: 2em;
 }
 
-.NameAndTrophy {
+.TrophyAndPoints {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .AwardGround {
   background-color: #969696;
   color: #ececec;
+  box-shadow: 2px 3px 0 black;
+}
+.Name {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 svg.Trophy {
