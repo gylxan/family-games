@@ -24,6 +24,10 @@ export const getStorageElementURLs = (path): Promise<string[]> => {
 
 export const getBlurImages = (): Promise<string[]> => getStorageElementURLs('images/blur');
 
-export const getIntroAudios = (): Promise<string[]> => getStorageElementURLs('audio/intro');
+export const getTetrisImage = (): Promise<string> =>
+  getStorageElementURLs('images/tetris').then(images => (!!images && images.length >= 1 ? images[0] : ''));
+
+export const getIntroAudio = (): Promise<string> =>
+  getStorageElementURLs('audio/intro').then(audios => (!!audios && audios.length >= 1 ? audios[0] : ''));
 
 export const getGameOverviewAudios = (): Promise<string[]> => getStorageElementURLs('audio/game-overview');
