@@ -83,10 +83,9 @@ class AwardCeremony extends React.PureComponent<Props, State> {
           return (
             <div key={key} className={classNames(styles.Award, 'animated', 'fadeIn', 'slow')}>
               <div
-                className={classNames(styles.NameAndTrophy, 'animated', 'fadeIn', 'slow')}
+                className={classNames(styles.TrophyAndPoints, 'animated', 'fadeIn', 'slow')}
                 style={{ animationDelay: `${key + 1}s` }}
               >
-                {teamsByPoints[teamsByPointsKeys[awardsToShow - (key + 1)]].map(team => team.name)}
                 <EmojiEventsSharp
                   className={classNames(styles.Trophy, styles[`TrophyPlace${place}`])}
                   fontSize={'inherit'}
@@ -96,6 +95,12 @@ class AwardCeremony extends React.PureComponent<Props, State> {
               <div className={styles.AwardGround} style={{ height: `${key + 2}em` }}>
                 {place}
                 <br />
+              </div>
+              <div
+                className={classNames(styles.Name, 'animated', 'fadeIn', 'slow')}
+                style={{ animationDelay: `${key + 1}s` }}
+              >
+                {teamsByPoints[teamsByPointsKeys[awardsToShow - (key + 1)]].map(team => team.name)}
               </div>
             </div>
           );
