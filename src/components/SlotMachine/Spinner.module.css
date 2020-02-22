@@ -30,16 +30,16 @@
 .Spinner::before {
   top: 0;
   bottom: 50%;
-  transform: translateY(-55px);
+  transform: translateY(-47px);
   z-index: 2;
-  border-bottom: 6px solid black;
+  border-bottom: 8px solid black;
 }
 
 .Spinner::after {
   top: 50%;
   bottom: 0;
   transform: translateY(55px);
-  border-top: 6px solid black;
+  border-top: 8px solid black;
 }
 
 

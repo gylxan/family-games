@@ -27,6 +27,6 @@ svg.Stop {
   position: absolute;
   margin-top: 0.2em;
   left: 50%;
-  transform: translatex(-50%);
+  transform: translatex(-65%);
   font-size: 5rem;
 }
