@@ -39,9 +39,9 @@ class Tower extends React.PureComponent<{}, State> {
           <strong>Rundenzahl:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong>Beschreibung:</strong> Ihr wollt hoch hinaus! Dafür hat jedes Team 54 Holzblöcke und {TIME_IN_SECS/60} Minuten Zeit.
-          Das Team mit dem höchsten gewinnt <strong>5 Punkte</strong>. Der Turm muss natürlich lang genug stehen, um
-          gemessen werden zu können.
+          <strong>Beschreibung:</strong> Ihr wollt hoch hinaus! Dafür hat jedes Team 54 Holzblöcke und{' '}
+          {TIME_IN_SECS / 60} Minuten Zeit. Das Team mit dem höchsten gewinnt <strong>5 Punkte</strong>. Der Turm muss
+          natürlich lang genug stehen, um gemessen werden zu können.
         </p>
       </GameDescription>
     );

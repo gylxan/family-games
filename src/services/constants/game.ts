@@ -8,7 +8,8 @@ import JukeBox from '../../pages/games/JukeBox';
 import Blur from '../../pages/games/Blur/Blur';
 import Estimate from '../../pages/games/Estimate';
 import PaperPlane from '../../pages/games/PaperPlane';
-import Tetris from "../../pages/games/Tetris";
+import Tetris from '../../pages/games/Tetris';
+import LumberMarket from '../../pages/games/LumberMarket';
 
 export const HOLZMARKT_NAME = 'Holzmarkt';
 
@@ -17,7 +18,7 @@ export const STATIC_GAMES: Array<Game> = [
     name: HOLZMARKT_NAME,
     url: '/holzmarkt',
     alreadyPlayed: false,
-    component: JustOne,
+    component: LumberMarket,
   },
   {
     name: 'EXIT',
