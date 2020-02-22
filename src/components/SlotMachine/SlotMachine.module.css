@@ -9,37 +9,37 @@
   padding: 2em;
   display: flex;
   transition: 0.3s transform;
-  transform: scale(0.6);
-  margin-top: -5em;
+  transform: scale(0.5);
+  margin-top: -8em;
 }
 
 .SlotMachine::after {
   position: absolute;
   content: '';
   display: block;
-  height: 180px;
+  height: 260px;
   top: 50%;
   transform: translateY(-50%);
   right: 30px;
   left: 30px;
-  background: rgba(255, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3)
 }
 
 .GradientFade {
   position: absolute;
-  top: 32px;
-  right: 32px;
-  bottom: 0;
-  left: 32px;
+  top: 47px;
+  right: 48px;
+  bottom: 47px;
+  left: 48px;
   background: linear-gradient(
     to bottom,
-    rgba(64, 64, 64, 1) 0%,
-    rgba(64, 64, 64, 0) 7%,
-    rgba(64, 64, 64, 0) 93%,
-    rgba(64, 64, 64, 1) 100%
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 7%,
+    rgba(0, 0, 0, 0) 93%,
+    rgba(0, 0, 0, 1) 100%
   );
 }
 
 .ButtonContainer {
-  margin-top: -2em;
+  margin-top: -7em;
 }
