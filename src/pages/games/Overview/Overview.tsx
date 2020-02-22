@@ -10,6 +10,7 @@ import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
 import { HOLZMARKT_NAME } from '../../../services/constants/game';
 
 export interface Props {
+  isShownFirst: boolean;
   games: Game[];
   push: (url: string) => void;
   goBack: () => void;
@@ -123,10 +124,11 @@ class Overview extends React.PureComponent<Props, State> {
   };
 
   render(): JSX.Element {
+    const { isShownFirst } = this.props;
     return (
       <div className={styles.Container}>
         <div className={styles.Games}>
-          {this.props.games.map((game: Game) => {
+          {this.props.games.map((game: Game, index: number) => {
             const css: CSSProperties = {
               backgroundColor: !game.alreadyPlayed ? game.color : 'rgba(0,0,0,0.3)',
               color: game.alreadyPlayed && 'grey',
@@ -134,6 +136,9 @@ class Overview extends React.PureComponent<Props, State> {
             const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
             if (isActiveGame) {
               css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;
+            }
+            if (isShownFirst) {
+              css.animationDelay = `${(index + 1) * 0.5}s`;
             }
             return (
               <div
@@ -146,6 +151,8 @@ class Overview extends React.PureComponent<Props, State> {
                   {
                     [styles.Chosen]: isActiveGame && !this.state.isStarted,
                   },
+                  { animated: isShownFirst },
+                  { fadeIn: isShownFirst },
                 )}
                 style={css}
               >

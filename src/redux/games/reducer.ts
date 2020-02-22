@@ -4,13 +4,17 @@ import { AnyAction, Reducer } from 'redux';
 import { GAMES } from '../actionTypes';
 import { getRandomGamesWithColors } from '../../services/utils/game';
 import CacheManager from '../../services/CacheManager';
+import config, { Environment } from '../../services/config';
 
 const cacheManager = new CacheManager<GameState>('games');
-cacheManager.delete();
+if (config.env === Environment.Development) {
+  cacheManager.delete();
+}
 const cachedData = cacheManager.load();
 
 export interface GameState {
   byName: { [name: string]: Game };
+  isShownFirst: boolean;
 }
 
 const initialState: GameState = Object.freeze(
@@ -18,6 +22,7 @@ const initialState: GameState = Object.freeze(
     ? cachedData
     : {
         byName: getRandomGamesWithColors(),
+        isShownFirst: true,
       },
 );
 
@@ -30,6 +35,7 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
         byName: {
           [action.payload.name]: action.payload,
         },
+        isShownFirst: false,
       };
       cacheManager.save(newState);
       return newState;
@@ -49,6 +55,7 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
             alreadyPlayed: true,
           },
         },
+        isShownFirst: false,
       };
       cacheManager.save(newState);
       return newState;
