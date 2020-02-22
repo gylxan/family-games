@@ -3,19 +3,13 @@
   flex-direction: column;
 }
 
-.Slots {
-  display: flex;
-  flex-direction: row;
+.Title {
+  margin-top: -1em;
 }
 
-.Slot {
-  height: 4em;
+.SlotMachine {
+  margin-top: -11em;
+  margin-bottom: -10em;
+  transform: scale(0.5);
 }
 
-.Slot:not(:last-of-type) {
-  margin-right: 2em;
-}
-
-.ButtonContainer {
-  margin-top: 2em;
-}
