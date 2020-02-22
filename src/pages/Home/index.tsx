@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import { LinkTo } from '../../services/routes';
 import classNames from 'classnames';
 import ColorCircles, { CIRCLE_COLORS } from './ColorCircles';
-import { getIntroAudios } from '../../services/utils/firebaseStorage';
+import { getIntroAudio } from '../../services/utils/firebaseStorage';
 
 const TITLE = 'Familien-Spiele';
 const Home: React.FC = () => {
   const [introAudio, setIntroAudio] = useState(null);
 
   useEffect(() => {
-    getIntroAudios().then(audios => audios.length && setIntroAudio(audios[0]));
+    getIntroAudio().then(audio => setIntroAudio(audio));
   }, []);
 
   const startAnimationTime = (CIRCLE_COLORS.length + 1) * 0.5;
