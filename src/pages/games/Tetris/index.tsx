@@ -5,6 +5,7 @@ import GameFlow from '../../../components/GameFlow';
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
 import styles from './Tetris.module.css';
+import classNames from 'classnames';
 
 export interface Props {}
 
