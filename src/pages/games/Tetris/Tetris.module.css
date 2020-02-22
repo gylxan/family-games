@@ -1,0 +1,21 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Slots {
+  display: flex;
+  flex-direction: row;
+}
+
+.Slot {
+  height: 4em;
+}
+
+.Slot:not(:last-of-type) {
+  margin-right: 2em;
+}
+
+.ButtonContainer {
+  margin-top: 2em;
+}
