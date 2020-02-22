@@ -24,8 +24,9 @@ div.Countdown {
 }
 
 svg.Stop {
-  font-size: 3rem;
   position: absolute;
-  margin-top: 0.5em;
+  margin-top: 0.2em;
+  left: 50%;
+  transform: translatex(-50%);
+  font-size: 5rem;
 }
-

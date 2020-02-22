@@ -15,7 +15,7 @@ interface State {
   image: string;
 }
 
-const ICON_HEIGHT = 260;
+const ICON_HEIGHT = 110;
 
 class Spinner extends React.Component<Props, State> {
   state = {
@@ -24,6 +24,7 @@ class Spinner extends React.Component<Props, State> {
     timeRemaining: 0,
     image: '',
   };
+
   multiplier = Math.floor(Math.random() * (4 - 1) + 1);
   timer = null;
   start = Spinner.getStartPosition();
@@ -88,7 +89,9 @@ class Spinner extends React.Component<Props, State> {
 
     return (
       <div
-        style={{ background: `#000 url(${this.state.image}) repeat-y`, backgroundPosition: '0px ' + position + 'px' }}
+        style={{
+          background: `#000 url(${this.state.image}) 0px ${position}px / 100% auto repeat-y`,
+        }}
         className={styles.Spinner}
       />
     );
