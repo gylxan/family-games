@@ -5,6 +5,7 @@ import GameFlow from '../../../components/GameFlow';
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
 import styles from './Tetris.module.css';
+import classNames from 'classnames';
 
 export interface Props {}
 
@@ -48,7 +49,7 @@ class Tetris extends React.PureComponent {
   renderGamePlay(): JSX.Element {
     return (
       <SlotMachine
-        className={styles.SlotMachine}
+        className={classNames(styles.SlotMachine, this.state.countdown && styles.SlotMachineFinished)}
         onEnd={(): void =>
           this.setState({
             countdown: COUNTDOWN_IN_MINUTES,

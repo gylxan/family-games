@@ -8,8 +8,16 @@
 }
 
 .SlotMachine {
-  margin-top: -11em;
-  margin-bottom: -10em;
-  transform: scale(0.5);
+  position: relative;
+  height: 0;
+  max-width: 401px;
+  padding-bottom: 330px;
+  overflow: hidden;
+  margin-bottom: 3.8em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+.SlotMachineFinished {
+  margin-bottom: 0;
+}

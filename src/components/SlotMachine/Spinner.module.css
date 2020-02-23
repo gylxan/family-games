@@ -5,15 +5,44 @@
 }
 
 .Spinner {
-  --icon-height: 260px;
+  position: relative;
+  --icon-height: 110px;
   display: inline-block;
   height: calc(var(--icon-height) * 3);
   overflow: hidden;
   will-change: backgroundPosition;
   transition: 0.3s background-position ease-in-out;
-  padding: 0 150px;
+  width: 33.33%;
   transform: translateZ(0);
 }
+
+
+.Spinner::after,
+.Spinner::before {
+  position: absolute;
+  content: '';
+  display: block;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3)
+}
+
+.Spinner::before {
+  top: 0;
+  bottom: 50%;
+  transform: translateY(-47px);
+  z-index: 2;
+  border-bottom: 8px solid black;
+}
+
+.Spinner::after {
+  top: 50%;
+  bottom: 0;
+  transform: translateY(55px);
+  border-top: 8px solid black;
+}
+
+
 
 .Spinner:nth-child(2) {
   margin: 0 10px;
