@@ -22,6 +22,17 @@ export const getStorageElementURLs = (path): Promise<string[]> => {
   });
 };
 
+export const getStorageElements = (path: string): Promise<any[]> => {
+  const storage: firebase.storage.Storage = firebase.storage();
+  const storageRef: firebase.storage.Reference = storage.ref();
+  const childRefs: firebase.storage.Reference = storageRef.child(path);
+  return childRefs.listAll().then(list => list.items);
+};
+
+export const getJukeboxStorageElements = (): Promise<any[]> => getStorageElements('audio/juke-box');
+
+export const getJukeboxAudios = (): Promise<string[]> => getStorageElementURLs('audio/juke-box');
+
 export const getBlurImages = (): Promise<string[]> => getStorageElementURLs('images/blur');
 
 export const getTetrisImage = (): Promise<string> =>

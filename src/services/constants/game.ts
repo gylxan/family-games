@@ -3,6 +3,7 @@ import Tower from '../../pages/games/Tower';
 import JustOne from '../../pages/games/JustOne';
 import Pantomime from '../../pages/games/Pantomime';
 import PantomimeMaster from '../../pages/master/Pantomime';
+import JukeBoxMaster from '../../pages/master/JukeBox';
 import LoopingLouie from '../../pages/games/LoopingLouie';
 import JukeBox from '../../pages/games/JukeBox';
 import Blur from '../../pages/games/Blur/Blur';
@@ -44,6 +45,7 @@ export const STATIC_GAMES: Array<Game> = [
     url: '/juke-box',
     alreadyPlayed: false,
     component: JukeBox,
+    masterComponent: JukeBoxMaster,
   },
   {
     name: 'Wischi Waschi',

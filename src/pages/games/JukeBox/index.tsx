@@ -1,14 +1,13 @@
 import React from 'react';
 import { Button, LinearProgress } from '@material-ui/core';
-import { PlayCircleFilled, PauseCircleFilled } from '@material-ui/icons';
+import { PauseCircleFilled, PlayCircleFilled } from '@material-ui/icons';
 import classNames from 'classnames';
 
 import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
 import GameFlow from '../../../components/GameFlow';
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
-import { getStorageElementURLs } from '../../../services/utils/firebaseStorage';
-import { getRandomIndex } from '../../../services/utils/array';
+import { getJukeboxAudios } from '../../../services/utils/firebaseStorage';
 
 import styles from './JukeBox.module.css';
 
@@ -32,8 +31,8 @@ class JukeBox extends React.PureComponent<State> {
   }
 
   loadTracks = (): void => {
-    getStorageElementURLs('audio/juke-box').then(audioURLs => {
-      this.tracks = audioURLs;
+    getJukeboxAudios().then(urls => {
+      this.tracks = urls;
       this.setState({
         hasData: true,
       });
@@ -41,7 +40,7 @@ class JukeBox extends React.PureComponent<State> {
   };
 
   startPlaying = (): void => {
-    this.audio.src = this.tracks.splice(getRandomIndex(this.tracks), 1)[0];
+    this.audio.src = this.tracks.shift();
     this.toggleAudio();
   };
 
