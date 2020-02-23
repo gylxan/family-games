@@ -19,6 +19,5 @@ const mapStateToProps = (rootState: RootState): Props => {
 
 const mapDispatchToProps = {
   push,
-  goBack,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Overview);

@@ -13,7 +13,6 @@ export interface Props {
   isShownFirst: boolean;
   games: Game[];
   push: (url: string) => void;
-  goBack: () => void;
 }
 
 export interface State {
@@ -163,9 +162,6 @@ class Overview extends React.PureComponent<Props, State> {
         </div>
 
         <div className={styles.ControlBar}>
-          <Button variant={'contained'} color={'secondary'} onClick={this.props.goBack}>
-            Zurück
-          </Button>
           <Button
             className={styles.StartButton}
             variant={'contained'}
