@@ -61,11 +61,13 @@ class Blur extends React.PureComponent<Props, State> {
     });
   };
 
-  handleCountdown = (): void => {
-    this.setState(prevProps => ({
-      ...prevProps,
-      currentBlur: prevProps.currentBlur - 1,
-    }));
+  handleCountdown = (currentCountdown: number): void => {
+    if (currentCountdown > 10) {
+      this.setState(prevProps => ({
+        ...prevProps,
+        currentBlur: prevProps.currentBlur - 1,
+      }));
+    }
   };
 
   quickForwardUnblur = (): void => {
@@ -103,7 +105,7 @@ class Blur extends React.PureComponent<Props, State> {
         <p>
           <strong>Beschreibung:</strong> Es werden verschwommene Bilder von Objekten gezeigt. Diese werden innerhalb
           <strong> einer Minute</strong> immer klarer. Die Objekte auf den Bildern müssen so schnell wie möglich erraten
-          werden. Das erste Team, welches den Begriff errät erhält einen Punkt.
+          werden. Das erste Team, was buzzert und den Begriff errät erhält einen Punkt.
         </p>
       </GameDescription>
     );
