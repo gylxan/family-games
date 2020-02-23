@@ -12,7 +12,7 @@ import { getRandomIndex } from '../../../services/utils/array';
 
 import styles from './JukeBox.module.css';
 
-const MAX_ROUNDS = 2;
+const MAX_ROUNDS = 5;
 
 export interface State {
   hasData: boolean;
