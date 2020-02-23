@@ -87,13 +87,13 @@ export const STATIC_GAMES: Array<Game> = [
 
 export const COLORS = [
   '#FFC312',
-  '#EE5A24',
+  '#F79F1F',
   '#EA2027',
-  '#FDA7DF',
   '#D980FA',
-  '#B53471',
+  '#833471',
+  '#5758BB',
   '#0652DD',
-  '#1B1464',
+  '#1289A7',
   '#12CBC4',
   '#009432',
 ];

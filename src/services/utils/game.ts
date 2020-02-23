@@ -12,7 +12,7 @@ export const getRandomGamesWithColors = (): { [name: string]: Game } => {
   // Add holzmarkt game in every case!
   const holzmarktGame = STATIC_GAMES.find(game => game.name === HOLZMARKT_NAME);
 
-  games.push({ ...holzmarktGame, color: COLORS[MAX_GAMES - 1] });
+  games.push({ ...holzmarktGame, color: COLORS[0] });
 
   let game;
   for (let i = 0; i < MAX_GAMES - 1; i++) {
@@ -20,7 +20,7 @@ export const getRandomGamesWithColors = (): { [name: string]: Game } => {
     if (isGameAlreadyAdded(games, game)) {
       i--;
     } else {
-      games.push({ ...game, color: COLORS[i] });
+      games.push({ ...game, color: COLORS[i + 1] });
     }
   }
 
