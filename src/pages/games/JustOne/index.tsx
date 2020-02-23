@@ -83,12 +83,11 @@ class JustOneGame extends React.PureComponent<State> {
         </p>
         <p>
           <strong>Beschreibung:</strong> Die Teams bestimmen 2 Ratende. Den anderen Spielern wird ein Begriff gezeigt,
-          den Sie den Ratenden erklären müssen. Dazu können sie Hinweise in Form <strong>eines Wortes</strong> auf einen
-          Zettel schreiben und den Game Mastern übergeben. Anschließend haben die Ratenden{' '}
+          den sie den Ratenden mit einem Wort beschreiben. Anschließend haben die Ratenden{' '}
           <strong>{COUNTDOWN_IN_SECONDS / 60} Minute</strong> Zeit, den Begriff zu erraten. Dafür haben sie nur einen
           Versuch.
           <br />
-          Achtung: Alle mehrfachen (identischen) Hinweise werden entfernt.
+          <strong>Achtung:</strong> Alle mehrfachen (identischen) Hinweise werden entfernt.
         </p>
       </GameDescription>
     );

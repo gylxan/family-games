@@ -1,5 +1,4 @@
 .Form {
-  
   width: 80vw;
 }
 
@@ -17,12 +16,22 @@
 .Row {
   display: block;
   flex-basis: 50%;
+  position: relative;
 }
 
 .NewInput {
   width: 50%;
 }
 
+div.Input {
+  margin-right: 1.5em;
+  left: 0;
+  width: calc(100% - 1.5em);
+}
+
 .ClearInput button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   color: #EA2027;
 }

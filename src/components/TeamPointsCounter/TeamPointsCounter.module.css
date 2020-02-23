@@ -11,5 +11,11 @@
 
 div.TeamPoints {
   color: white;
-  font-size: 16px;
+  height: 1.3em;
+  padding: 0 0.3em;
+}
+
+.TeamPointsCounter svg,
+div.TeamPoints {
+  font-size: 2rem;
 }

@@ -25,11 +25,10 @@ const Description: React.FC<DescriptionProps> = ({ onStart }) => (
       <strong>Rundenzahl:</strong> {MAX_ROUNDS}
     </p>
     <p>
-      <strong>Beschreibung:</strong> Alle Spieler basteln aus einem Din A4-Zettel ein Papierflugzeug. Dafür habt ihr{' '}
-      {TIME_IN_SECS / 60} Minuten Zeit.
-      <br />
-      Danach stellen sich draußen alle an einer Linie und werfen nacheinander ihre Flugzeuge so weit wie möglich. Das
-      Team, dessen Spieler das Papierflugzeug am Weitesten geworfen hat, gewinnt die Runde.
+      <strong>Beschreibung:</strong> Alle Spieler basteln innerhalb von <strong>{TIME_IN_SECS / 60} Minuten</strong> aus
+      einem Din A4-Zettel ein Papierflugzeug. Danach stellen sich draußen alle an einer Linie und werfen nacheinander
+      ihre Flugzeuge. Das Team, dessen Spieler das Papierflugzeug am Weitesten geworfen hat, gewinnt
+      die Runde.
     </p>
   </GameDescription>
 );

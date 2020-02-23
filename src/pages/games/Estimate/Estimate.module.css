@@ -19,7 +19,11 @@
 }
 
 .ButtonContainer {
-  margin-top: 2em;
+  margin-top: 1.5em;
+}
+
+.ButtonContainer svg {
+  font-size: 4em;
 }
 
 .ButtonContainer > *:not(:last-child) {

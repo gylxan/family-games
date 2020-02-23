@@ -92,11 +92,11 @@ class JukeBox extends React.PureComponent<State> {
           <strong>Modus:</strong> Battle
         </p>
         <p>
-          <strong>Beschreibung:</strong> In jeder Runde wird max. eine Minute eines Hits der 70er, 80er oder 90er
-          vorgespielt. Wer das Lied erkennt drückt auf den Buzzer. Daraufhin wird das Lied pausiert und das Team, das
-          als erstes gebuzzt hat, darf eine Antwort geben. Für eine richtige Antwort erhält das Team einen Punkt und die
-          Runde ist beendet. Bei einer falschen Antwort, erhält das gegnerische Team die Möglichkeit zu lösen. Können
-          oder wollen beide Teams nicht auflösen, läuft das Lied weiter.
+          <strong>Beschreibung:</strong> In jeder Runde wird ein Lied der letzten Jahrzehnte abgespielt. Die Teams
+          spielen gleichzeitig und versuchen das Lied zu erraten. Zum Lösen wird der Buzzer verwendet. Bei einer
+          richtigen Antwort ist die Runde beendet und das Team erhält einen Punkt. Bei einer falschen Antwort, erhält
+          das gegnerische Team die Möglichkeit zu lösen. Können oder wollen beide Teams nicht auflösen, läuft das Lied
+          weiter.
           <br />
           Es werden {MAX_ROUNDS} Runden gespielt.
         </p>

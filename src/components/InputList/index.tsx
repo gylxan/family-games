@@ -59,6 +59,7 @@ class InputList extends React.Component<Props, State> {
           {this.props.inputs.map((value: string, index: number) => (
             <div className={styles.Row} key={index}>
               <TextField
+                className={styles.Input}
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => this.handleChange(e, index)}
               />
@@ -74,6 +75,7 @@ class InputList extends React.Component<Props, State> {
           <TextField
             className={styles.NewInput}
             name="newItem"
+            label="Neuer Begriff"
             variant="filled"
             value={this.state.newValue}
             onChange={this.handleNewChange}

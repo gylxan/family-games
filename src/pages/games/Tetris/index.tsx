@@ -35,12 +35,11 @@ class Tetris extends React.PureComponent {
           <strong>Rundenzahl:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong>Beschreibung:</strong> Jedes Team bekommt pro Runde 3 Platten mit Formen. Diese Formen müssen mit
-          Teilen ausgefüllt werden. Ihr {COUNTDOWN_IN_MINUTES} Minuten Zeit. Neben den Teilen sind Symbole, welche
-          zufällig ermittelt werden und angeben, welche Teile ihr verwenden dürft. Ihr legt fest, welches Symbol ihr für
-          welche Platte verwendet. Alle ermittelten Symbole müssen verwendet werden. Wenn ihr alle Platten fertig habt
-          müsst ihr buzzern. Solltet ihr in der Zeit nicht fertig werden, gewinnt das Team mit den meisten fertigen
-          Formen.
+          <strong>Beschreibung:</strong> Jedes Team bekommt pro Runde 3 Puzzle. Diese müssen innerhalb von{' '}
+          <strong>{COUNTDOWN_IN_MINUTES} Minuten</strong> fertiggestellt werden. Es wird zufällig bestimmt, welche Teile
+          verwendet werden müssen. Das Team, das zuerst alle Puzzle fertiggestellt hat, drückt den Buzzer und gewinnt
+          die Runde. Sollte kein Team innerhalb der Zeit fertig werden, gewinnt das Team mit den meisten fertigen
+          Puzzlen.
         </p>
       </GameDescription>
     );
@@ -48,21 +47,25 @@ class Tetris extends React.PureComponent {
 
   renderGamePlay(): JSX.Element {
     return (
-      <SlotMachine
-        className={classNames(styles.SlotMachine, this.state.countdown && styles.SlotMachineFinished)}
-        onEnd={(): void =>
-          this.setState({
-            countdown: COUNTDOWN_IN_MINUTES,
-          })
-        }
-      />
+      <div
+        className={classNames(styles.SlotMachineContainer, this.state.countdown && styles.SlotMachineContainerFinished)}
+      >
+        <SlotMachine
+          className={styles.SlotMachine}
+          onEnd={(): void =>
+            this.setState({
+              countdown: COUNTDOWN_IN_MINUTES,
+            })
+          }
+        />
+      </div>
     );
   }
 
   render(): JSX.Element {
     return (
       <>
-        <h1 className={styles.Title}>Tetris</h1>
+        <h1>Tetris</h1>
         <GameFlow
           rounds={MAX_ROUNDS}
           teamsLoseOnTimeEnd={false}

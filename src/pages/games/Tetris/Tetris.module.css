@@ -3,21 +3,24 @@
   flex-direction: column;
 }
 
-.Title {
-  margin-top: -1em;
+.SlotMachineContainer {
+  width: 401px;
+  margin-bottom: 3.8em;
+  padding: 10px;
+  background: white;
+  box-shadow: 2px 3px 0 black;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .SlotMachine {
   position: relative;
   height: 0;
-  max-width: 401px;
+  width: 401px;
   padding-bottom: 330px;
   overflow: hidden;
-  margin-bottom: 3.8em;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.SlotMachineFinished {
+.SlotMachineContainerFinished {
   margin-bottom: 0;
 }

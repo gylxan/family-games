@@ -98,9 +98,9 @@ class LumberMarket extends React.PureComponent<Props, State> {
           <strong>Rundenzahl:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong>Beschreibung:</strong> Die Teams sammeln die mitgebrachten Holzstücke und bringen sie zur Waage. Das
-          Team mit einem höheren Gesamtgewicht gewinnt das Spiel und erhält 5 Punkte. Anschließend könnt ihr eure
-          Holzstücke in den Kamin werfen oder fachgerecht entsorgen.
+          <strong>Beschreibung:</strong> Die Teams sammeln ihre mitgebrachten Holzstücke und bringen sie zur Waage. Das
+          Team mit dem höheren Gesamtgewicht gewinnt das Spiel und erhält 5 Punkte. Anschließend können die Holzstücke
+          in den Kamin geworfen oder fachgerecht entsorgt werden.
         </p>
       </GameDescription>
     );

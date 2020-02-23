@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import React from 'react';
 import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
 import { getRandomIndex } from '../../../services/utils/array';
@@ -6,6 +7,7 @@ import Team from '../../../interfaces/Team';
 import styles from './Estimate.module.css';
 import GameFlow from '../../../components/GameFlow';
 import { Button, TextField } from '@material-ui/core';
+import { Loupe, RemoveRedEye } from '@material-ui/icons';
 
 export interface Props {
   teams: Team[];
@@ -29,8 +31,12 @@ interface Question {
 
 const QUESTIONS: Question[] = [
   {
-    question: 'Wie viele Milliarden Menschen leben in China?',
+    question: 'Wie viele Liter Wasser kann ein ausgewachsenes Kamel in 15 Minuten trinken?',
     answer: 1.386,
+    tips: [
+      'Das aufgenommene Wasser steht dem Kamel rund 4 Wochen zur Verfügung',
+      'Mit dem aufgenommenen Wasser kann man durchschnittlich ca. 17 Minuten duschen',
+    ],
   },
   {
     question: 'Wie viele Bienenarten gibt es in Europa?',
@@ -174,14 +180,14 @@ class Estimate extends React.PureComponent<Props, State> {
           </div>
         ) : (
           <div className={styles.ButtonContainer}>
-            <Button color={'primary'} variant={'contained'} onClick={this.handleCheckValues}>
-              Prüfen
-            </Button>
             {!!this.state.currentQuestion.tips && this.state.tipsToShow < this.state.currentQuestion.tips.length && (
-              <Button color={'primary'} variant={'contained'} onClick={this.handleShowTip}>
-                Tipp
+              <Button color={'primary'} onClick={this.handleShowTip}>
+                <Loupe style={{ color: 'white' }} />
               </Button>
             )}
+            <Button color={'primary'} onClick={this.handleCheckValues}>
+              <RemoveRedEye style={{ color: 'white' }} />
+            </Button>
           </div>
         )}
       </div>
@@ -201,8 +207,8 @@ class Estimate extends React.PureComponent<Props, State> {
           <strong>Rundenzahl:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong>Beschreibung:</strong> Es werden Schätzfragen gestellt, die es gilt zu beantworten! Beratschlagt euch mit eurem Team und
-          schreibt die Antwort auf Zetteln, die ihr den Quizmastern gebt.
+          <strong>Beschreibung:</strong> Es werden Schätzfragen gestellt, die es gilt zu beantworten! Beratschlagt euch
+          mit eurem Team und schreibt die Antwort auf Zetteln, die ihr den Quizmastern gebt.
         </p>
       </GameDescription>
     );
