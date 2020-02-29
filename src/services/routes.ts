@@ -1,10 +1,10 @@
 export enum Routes {
   Home = '/',
-  TeamPreparation = '/teampreparation/:id',
+  TeamPreparation = '/team-vorbereitung/:id',
   Player = '/player',
-  Master = '/master',
-  Games = '/games',
-  AwardCeremony = '/awardceremony',
+  Master = '/game-master',
+  Games = '/spiele',
+  AwardCeremony = '/siegerehrung',
 }
 
 export const LinkTo = {
