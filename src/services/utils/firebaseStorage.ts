@@ -42,3 +42,6 @@ export const getIntroAudio = (): Promise<string> =>
   getStorageElementURLs('audio/intro').then(audios => (!!audios && audios.length >= 1 ? audios[0] : ''));
 
 export const getGameOverviewAudios = (): Promise<string[]> => getStorageElementURLs('audio/game-overview');
+
+export const getExitAudio = (): Promise<string> =>
+  getStorageElementURLs('audio/exit').then(audios => (!!audios && audios.length >= 1 ? audios[0] : ''));

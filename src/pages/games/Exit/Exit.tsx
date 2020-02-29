@@ -7,6 +7,7 @@ import Countdown from '../../../components/Countdown';
 import Team from '../../../interfaces/Team';
 import styles from './Exit.module.css';
 import { Button, TextField } from '@material-ui/core';
+import { getExitAudio } from '../../../services/utils/firebaseStorage';
 
 export interface Props {
   teams: Team[];
@@ -37,6 +38,19 @@ class Exit extends React.PureComponent<Props, State> {
     isTimeUp: false,
     score: this.props.teams.reduce((scores: Score, team: Team) => ({ ...scores, [team.id]: `0` }), {}),
   };
+  audio = new Audio();
+
+  componentDidMount(): void {
+    getExitAudio().then(track => {
+      this.audio.src = track;
+      this.audio.loop = true;
+      this.audio.play();
+    });
+  }
+
+  componentWillUnmount(): void {
+    this.audio = null;
+  }
 
   startGameFlow = (): void => {
     this.setState({
@@ -63,6 +77,7 @@ class Exit extends React.PureComponent<Props, State> {
   };
 
   setIsTimeUp = (): void => {
+    this.audio.pause();
     this.setState({
       isTimeUp: true,
     });
@@ -74,11 +89,10 @@ class Exit extends React.PureComponent<Props, State> {
         <span className={styles.FakeCountdown}>{TIME_IN_MINUTES}:00</span>
         <p>
           Ihr seid mit eurer Familie in ein Haus im Sauerland gefahren. Nachdem ihr einen schönen gemeinsamen Tag
-          verbracht habt, spielt ihr am Abend Spieleturnier. Ihr startet ein Computerprogramm, das euch zunächst einige
-          harmlose Spiele vorschlägt.
+          verbracht habt, spielt ihr am Abend Familien-Spiele. Ihr startet ein Computerprogramm, das euch zunächst
+          einige harmlose Spiele vorschlägt.
         </p>
         <p>
-          {' '}
           Doch plötzlich öffnet sich das Spiel mit dem Namen &bdquo;EXIT&rdquo;. Ihr hört unheimliche Musik, das Licht
           beginnt zu flackern und ein Timer mit <strong>{TIME_IN_MINUTES} Minuten</strong> erscheint.
         </p>
