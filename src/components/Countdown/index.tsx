@@ -144,6 +144,7 @@ class Countdown extends React.Component<Props, State> {
         }
         break;
       case 'n':
+      case 's':
         this.stopCountdown(true);
         break;
     }
