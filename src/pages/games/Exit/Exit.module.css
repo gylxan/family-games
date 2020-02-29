@@ -10,3 +10,23 @@
   right: 0;
   font-size: 2em;
 }
+
+.Row {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  margin: 2em 0 3em;
+}
+
+
+.TeamColumn {
+  position: relative;
+  flex-basis: calc(50% - 2em);
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 0;
+}
+
+.TeamColumn input {
+  text-align: right;
+}

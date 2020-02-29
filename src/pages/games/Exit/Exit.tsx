@@ -45,7 +45,11 @@ class Exit extends React.PureComponent<Props, State> {
   };
 
   setScore = (): void => {
-    
+    const newTeams = this.props.teams.map(team => ({
+      ...team,
+      points: team.points + parseInt(this.state.score[team.id]),
+    }));
+    this.props.onEndGame(newTeams);
   };
 
   updateScore = (event: React.ChangeEvent<HTMLInputElement>, teamId: number): void => {
@@ -111,20 +115,26 @@ class Exit extends React.PureComponent<Props, State> {
     return (
       <>
         {this.state.isTimeUp ? (
-          this.props.teams.map((team: Team) => (
-            <div className={styles.TeamColumn} key={team.id}>
-              <div>
-                <TextField
-                  type="number"
-                  className={styles.TeamInput}
-                  value={this.state.score[team.id]}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => this.updateScore(e, team.id)}
-                />
-              </div>
+          <>
+            <div className={styles.Row}>
+              {this.props.teams.map((team: Team) => (
+                <div className={styles.TeamColumn} key={team.id}>
+                  <small className={styles.TeamName}>{team.name}</small>
+                  <TextField
+                    type="number"
+                    className={styles.TeamInput}
+                    value={this.state.score[team.id]}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => this.updateScore(e, team.id)}
+                  />
+                </div>
+              ))}
             </div>
-          ))
+            <Button autoFocus variant={'contained'} color={'primary'} onClick={this.setScore}>
+              Punkte vergeben
+            </Button>
+          </>
         ) : (
-          <Countdown started={true} time={TIME_IN_MINUTES} onEnd={this.setIsTimeUp} />
+          <Countdown started={true} time={TIME_IN_MINUTES * 60000} onEnd={this.setIsTimeUp} />
         )}
       </>
     );
