@@ -4,6 +4,10 @@
   cursor: pointer;
 }
 
+.Countdown:focus {
+  outline: 0;
+}
+
 .StartCountdown {
   display: none;
   opacity: 0;

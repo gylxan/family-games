@@ -23,6 +23,7 @@ export interface Props {
 
 class Countdown extends React.Component<Props, State> {
   countdown = null;
+  countdownRef = React.createRef<HTMLDivElement>();
   static defaultProps = {
     startText: 'Los!',
     onlySmallCountdown: false,
@@ -39,6 +40,9 @@ class Countdown extends React.Component<Props, State> {
   componentDidMount(): void {
     if (this.props.started) {
       this.startStartCountdown();
+    }
+    if (this.countdownRef.current) {
+      this.countdownRef.current.focus();
     }
   }
 
@@ -129,6 +133,22 @@ class Countdown extends React.Component<Props, State> {
     return '' + (minutes > 0 ? `${minutes}:` : '') + `${(seconds <= 9 && minutes > 0 ? '0' : '') + seconds}`;
   };
 
+  handleKeyPress = (event: React.KeyboardEvent): void => {
+    switch (event.key) {
+      case 'p':
+      case ' ':
+        if (this.state.isPaused) {
+          this.continueCountdown();
+        } else {
+          this.pauseCountdown();
+        }
+        break;
+      case 'n':
+        this.stopCountdown(true);
+        break;
+    }
+  };
+
   render(): React.ReactNode {
     const { started, time, startText, className } = this.props;
     const { startCountdown, countdown, isPaused } = this.state;
@@ -139,6 +159,9 @@ class Countdown extends React.Component<Props, State> {
       <div
         className={classNames(className, styles.Countdown)}
         onClick={!isPaused ? this.pauseCountdown : this.continueCountdown}
+        onKeyPress={this.handleKeyPress}
+        tabIndex={0}
+        ref={this.countdownRef}
       >
         {startCountdown > 0 && (
           <div>
