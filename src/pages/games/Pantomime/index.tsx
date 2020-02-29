@@ -4,7 +4,7 @@ import GameFlow from '../../../components/GameFlow';
 
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
-const MAX_ROUNDS = 2;
+const MAX_ROUNDS = 4;
 
 class Pantomime extends React.PureComponent {
   renderGameDescription = (): React.ReactElement<GameDescriptionProps> => {
