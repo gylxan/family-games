@@ -8,10 +8,11 @@ import GameFlow from '../../../components/GameFlow';
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
 import { getJukeboxAudios } from '../../../services/utils/firebaseStorage';
+import { shuffle } from '../../../services/utils/array';
 
 import styles from './JukeBox.module.css';
 
-const MAX_ROUNDS = 5;
+const MAX_ROUNDS = 10;
 
 export interface State {
   hasData: boolean;
@@ -32,7 +33,7 @@ class JukeBox extends React.PureComponent<State> {
 
   loadTracks = (): void => {
     getJukeboxAudios().then(urls => {
-      this.tracks = urls;
+      this.tracks = shuffle(urls);
       this.setState({
         hasData: true,
       });
