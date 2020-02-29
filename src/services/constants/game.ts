@@ -11,6 +11,7 @@ import Estimate from '../../pages/games/Estimate';
 import PaperPlane from '../../pages/games/PaperPlane';
 import Tetris from '../../pages/games/Tetris';
 import LumberMarket from '../../pages/games/LumberMarket';
+import Exit from '../../pages/games/Exit';
 
 export const HOLZMARKT_NAME = 'Holzmarkt';
 
@@ -25,7 +26,7 @@ export const STATIC_GAMES: Array<Game> = [
     name: 'EXIT',
     url: '/exit',
     alreadyPlayed: false,
-    component: JustOne,
+    component: Exit,
   },
   {
     name: 'Körper-klaus',

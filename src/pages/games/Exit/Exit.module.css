@@ -1,0 +1,12 @@
+.Introduction {
+  position: relative;
+  max-width: 80vw;
+}
+
+.FakeCountdown {
+  position: absolute;
+  display: block;
+  top: -1.3em;
+  right: 0;
+  font-size: 2em;
+}
