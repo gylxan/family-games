@@ -32,7 +32,7 @@ interface Question {
 const QUESTIONS: Question[] = [
   {
     question: 'Wie viele Liter Wasser kann ein ausgewachsenes Kamel in 15 Minuten trinken?',
-    answer: 1.386,
+    answer: 1386,
     tips: [
       'Das aufgenommene Wasser steht dem Kamel rund 4 Wochen zur Verfügung',
       'Mit dem aufgenommenen Wasser kann man durchschnittlich ca. 17 Minuten duschen',

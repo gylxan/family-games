@@ -7,8 +7,6 @@ import { GameMode } from '../../../components/GameFlow/GameFlow';
 import styles from './Tetris.module.css';
 import classNames from 'classnames';
 
-export interface Props {}
-
 export interface State {
   countdown: number | undefined;
 }
@@ -54,7 +52,7 @@ class Tetris extends React.PureComponent {
           className={styles.SlotMachine}
           onEnd={(): void =>
             this.setState({
-              countdown: COUNTDOWN_IN_MINUTES,
+              countdown: COUNTDOWN_IN_MINUTES * 60,
             })
           }
         />
