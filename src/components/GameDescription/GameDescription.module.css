@@ -1,6 +1,5 @@
 .GameDescription {
   animation: fadeIn 5s;
-  padding-bottom: 2em;
 }
 
 @keyframes fadeIn {
@@ -23,4 +22,5 @@
 .Description p {
   margin: 5px;
   font-family: 'montserrat', Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }

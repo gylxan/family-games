@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './InputList.module.css';
-import { TextField } from '@material-ui/core';
+import {IconButton, TextField} from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
 import classNames from 'classnames';
@@ -64,9 +64,9 @@ class InputList extends React.Component<Props, State> {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => this.handleChange(e, index)}
               />
               <span className={styles.ClearInput}>
-                <Button onClick={(): void => this.removeItem(index)}>
+                <IconButton onClick={(): void => this.removeItem(index)}>
                   <Clear />
-                </Button>
+                </IconButton>
               </span>
             </div>
           ))}

@@ -1,7 +1,9 @@
 .FooterRating {
   display: flex;
   justify-content: space-between;
-  margin-top: 1.5em;
+  width: 80vw;
+  margin-top: auto;
+  margin-bottom: 0.5em;
 }
 
 .TeamButton {
@@ -9,8 +11,5 @@
 }
 
 button.SkipButton {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0.5em;
+  font-size: 1em;
 }

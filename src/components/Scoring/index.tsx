@@ -5,6 +5,7 @@ import { Check, Clear } from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 import Team from '../../interfaces/Team';
 import { getOtherTeam } from '../../services/utils/team';
+import classNames from 'classnames';
 
 export interface Props {
   onScored: (teamId: null | number) => void;
@@ -14,7 +15,7 @@ export interface Props {
 }
 
 const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId, showSkipOption }) => (
-  <div className={styles.FooterRating}>
+  <div className={classNames(styles.FooterRating)}>
     {!!activeTeamId ? (
       <>
         <Button
@@ -36,23 +37,24 @@ const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId, showSkipOptio
       </>
     ) : (
       <>
-        {teams.map(team => (
-          <Button
-            key={team.id}
-            variant={'contained'}
-            color="primary"
-            className={styles.TeamButton}
-            onClick={(): void => onScored(team.id)}
-            startIcon={<Check />}
-          >
-            {team.name}
-          </Button>
+        {teams.map((team, index) => (
+          <>
+            <Button
+              key={team.id}
+              variant={'contained'}
+              color="primary"
+              className={styles.TeamButton}
+              onClick={(): void => onScored(team.id)}
+            >
+              {team.name}
+            </Button>
+            {showSkipOption && index + 1 === teams.length / 2 && (
+              <Button onClick={(): void => onScored(null)}>
+                <Clear style={{ color: 'white' }} />
+              </Button>
+            )}
+          </>
         ))}
-        {showSkipOption && (
-          <Button className={styles.SkipButton} onClick={(): void => onScored(null)}>
-            <Clear style={{ color: 'white' }} />
-          </Button>
-        )}
       </>
     )}
   </div>

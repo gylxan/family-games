@@ -13,6 +13,7 @@ if (config.env === Environment.Development) {
 const cachedData = cacheManager.load();
 
 export interface GameState {
+  currentGame: undefined | Game;
   byName: { [name: string]: Game };
   isShownFirst: boolean;
 }
@@ -23,12 +24,24 @@ const initialState: GameState = Object.freeze(
     : {
         byName: getRandomGamesWithColors(),
         isShownFirst: true,
+        currentGame: undefined,
       },
 );
 
 const gameReducer: Reducer<GameState> = (state: GameState = initialState, action: AnyAction): GameState => {
-  let newState;
+  let newState, game: Game;
   switch (action.type) {
+    case GAMES.SET_CURRENT_BY_URL:
+      game = Object.keys(state.byName)
+        .map(name => state.byName[name])
+        .find(game => game.url === action.payload.url);
+      newState = {
+        ...state,
+        currentGame: game,
+      };
+      cacheManager.save(newState);
+      return newState;
+
     case GAMES.UPDATE:
       newState = {
         ...state,
@@ -40,7 +53,7 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
       cacheManager.save(newState);
       return newState;
     case GAMES.SET_ALREADY_PLAYED_BY_URL:
-      const game = Object.keys(state.byName)
+      game = Object.keys(state.byName)
         .map(name => state.byName[name])
         .find(game => game.url === action.payload.url);
       if (!game) {

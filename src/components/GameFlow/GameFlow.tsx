@@ -24,6 +24,7 @@ export interface Props {
   countdown?: number;
   showStartCountdown?: boolean;
   teamsLoseOnTimeEnd?: boolean;
+  showCountdownBetweenTeams?: boolean;
   descriptionComponent: React.ReactElement<GameDescriptionProps>;
   playingComponent: React.ReactNode;
   onEndGame: (teams: Team[]) => void;
@@ -177,6 +178,7 @@ class GameFlow extends React.PureComponent<Props, State> {
       onCountdown,
       showCountdown,
       teamsLoseOnTimeEnd,
+      showCountdownBetweenTeams,
     } = this.props;
     const { activeTeam } = this.state;
 
@@ -188,7 +190,9 @@ class GameFlow extends React.PureComponent<Props, State> {
           (!this.state.showStop ? (
             <Countdown
               started={true}
-              className={classNames(styles.Countdown, { [styles.CountdownBetweenTeams]: !activeTeam })}
+              className={classNames(styles.Countdown, {
+                [styles.CountdownBetweenTeams]: !activeTeam || showCountdownBetweenTeams,
+              })}
               time={countdown * 1000}
               countdownCallback={onCountdown}
               onEnd={(): void => {

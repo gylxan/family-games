@@ -4,8 +4,9 @@ import { Routes } from '../../services/routes';
 
 export interface Props {
   disableGameByUrl: (url: string) => void;
+  setCurrentGameByUrl: (url: string) => void;
 }
-const GamePlayedDetector: React.FC<Props> = ({ disableGameByUrl }) => {
+const GamePlayedDetector: React.FC<Props> = ({ disableGameByUrl, setCurrentGameByUrl }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -14,7 +15,8 @@ const GamePlayedDetector: React.FC<Props> = ({ disableGameByUrl }) => {
     if (gameUrl !== Routes.Games) {
       disableGameByUrl(gameUrl);
     }
-  }, [pathname, disableGameByUrl]);
+    setCurrentGameByUrl(gameUrl);
+  }, [pathname, disableGameByUrl, setCurrentGameByUrl]);
 
   return null;
 };
