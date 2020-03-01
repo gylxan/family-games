@@ -9,15 +9,6 @@ import { getPlayedGames, hasAllGamesPlayed } from '../../../services/utils/game'
 import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
 import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/constants/game';
 
-// @ts-ignore
-import electritySound from '../../../assets/electricity.wav';
-// @ts-ignore
-import shutdownSound from '../../../assets/shutdown.mp3';
-// @ts-ignore
-import startupSound from '../../../assets/startup.wav';
-// @ts-ignore
-import evilSound from '../../../assets/evil-sound.mp3';
-
 const GAMES_BEFORE_EXIT = 5;
 
 export interface Props {
@@ -28,7 +19,7 @@ export interface Props {
 
 export interface State {
   activeGame: Game | null;
-  audio: string | null;
+  audios: string[];
   isStarted: boolean;
   isStopping: boolean;
   exitGameShowStarted: boolean;
@@ -42,7 +33,7 @@ const MAX_INTERVAL = 1100;
 
 class Overview extends React.PureComponent<Props, State> {
   state = {
-    audio: null,
+    audios: [],
     activeGame: null,
     isStarted: false,
     isStopping: false,
@@ -62,14 +53,14 @@ class Overview extends React.PureComponent<Props, State> {
       push(Routes.AwardCeremony);
       return;
     }
-    getGameOverviewAudios().then(
-      audios =>
-        audios.length &&
-        this.setState({
-          audio: audios[0],
-        }),
-    );
+    getGameOverviewAudios().then(audios => {
+      this.setState({
+        audios,
+      });
+    });
   }
+
+  getAudio = (name: string): string => this.state.audios.find(audio => audio.toLowerCase().indexOf(name) >= 0);
 
   startRandomGameChoose = (): void => {
     this.setState({
@@ -113,14 +104,14 @@ class Overview extends React.PureComponent<Props, State> {
 
   startExitGameShow = (): void => {
     this.audio.loop = false;
-    this.audio.src = electritySound;
+    this.audio.src = this.getAudio('electricity');
     this.audio.play();
     this.audio.onended = (): void => this.startShutdown();
   };
 
   startShutdown = (): void => {
     this.audio.onended = (): void => this.startStartup();
-    this.audio.src = shutdownSound;
+    this.audio.src = this.getAudio('shutdown');
     this.setState({
       showOverlay: true,
     });
@@ -130,7 +121,7 @@ class Overview extends React.PureComponent<Props, State> {
   startStartup = (): void => {
     this.audio.onended = null;
     this.timeout = window.setTimeout(() => {
-      this.audio.src = startupSound;
+      this.audio.src = this.getAudio('startup');
       this.setState({
         showOverlay: false,
         showOverview: false,
@@ -143,7 +134,7 @@ class Overview extends React.PureComponent<Props, State> {
 
   showExitGame = (): void => {
     const { push } = this.props;
-    this.audio.src = evilSound;
+    this.audio.src = this.getAudio('evil');
     this.setState({
       showExitGame: true,
     });
@@ -276,9 +267,7 @@ class Overview extends React.PureComponent<Props, State> {
             </div>
           </>
         )}
-        {!this.state.isStarted && this.state.activeGame && this.state.audio && (
-          <audio src={this.state.audio} autoPlay />
-        )}
+        {!this.state.isStarted && this.state.activeGame && <audio src={this.getAudio('tada')} autoPlay />}
         {this.state.showOverlay && <div className={classNames(styles.Overlay, 'animated', 'fadeIn')} />}
       </div>
     );
