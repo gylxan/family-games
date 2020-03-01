@@ -216,16 +216,13 @@ class Estimate extends React.PureComponent<Props, State> {
 
   render(): JSX.Element {
     return (
-      <>
-        <h1>Schätze</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          showScoring
-          descriptionComponent={this.renderGameDescription()}
-          playingComponent={this.renderGame()}
-          onStartPlaying={this.startNextTurn}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        showScoring
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={this.renderGame()}
+        onStartPlaying={this.startNextTurn}
+      />
     );
   }
 }

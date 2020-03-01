@@ -62,22 +62,19 @@ class Tetris extends React.PureComponent {
 
   render(): JSX.Element {
     return (
-      <>
-        <h1>Tetris</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          teamsLoseOnTimeEnd={false}
-          pointsPerRound={POINTS_PER_ROUND}
-          countdown={this.state.countdown}
-          showScoring={this.state.countdown !== undefined}
-          descriptionComponent={this.renderGameDescription()}
-          playingComponent={this.renderGamePlay()}
-          gameMode={GameMode.BATTLE}
-          onStartPlaying={(): void => {
-            this.setState({ countdown: undefined });
-          }}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        teamsLoseOnTimeEnd={false}
+        pointsPerRound={POINTS_PER_ROUND}
+        countdown={this.state.countdown}
+        showScoring={this.state.countdown !== undefined}
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={this.renderGamePlay()}
+        gameMode={GameMode.BATTLE}
+        onStartPlaying={(): void => {
+          this.setState({ countdown: undefined });
+        }}
+      />
     );
   }
 }

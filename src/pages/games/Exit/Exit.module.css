@@ -6,9 +6,13 @@
 .FakeCountdown {
   position: absolute;
   display: block;
-  top: -1.3em;
+  top: -0.8em;
   right: 0;
   font-size: 2em;
+}
+
+.FirstParagraph {
+  padding-top: 0.4em;
 }
 
 .Row {

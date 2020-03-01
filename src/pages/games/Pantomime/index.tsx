@@ -30,17 +30,14 @@ class Pantomime extends React.PureComponent {
 
   render(): JSX.Element {
     return (
-      <>
-        <h1>Körperklaus</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          countdown={60}
-          showScoring
-          descriptionComponent={this.renderGameDescription()}
-          playingComponent={<></>}
-          gameMode={GameMode.ROUNDS}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        countdown={60}
+        showScoring
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={<></>}
+        gameMode={GameMode.ROUNDS}
+      />
     );
   }
 }

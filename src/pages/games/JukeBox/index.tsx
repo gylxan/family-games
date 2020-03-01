@@ -106,23 +106,18 @@ class JukeBox extends React.PureComponent<State> {
   };
 
   render(): JSX.Element {
-    return (
-      <>
-        <h1>Juke-Box</h1>
-        {this.state.hasData ? (
-          <GameFlow
-            rounds={MAX_ROUNDS}
-            showScoring
-            onStartPlaying={this.startPlaying}
-            onEndTurn={this.endAudio}
-            descriptionComponent={this.renderGameDescription()}
-            playingComponent={this.renderGamePlay()}
-            gameMode={GameMode.BATTLE}
-          />
-        ) : (
-          <LinearProgress className={styles.ProgressBar} />
-        )}
-      </>
+    return this.state.hasData ? (
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        showScoring
+        onStartPlaying={this.startPlaying}
+        onEndTurn={this.endAudio}
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={this.renderGamePlay()}
+        gameMode={GameMode.BATTLE}
+      />
+    ) : (
+      <LinearProgress className={styles.ProgressBar} />
     );
   }
 }

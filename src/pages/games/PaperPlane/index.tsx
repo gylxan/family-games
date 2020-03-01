@@ -27,8 +27,7 @@ const Description: React.FC<DescriptionProps> = ({ onStart }) => (
     <p>
       <strong>Beschreibung:</strong> Alle Spieler basteln innerhalb von <strong>{TIME_IN_SECS / 60} Minuten</strong> aus
       einem Din A4-Zettel ein Papierflugzeug. Danach stellen sich draußen alle an einer Linie und werfen nacheinander
-      ihre Flugzeuge. Das Team, dessen Spieler das Papierflugzeug am Weitesten geworfen hat, gewinnt
-      die Runde.
+      ihre Flugzeuge. Das Team, dessen Spieler das Papierflugzeug am Weitesten geworfen hat, gewinnt die Runde.
     </p>
   </GameDescription>
 );
@@ -52,17 +51,14 @@ const GamePlay: React.FC<GamePlayProps> = ({ isTimeUp, setIsTimeUp }) => {
 const PaperPlane: React.FC = () => {
   const [isFirstTimeUp, setIsFirstTimeUp] = useState(false);
   return (
-    <>
-      <h1>Speed Origami</h1>
-      <GameFlow
-        gameMode={GameMode.BATTLE}
-        rounds={MAX_ROUNDS}
-        showScoring={isFirstTimeUp}
-        showStartCountdown={true}
-        descriptionComponent={<Description />}
-        playingComponent={<GamePlay isTimeUp={isFirstTimeUp} setIsTimeUp={setIsFirstTimeUp} />}
-      />
-    </>
+    <GameFlow
+      gameMode={GameMode.BATTLE}
+      rounds={MAX_ROUNDS}
+      showScoring={isFirstTimeUp}
+      showStartCountdown={true}
+      descriptionComponent={<Description />}
+      playingComponent={<GamePlay isTimeUp={isFirstTimeUp} setIsTimeUp={setIsFirstTimeUp} />}
+    />
   );
 };
 

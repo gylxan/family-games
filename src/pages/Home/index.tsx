@@ -65,7 +65,6 @@ const Home: React.FC = () => {
           </Button>
         </div>
       )}
-       
     </div>
   );
 };

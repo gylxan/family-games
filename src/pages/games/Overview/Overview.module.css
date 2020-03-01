@@ -1,6 +1,5 @@
 .Container {
-  display: block;
-  width: 100%;
+  margin-top: 1em;
 }
 
 .Games {
@@ -9,7 +8,7 @@
   display: grid;
   grid-template-columns: repeat(5, 26vh);
   grid-gap: var(--space-row) var(--space-column);
-  margin-bottom: 4em;
+  margin-bottom: 2em;
   justify-content: center;
 }
 
@@ -37,6 +36,7 @@
   background-color: #266bb0;
   height: 40vh;
   width: 40vh;
+  margin-top: 20vh;
 }
 
 .Tile.AlreadyPlayed {

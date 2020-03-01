@@ -116,19 +116,16 @@ class Blur extends React.PureComponent<Props, State> {
       return <LinearProgress />;
     }
     return (
-      <>
-        <h1 className={styles.Title}>Wischi Waschi</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          countdown={60}
-          showScoring
-          showRoundIndicator={false}
-          descriptionComponent={this.renderGameDescription()}
-          playingComponent={this.renderGame()}
-          onStartPlaying={this.startNextTurn}
-          onCountdown={this.handleCountdown}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        countdown={60}
+        showScoring
+        showRoundIndicator={false}
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={this.renderGame()}
+        onStartPlaying={this.startNextTurn}
+        onCountdown={this.handleCountdown}
+      />
     );
   }
 }

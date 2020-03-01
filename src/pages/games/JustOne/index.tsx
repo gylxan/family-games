@@ -76,7 +76,7 @@ class JustOneGame extends React.PureComponent<State> {
           <strong>Teilnehmer:</strong> alle (2 x Ratende je Team)
         </p>
         <p>
-          <strong>Modus:</strong> Abwechelnd
+          <strong>Modus:</strong> Abwechselnd
         </p>
         <p>
           <strong>Rundenzahl je Team:</strong> {MAX_ROUNDS}
@@ -96,9 +96,9 @@ class JustOneGame extends React.PureComponent<State> {
   renderGameFlowExplaining(): JSX.Element {
     return (
       <>
-        <p>
+        <span>
           Erklärt den Begriff: <strong className={styles.Action}>{this.state.currentWord}</strong>
-        </p>
+        </span>
         <InputList edit={true} inputs={this.state.hints} updateInputs={this.setHints} />
         <div className={styles.Footer}>
           <Button variant={'contained'} color={'primary'} onClick={this.startGuessing}>
@@ -116,11 +116,11 @@ class JustOneGame extends React.PureComponent<State> {
           Ratet den Begriff zu diesen Wörtern. <br />
           Ihr habt einen Versuch.
         </p>
-        <ul className={styles.Hints}>
+        <div className={styles.Hints}>
           {this.state.hints.map((hint: string, index: number) => (
-            <li key={index}>{hint}</li>
+            <span key={index}>{hint}</span>
           ))}
-        </ul>
+        </div>
       </>
     );
   }
@@ -138,19 +138,17 @@ class JustOneGame extends React.PureComponent<State> {
 
   render(): JSX.Element {
     return (
-      <>
-        <h1>Nur Eins</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          countdown={COUNTDOWN_IN_SECONDS}
-          showScoring={this.state.playPhase === PlayingPhase.GUESSING}
-          showCountdown={this.state.playPhase === PlayingPhase.GUESSING}
-          onStartPlaying={this.startPlaying}
-          descriptionComponent={this.renderDescription()}
-          playingComponent={this.renderGamePlay()}
-          gameMode={GameMode.ROUNDS}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        countdown={COUNTDOWN_IN_SECONDS}
+        showScoring={this.state.playPhase === PlayingPhase.GUESSING}
+        showCountdown={this.state.playPhase === PlayingPhase.GUESSING}
+        onStartPlaying={this.startPlaying}
+        descriptionComponent={this.renderDescription()}
+        playingComponent={this.renderGamePlay()}
+        gameMode={GameMode.ROUNDS}
+        showCountdownBetweenTeams
+      />
     );
   }
 }

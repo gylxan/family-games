@@ -88,7 +88,7 @@ class Exit extends React.PureComponent<Props, State> {
     return (
       <div className={styles.Introduction}>
         <span className={styles.FakeCountdown}>{TIME_IN_MINUTES}:00</span>
-        <p>
+        <p className={styles.FirstParagraph}>
           Ihr seid mit eurer Familie in ein Haus im Sauerland gefahren. Nachdem ihr einen schönen gemeinsamen Tag
           verbracht habt, spielt ihr am Abend Familien-Spiele. Ihr startet ein Computerprogramm, das euch zunächst
           einige harmlose Spiele vorschlägt.
@@ -156,21 +156,16 @@ class Exit extends React.PureComponent<Props, State> {
   }
 
   render(): JSX.Element {
-    return (
-      <>
-        <h1>Exit</h1>
-        {this.state.gamePhase === GamePhase.INTRODUCTION ? (
-          this.renderIntroduction()
-        ) : (
-          <GameFlow
-            rounds={MAX_ROUNDS}
-            showScoring={false}
-            descriptionComponent={this.renderDescription()}
-            playingComponent={this.renderGamePlay()}
-            gameMode={GameMode.BATTLE}
-          />
-        )}
-      </>
+    return this.state.gamePhase === GamePhase.INTRODUCTION ? (
+      this.renderIntroduction()
+    ) : (
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        showScoring={false}
+        descriptionComponent={this.renderDescription()}
+        playingComponent={this.renderGamePlay()}
+        gameMode={GameMode.BATTLE}
+      />
     );
   }
 }

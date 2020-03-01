@@ -133,17 +133,14 @@ class LumberMarket extends React.PureComponent<Props, State> {
 
   render(): JSX.Element {
     return (
-      <>
-        <h1>Holzmarkt</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          pointsPerRound={POINTS_PER_ROUND}
-          showScoring
-          descriptionComponent={this.renderGameDescription()}
-          playingComponent={this.renderGamePlay()}
-          gameMode={GameMode.BATTLE}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        pointsPerRound={POINTS_PER_ROUND}
+        showScoring
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={this.renderGamePlay()}
+        gameMode={GameMode.BATTLE}
+      />
     );
   }
 }

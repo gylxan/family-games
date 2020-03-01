@@ -1,18 +1,21 @@
 .Footer {
   display: flex;
   justify-content: center;
-  margin-top: 2.5em;
+  margin-top: 0.5em;
 }
 
 .Action {
-  display: block;
-  font-size: 2em;
+  display: inline-block;
+  font-size: 1.5em;
 }
 
 .Hints {
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .Hints span {
-  flex-basis: 33%;
+  flex-basis: 30%;
 }

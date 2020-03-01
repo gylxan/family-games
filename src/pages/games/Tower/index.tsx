@@ -61,17 +61,14 @@ class Tower extends React.PureComponent<{}, State> {
 
   render(): JSX.Element {
     return (
-      <>
-        <h1>Turmbau zu Babel</h1>
-        <GameFlow
-          rounds={MAX_ROUNDS}
-          pointsPerRound={POINTS_PER_ROUND}
-          showScoring={this.state.isTimeUp}
-          descriptionComponent={this.renderGameDescription()}
-          playingComponent={this.renderGamePlay()}
-          gameMode={GameMode.BATTLE}
-        />
-      </>
+      <GameFlow
+        rounds={MAX_ROUNDS}
+        pointsPerRound={POINTS_PER_ROUND}
+        showScoring={this.state.isTimeUp}
+        descriptionComponent={this.renderGameDescription()}
+        playingComponent={this.renderGamePlay()}
+        gameMode={GameMode.BATTLE}
+      />
     );
   }
 }
