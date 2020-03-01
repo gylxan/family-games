@@ -5,7 +5,7 @@ import { GAMES } from '../actionTypes';
 import { getRandomGamesWithColors } from '../../services/utils/game';
 import CacheManager from '../../services/CacheManager';
 import config, { Environment } from '../../services/config';
-import { STATIC_GAMES } from '../../services/constants/game';
+import { EXIT_NAME, STATIC_GAMES } from '../../services/constants/game';
 
 const cacheManager = new CacheManager<GameState>('games');
 if (config.env === Environment.Development) {
@@ -17,6 +17,7 @@ export interface GameState {
   currentGame: undefined | Game;
   byName: { [name: string]: Game };
   isShownFirst: boolean;
+  exitGamePlayed: boolean;
 }
 
 const initialState: GameState = Object.freeze(
@@ -26,6 +27,7 @@ const initialState: GameState = Object.freeze(
         byName: getRandomGamesWithColors(),
         isShownFirst: true,
         currentGame: undefined,
+        exitGamePlayed: false,
       },
 );
 
@@ -57,6 +59,14 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
         .map(name => state.byName[name])
         .find(game => game.url === action.payload.url);
       if (!game) {
+        game = STATIC_GAMES.find(game => game.url === action.payload.url);
+        if (!!game && game.name === EXIT_NAME) {
+          newState = {
+            ...state,
+            exitGamePlayed: true,
+          };
+        }
+        cacheManager.save(newState);
         return state;
       }
       newState = {

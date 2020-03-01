@@ -11,8 +11,17 @@ import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/const
 
 const GAMES_BEFORE_EXIT = 5;
 
+//TODO Just One Bei zwei begriffen wird nicht richtig getrennt
+// TODO Schriftart in Beschreibung wieder vergrößern (Exit game und Just one checken)
+//TODO Tetris rutscht wieder hoch
+// TODO getPlayedGames as reduc slector or check exit has been played
+// Wenn nur noch ein spiel, sofort verwenden
+//TODO: JukeBox, Runden als strong text und kürzen
+// TODO Jukebox: Eventuell noch button zum auflösen
+
 export interface Props {
   isShownFirst: boolean;
+  exitGamePlayed: boolean;
   games: Game[];
   push: (url: string) => void;
 }
@@ -91,7 +100,7 @@ class Overview extends React.PureComponent<Props, State> {
       });
     }, 250);
 
-    if (getPlayedGames(this.props.games).length === GAMES_BEFORE_EXIT) {
+    if (getPlayedGames(this.props.games).length === GAMES_BEFORE_EXIT && !this.props.exitGamePlayed) {
       this.stopInterval();
       this.setState({
         exitGameShowStarted: true,
