@@ -28,7 +28,7 @@ div.Countdown {
   composes: Countdown from '../Countdown/Countdown.module.css';
   position: absolute;
   width: 100%;
-  bottom: 0.1em;
+  bottom: 0;
 }
 
 svg.Stop {

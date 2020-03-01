@@ -9,7 +9,7 @@ import { getPlayedGames, hasAllGamesPlayed } from '../../../services/utils/game'
 import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
 import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/constants/game';
 
-const GAMES_BEFORE_EXIT = 5;
+const GAMES_BEFORE_EXIT = 1;
 
 export interface Props {
   isShownFirst: boolean;
