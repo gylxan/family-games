@@ -10,7 +10,8 @@
 }
 
 .BlurImage {
-  min-width: 10vw;
+  min-width: 40vw;
+  min-height: 40vh;
   width: auto;
   display: block;
   max-width: 80vw;
