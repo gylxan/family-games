@@ -9,7 +9,7 @@ import { getPlayedGames, hasAllGamesPlayed } from '../../../services/utils/game'
 import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
 import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/constants/game';
 
-const GAMES_BEFORE_EXIT = 1;
+const GAMES_BEFORE_EXIT = 5;
 
 export interface Props {
   isShownFirst: boolean;
@@ -140,7 +140,10 @@ class Overview extends React.PureComponent<Props, State> {
     });
     this.audio.play();
     this.audio.onended = (): void => {
-      push(LinkTo.playerGame(STATIC_GAMES.find(game => game.name === EXIT_NAME).url));
+      this.timeout = window.setTimeout(() => {
+        window.clearTimeout(this.timeout);
+        push(LinkTo.playerGame(STATIC_GAMES.find(game => game.name === EXIT_NAME).url));
+      }, 2000);
     };
   };
 
