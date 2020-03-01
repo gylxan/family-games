@@ -49,6 +49,7 @@ class Exit extends React.PureComponent<Props, State> {
   }
 
   componentWillUnmount(): void {
+    this.audio.pause();
     this.audio = null;
   }
 

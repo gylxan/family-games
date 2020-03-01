@@ -35,3 +35,5 @@ export const getRandomGamesWithColors = (): { [name: string]: Game } => {
 };
 export const hasAllGamesPlayed = (games: Game[]): boolean =>
   games.map(game => game.alreadyPlayed).reduce((prev, current) => prev && current, true);
+
+export const getPlayedGames = (games: Game[]): Game[] => games.filter(game => game.alreadyPlayed === true);
