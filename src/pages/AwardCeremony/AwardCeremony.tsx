@@ -111,7 +111,7 @@ class AwardCeremony extends React.PureComponent<Props, State> {
 
   render(): JSX.Element {
     return this.state.showStartText ? (
-      <h1 className={classNames('animated', 'fadeIn', 'slow')}>Kommen wir zur Siegerehrung!</h1>
+      <h1 className={classNames(styles.StartText, 'animated', 'fadeIn', 'slow')}>Kommen wir zur Siegerehrung!</h1>
     ) : (
       <>
         {this.renderAwards()}
