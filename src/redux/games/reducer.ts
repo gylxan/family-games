@@ -5,6 +5,7 @@ import { GAMES } from '../actionTypes';
 import { getRandomGamesWithColors } from '../../services/utils/game';
 import CacheManager from '../../services/CacheManager';
 import config, { Environment } from '../../services/config';
+import { STATIC_GAMES } from '../../services/constants/game';
 
 const cacheManager = new CacheManager<GameState>('games');
 if (config.env === Environment.Development) {
@@ -32,9 +33,8 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
   let newState, game: Game;
   switch (action.type) {
     case GAMES.SET_CURRENT_BY_URL:
-      game = Object.keys(state.byName)
-        .map(name => state.byName[name])
-        .find(game => game.url === action.payload.url);
+      // Use STATIC_GAMES here to set EXIT as current game,too
+      game = STATIC_GAMES.find(game => game.url === action.payload.url);
       newState = {
         ...state,
         currentGame: game,
