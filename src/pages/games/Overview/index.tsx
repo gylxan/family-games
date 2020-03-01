@@ -13,8 +13,7 @@ interface Props {
 const mapStateToProps = (rootState: RootState): Props => {
   return {
     games: getGamesArray(rootState),
-    //isShownFirst: rootState.game.isShownFirst,
-    isShownFirst: false,
+    isShownFirst: rootState.game.isShownFirst,
   };
 };
 
