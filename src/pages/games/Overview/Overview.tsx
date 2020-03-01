@@ -11,13 +11,15 @@ import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/const
 
 const GAMES_BEFORE_EXIT = 5;
 
-//TODO Just One Bei zwei begriffen wird nicht richtig getrennt
+//KIKI
 // TODO Schriftart in Beschreibung wieder vergrößern (Exit game und Just one checken)
-//TODO Tetris rutscht wieder hoch
-// TODO getPlayedGames as reduc slector or check exit has been played
-// Wenn nur noch ein spiel, sofort verwenden
 //TODO: JukeBox, Runden als strong text und kürzen
+//TODO Tetris rutscht wieder hoch
+
+//GUIDO
+//TODO Just One Bei zwei begriffen wird nicht richtig getrennt
 // TODO Jukebox: Eventuell noch button zum auflösen
+// Wenn nur noch ein spiel, sofort verwenden
 
 export interface Props {
   isShownFirst: boolean;
