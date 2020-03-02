@@ -1,19 +1,17 @@
-import React, { CSSProperties } from 'react';
-import styles from './Overview.module.css';
-import { Game } from '../../../interfaces/Game';
+import React from 'react';
 import { Button } from '@material-ui/core';
-import { getRandomItem } from '../../../services/utils/array';
 import classNames from 'classnames';
+
+import { Game } from '../../../interfaces/Game';
+import { getRandomItem } from '../../../services/utils/array';
 import { LinkTo, Routes } from '../../../services/routes';
 import { getPlayedGames, hasAllGamesPlayed } from '../../../services/utils/game';
 import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
-import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/constants/game';
+import { EXIT_GAME, HOLZMARKT_NAME } from '../../../services/constants/game';
 import Tile from './Tile';
+import styles from './Overview.module.css';
 
 const GAMES_BEFORE_EXIT = 5;
-
-//GUIDO
-//TODO Just One Bei zwei begriffen wird nicht richtig getrennt
 
 export interface Props {
   isShownFirst: boolean;
@@ -159,7 +157,7 @@ class Overview extends React.PureComponent<Props, State> {
     this.audio.onended = (): void => {
       this.timeout = window.setTimeout(() => {
         window.clearTimeout(this.timeout);
-        push(LinkTo.playerGame(STATIC_GAMES.find(game => game.name === EXIT_NAME).url));
+        push(LinkTo.playerGame(EXIT_GAME.url));
       }, 2000);
     };
   };
@@ -212,15 +210,7 @@ class Overview extends React.PureComponent<Props, State> {
     const isLastGame = this.isLastGame();
     return (
       <div className={styles.Container}>
-        {showExitGame && (
-          <Tile
-            game={STATIC_GAMES.find(game => game.name === EXIT_NAME)}
-            isChosen
-            isActive
-            className={styles.ExitGame}
-            size="Large"
-          />
-        )}
+        {showExitGame && <Tile game={EXIT_GAME} isChosen isActive className={styles.ExitGame} size="Large" />}
         {this.state.showOverview && (
           <>
             <div className={styles.Games}>

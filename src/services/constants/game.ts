@@ -16,6 +16,13 @@ import Exit from '../../pages/games/Exit';
 export const HOLZMARKT_NAME = 'Holzmarkt';
 export const EXIT_NAME = 'EXIT';
 
+export const EXIT_GAME = {
+  name: EXIT_NAME,
+  url: '/exit',
+  alreadyPlayed: false,
+  component: Exit,
+};
+
 export const STATIC_GAMES: Array<Game> = [
   {
     name: HOLZMARKT_NAME,
@@ -23,12 +30,7 @@ export const STATIC_GAMES: Array<Game> = [
     alreadyPlayed: false,
     component: LumberMarket,
   },
-  {
-    name: EXIT_NAME,
-    url: '/exit',
-    alreadyPlayed: false,
-    component: Exit,
-  },
+  EXIT_GAME,
   {
     name: 'Körper-klaus',
     url: '/koerper-klaus',
