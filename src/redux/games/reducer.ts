@@ -33,6 +33,7 @@ const initialState: GameState = Object.freeze(
 
 const gameReducer: Reducer<GameState> = (state: GameState = initialState, action: AnyAction): GameState => {
   let newState, game: Game;
+  // TODO Make this more efficient!
   switch (action.type) {
     case GAMES.SET_CURRENT_BY_URL:
       // Use STATIC_GAMES here to set EXIT as current game,too

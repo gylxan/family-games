@@ -73,7 +73,18 @@ class Overview extends React.PureComponent<Props, State> {
 
   getAudio = (name: string): string => this.state.audios.find(audio => audio.toLowerCase().indexOf(name) >= 0);
 
+  isLastGame = (): boolean => getPlayedGames(this.props.games).length === this.props.games.length - 1;
+
   startRandomGameChoose = (): void => {
+    const { games } = this.props;
+    if (this.isLastGame()) {
+      this.setState({
+        activeGame: games.find(game => game.alreadyPlayed === false),
+        isStarted: false,
+      });
+      this.redirectToGameAfterTimeout();
+      return;
+    }
     this.setState({
       isStarted: true,
     });
@@ -96,12 +107,6 @@ class Overview extends React.PureComponent<Props, State> {
   };
 
   startInterval = (): void => {
-    this.interval = window.setInterval(() => {
-      this.setState({
-        activeGame: this.getRandomGame(),
-      });
-    }, 250);
-
     if (getPlayedGames(this.props.games).length === GAMES_BEFORE_EXIT && !this.props.isExitGamePlayed) {
       this.stopInterval();
       this.setState({
@@ -110,7 +115,14 @@ class Overview extends React.PureComponent<Props, State> {
         isStopping: false,
       });
       this.startExitGameShow();
+      return;
     }
+
+    this.interval = window.setInterval(() => {
+      this.setState({
+        activeGame: this.getRandomGame(),
+      });
+    }, 250);
   };
 
   startExitGameShow = (): void => {
@@ -200,6 +212,7 @@ class Overview extends React.PureComponent<Props, State> {
     }, time);
   };
 
+  // TODO: Create an own component for the tiles!
   getGameCssProperties = (game: Game, index: number, isActiveGame: boolean): CSSProperties => {
     const { isShownFirst } = this.props;
     const { isExitGameShowStarted } = this.state;
@@ -251,6 +264,8 @@ class Overview extends React.PureComponent<Props, State> {
 
   render(): JSX.Element {
     const { isExitGameShowStarted, showExitGame } = this.state;
+    const { games } = this.props;
+    const isLastGame = this.isLastGame();
     return (
       <div className={styles.Container}>
         {showExitGame && (
@@ -276,7 +291,7 @@ class Overview extends React.PureComponent<Props, State> {
                 }
                 onClick={!this.state.isStarted ? this.startRandomGameChoose : this.stopRandomGameChoose}
               >
-                {this.state.isStarted ? 'Stop' : 'Spiel auswählen!'}
+                {this.state.isStarted ? 'Stop' : isLastGame ? 'Letztes Spiel starten' : 'Spiel auswählen!'}
               </Button>
             </div>
           </>
