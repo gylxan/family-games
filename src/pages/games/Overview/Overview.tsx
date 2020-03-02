@@ -23,7 +23,7 @@ const GAMES_BEFORE_EXIT = 5;
 
 export interface Props {
   isShownFirst: boolean;
-  exitGamePlayed: boolean;
+  isExitGamePlayed: boolean;
   games: Game[];
   push: (url: string) => void;
 }
@@ -33,7 +33,7 @@ export interface State {
   audios: string[];
   isStarted: boolean;
   isStopping: boolean;
-  exitGameShowStarted: boolean;
+  isExitGameShowStarted: boolean;
   showOverlay: boolean;
   showExitGame: boolean;
   showOverview: boolean;
@@ -48,7 +48,7 @@ class Overview extends React.PureComponent<Props, State> {
     activeGame: null,
     isStarted: false,
     isStopping: false,
-    exitGameShowStarted: false,
+    isExitGameShowStarted: false,
     showOverlay: false,
     showOverview: true,
     showExitGame: false,
@@ -102,10 +102,10 @@ class Overview extends React.PureComponent<Props, State> {
       });
     }, 250);
 
-    if (getPlayedGames(this.props.games).length === GAMES_BEFORE_EXIT && !this.props.exitGamePlayed) {
+    if (getPlayedGames(this.props.games).length === GAMES_BEFORE_EXIT && !this.props.isExitGamePlayed) {
       this.stopInterval();
       this.setState({
-        exitGameShowStarted: true,
+        isExitGameShowStarted: true,
         isStarted: false,
         isStopping: false,
       });
@@ -202,7 +202,7 @@ class Overview extends React.PureComponent<Props, State> {
 
   getGameCssProperties = (game: Game, index: number, isActiveGame: boolean): CSSProperties => {
     const { isShownFirst } = this.props;
-    const { exitGameShowStarted } = this.state;
+    const { isExitGameShowStarted } = this.state;
     const css: CSSProperties = {};
     if (!game.alreadyPlayed) {
       css.backgroundColor = game.color;
@@ -214,7 +214,7 @@ class Overview extends React.PureComponent<Props, State> {
     if (isShownFirst) {
       css.animationDelay = `${(index + 1) * 0.5}s`;
     }
-    if (exitGameShowStarted) {
+    if (isExitGameShowStarted) {
       css.animationIterationCount = 'infinite';
     }
     return css;
@@ -222,7 +222,7 @@ class Overview extends React.PureComponent<Props, State> {
 
   renderGameTile = (game: Game, index: number): JSX.Element => {
     const { isShownFirst } = this.props;
-    const { exitGameShowStarted } = this.state;
+    const { isExitGameShowStarted } = this.state;
     const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
     return (
       <div
@@ -238,9 +238,9 @@ class Overview extends React.PureComponent<Props, State> {
           {
             [styles.AlreadyPlayed]: game.alreadyPlayed,
           },
-          { animated: isShownFirst || exitGameShowStarted },
+          { animated: isShownFirst || isExitGameShowStarted },
           { fadeIn: isShownFirst },
-          { flash: exitGameShowStarted },
+          { flash: isExitGameShowStarted },
         )}
         style={this.getGameCssProperties(game, index, isActiveGame)}
       >
@@ -250,7 +250,7 @@ class Overview extends React.PureComponent<Props, State> {
   };
 
   render(): JSX.Element {
-    const { exitGameShowStarted, showExitGame } = this.state;
+    const { isExitGameShowStarted, showExitGame } = this.state;
     return (
       <div className={styles.Container}>
         {showExitGame && (
@@ -266,8 +266,8 @@ class Overview extends React.PureComponent<Props, State> {
               <Button
                 className={classNames(
                   styles.StartButton,
-                  { animated: exitGameShowStarted },
-                  { hinge: exitGameShowStarted },
+                  { animated: isExitGameShowStarted },
+                  { hinge: isExitGameShowStarted },
                 )}
                 variant={'contained'}
                 color={'primary'}

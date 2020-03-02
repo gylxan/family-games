@@ -8,14 +8,14 @@ import RootState from '../../../redux/RootState';
 interface Props {
   games: Game[];
   isShownFirst: boolean;
-  exitGamePlayed: boolean;
+  isExitGamePlayed: boolean;
 }
 
 const mapStateToProps = (rootState: RootState): Props => {
   return {
     games: getGamesArray(rootState),
     isShownFirst: rootState.game.isShownFirst,
-    exitGamePlayed: rootState.game.exitGamePlayed,
+    isExitGamePlayed: rootState.game.isExitGamePlayed,
   };
 };
 

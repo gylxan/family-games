@@ -17,7 +17,7 @@ export interface GameState {
   currentGame: undefined | Game;
   byName: { [name: string]: Game };
   isShownFirst: boolean;
-  exitGamePlayed: boolean;
+  isExitGamePlayed: boolean;
 }
 
 const initialState: GameState = Object.freeze(
@@ -27,7 +27,7 @@ const initialState: GameState = Object.freeze(
         byName: getRandomGamesWithColors(),
         isShownFirst: true,
         currentGame: undefined,
-        exitGamePlayed: false,
+        isExitGamePlayed: false,
       },
 );
 
@@ -63,7 +63,7 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
         if (!!game && game.name === EXIT_NAME) {
           newState = {
             ...state,
-            exitGamePlayed: true,
+            isExitGamePlayed: true,
           };
         }
         cacheManager.save(newState);
