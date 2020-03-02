@@ -13,7 +13,7 @@ export interface Props {
 const TeamPointsCounter: React.FC<Props> = ({ teams, currentGame }) => (
   <header className={styles.TeamPointsCounter}>
     {teams.map((team, index) => (
-      <>
+      <React.Fragment key={team.id}>
         <Chip
           key={team.id}
           className={styles.TeamPoints}
@@ -26,7 +26,7 @@ const TeamPointsCounter: React.FC<Props> = ({ teams, currentGame }) => (
           }
         />
         {currentGame && index === teams.length / 2 - 1 && <h1>{currentGame.name}</h1>}
-      </>
+      </React.Fragment>
     ))}
   </header>
 );
