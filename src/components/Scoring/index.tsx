@@ -38,9 +38,8 @@ const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId, showSkipOptio
     ) : (
       <>
         {teams.map((team, index) => (
-          <>
+          <React.Fragment key={team.id}>
             <Button
-              key={team.id}
               variant={'contained'}
               color="primary"
               className={styles.TeamButton}
@@ -53,7 +52,7 @@ const Scoring: React.FC<Props> = ({ onScored, teams, activeTeamId, showSkipOptio
                 <Clear style={{ color: 'white' }} />
               </Button>
             )}
-          </>
+          </React.Fragment>
         ))}
       </>
     )}
