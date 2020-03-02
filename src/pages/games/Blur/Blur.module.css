@@ -19,3 +19,9 @@
   box-sizing: border-box;
   margin: auto;
 }
+
+.ProgressBar {
+  min-width: 60vw;
+  margin: auto;
+  margin-top: 2em;
+}

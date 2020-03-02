@@ -5,12 +5,10 @@
 
 .SlotMachineContainer {
   width: 401px;
-  margin-bottom: 3.8em;
   padding: 10px;
   background: white;
   box-shadow: 2px 3px 0 black;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2.2em auto 5.3em;
 }
 
 .SlotMachine {

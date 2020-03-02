@@ -113,7 +113,7 @@ class Blur extends React.PureComponent<Props, State> {
 
   render(): JSX.Element {
     if (!this.state.hasImagesLoaded) {
-      return <LinearProgress />;
+      return <LinearProgress className={styles.ProgressBar} />;
     }
     return (
       <GameFlow
