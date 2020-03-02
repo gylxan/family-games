@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './InputList.module.css';
-import {IconButton, TextField} from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import { IconButton, TextField } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
 import classNames from 'classnames';
 
