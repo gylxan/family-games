@@ -20,9 +20,9 @@ const Description: React.FC<DescriptionProps> = ({ onStart }) => (
       <strong>Rundenzahl:</strong> {MAX_ROUNDS}
     </p>
     <p>
-      <strong>Beschreibung:</strong> Jedes Team bestimmt 2 Spieler. Der Louie fliegt im Kreis und versucht dabei die
-      Hühner der Spieler (Chips) aus dem Stall zu schubsen. Die Spieler müssen den Louie abwehren und über ihren Stall
-      hinweg fliegen lassen. Das Team, dessen Spieler zuletzt noch Hühner im Stall hat, gewinnt eine Runde.
+      <strong>Beschreibung:</strong> Der Louie fliegt im Kreis und versucht dabei die Hühner der Spieler (Chips) aus dem
+      Stall zu schubsen. Die Spieler müssen den Louie abwehren und über ihren Stall hinweg fliegen lassen. Das Team,
+      dessen Spieler zuletzt noch Hühner im Stall hat, gewinnt eine Runde.
     </p>
   </GameDescription>
 );

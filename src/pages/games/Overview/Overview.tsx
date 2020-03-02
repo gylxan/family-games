@@ -11,11 +11,6 @@ import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/const
 
 const GAMES_BEFORE_EXIT = 5;
 
-//KIKI
-// TODO Schriftart in Beschreibung wieder vergrößern (Exit game und Just one checken)
-//TODO: JukeBox, Runden als strong text und kürzen
-//TODO Tetris rutscht wieder hoch
-
 //GUIDO
 //TODO Just One Bei zwei begriffen wird nicht richtig getrennt
 

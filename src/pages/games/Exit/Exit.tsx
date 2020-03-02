@@ -117,10 +117,9 @@ class Exit extends React.PureComponent<Props, State> {
           <strong>Rundenzahl je Team:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong> Beschreibung:</strong> Jedes Team erhält 4 Umschläge. In den Umschlägen befinden sich Rätsel und 2
-          Hinweise um diese Rätsel zu lösen. Gesucht wird entweder ein Lösungswort oder ein Zahlencode. Beide Teams
-          versuchen innerhalb von <strong>{TIME_IN_MINUTES} Minuten</strong> so viele Rätsel zu lösen wie möglich. Jedes
-          gelöste Rätsel bringt 2 Punkte, wurde ein Hinweis benutzt, wird 1 Punkt abgezogen.
+          <strong> Beschreibung:</strong> Jedes Team erhält 4 Umschläge mit je einem Rätsel und 2 Hinweisen. Gesucht
+          wird entweder ein Lösungswort oder ein Zahlencode. Beide Teams versuchen innerhalb von{' '}
+          <strong>{TIME_IN_MINUTES} Minuten</strong> so viele Rätsel zu lösen wie möglich.
         </p>
       </GameDescription>
     );

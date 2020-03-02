@@ -34,10 +34,9 @@ class Tetris extends React.PureComponent {
         </p>
         <p>
           <strong>Beschreibung:</strong> Jedes Team bekommt pro Runde 3 Puzzle. Diese müssen innerhalb von{' '}
-          <strong>{COUNTDOWN_IN_MINUTES} Minuten</strong> fertiggestellt werden. Es wird zufällig bestimmt, welche Teile
-          verwendet werden müssen. Das Team, das zuerst alle Puzzle fertiggestellt hat, drückt den Buzzer und gewinnt
-          die Runde. Sollte kein Team innerhalb der Zeit fertig werden, gewinnt das Team mit den meisten fertigen
-          Puzzlen.
+          <strong>{COUNTDOWN_IN_MINUTES} Minuten</strong> fertiggestellt werden. Das Team, das zuerst alle Puzzle
+          fertiggestellt hat, drückt den Buzzer und gewinnt die Runde. Sollte kein Team innerhalb der Zeit fertig
+          werden, gewinnt das Team mit den meisten fertigen Puzzlen.
         </p>
       </GameDescription>
     );

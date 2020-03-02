@@ -82,10 +82,9 @@ class JustOneGame extends React.PureComponent<State> {
           <strong>Rundenzahl je Team:</strong> {MAX_ROUNDS}
         </p>
         <p>
-          <strong>Beschreibung:</strong> Die Teams bestimmen 2 Ratende. Den anderen Spielern wird ein Begriff gezeigt,
-          den sie den Ratenden mit einem Wort beschreiben. Anschließend haben die Ratenden{' '}
-          <strong>{COUNTDOWN_IN_SECONDS / 60} Minute</strong> Zeit, den Begriff zu erraten. Dafür haben sie nur einen
-          Versuch.
+          <strong>Beschreibung:</strong> Dem Team wird ein Begriff gezeigt, den sie den Ratenden mit einem Wort
+          beschreiben. Anschließend haben die Ratenden <strong>{COUNTDOWN_IN_SECONDS / 60} Minute</strong> Zeit, den
+          Begriff zu erraten. Dafür haben sie nur einen Versuch.
           <br />
           <strong>Achtung:</strong> Alle mehrfachen (identischen) Hinweise werden entfernt.
         </p>
