@@ -18,7 +18,6 @@ const GAMES_BEFORE_EXIT = 5;
 
 //GUIDO
 //TODO Just One Bei zwei begriffen wird nicht richtig getrennt
-// TODO Jukebox: Eventuell noch button zum auflösen
 
 export interface Props {
   isShownFirst: boolean;
