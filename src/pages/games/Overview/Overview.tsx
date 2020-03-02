@@ -8,6 +8,7 @@ import { LinkTo, Routes } from '../../../services/routes';
 import { getPlayedGames, hasAllGamesPlayed } from '../../../services/utils/game';
 import { getGameOverviewAudios } from '../../../services/utils/firebaseStorage';
 import { EXIT_NAME, HOLZMARKT_NAME, STATIC_GAMES } from '../../../services/constants/game';
+import Tile from './Tile';
 
 const GAMES_BEFORE_EXIT = 5;
 
@@ -205,68 +206,44 @@ class Overview extends React.PureComponent<Props, State> {
     }, time);
   };
 
-  // TODO: Create an own component for the tiles!
-  getGameCssProperties = (game: Game, index: number, isActiveGame: boolean): CSSProperties => {
-    const { isShownFirst } = this.props;
-    const { isExitGameShowStarted } = this.state;
-    const css: CSSProperties = {};
-    if (!game.alreadyPlayed) {
-      css.backgroundColor = game.color;
-    }
-
-    if (isActiveGame) {
-      css.boxShadow = `0 0 10px 10px rgba(255,255,255,0.5)`;
-    }
-    if (isShownFirst) {
-      css.animationDelay = `${(index + 1) * 0.5}s`;
-    }
-    if (isExitGameShowStarted) {
-      css.animationIterationCount = 'infinite';
-    }
-    return css;
-  };
-
-  renderGameTile = (game: Game, index: number): JSX.Element => {
-    const { isShownFirst } = this.props;
-    const { isExitGameShowStarted } = this.state;
-    const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
-    return (
-      <div
-        key={game.name}
-        className={classNames(
-          styles.Tile,
-          {
-            [styles.Active]: isActiveGame,
-          },
-          {
-            [styles.Chosen]: isActiveGame && !this.state.isStarted,
-          },
-          {
-            [styles.AlreadyPlayed]: game.alreadyPlayed,
-          },
-          { animated: isShownFirst || isExitGameShowStarted },
-          { fadeIn: isShownFirst },
-          { flash: isExitGameShowStarted },
-        )}
-        style={this.getGameCssProperties(game, index, isActiveGame)}
-      >
-        {game.name}
-      </div>
-    );
-  };
-
   render(): JSX.Element {
-    const { isExitGameShowStarted, showExitGame } = this.state;
+    const { isStarted, isExitGameShowStarted, showExitGame } = this.state;
+    const { isShownFirst } = this.props;
     const isLastGame = this.isLastGame();
     return (
       <div className={styles.Container}>
         {showExitGame && (
-          <div className={classNames(styles.Tile, styles.Active, styles.Chosen, styles.ExitGame)}>EXIT</div>
+          <Tile
+            game={STATIC_GAMES.find(game => game.name === EXIT_NAME)}
+            isChosen
+            isActive
+            className={styles.ExitGame}
+            size="Large"
+          />
         )}
         {this.state.showOverview && (
           <>
             <div className={styles.Games}>
-              {this.props.games.map((game: Game, index: number) => this.renderGameTile(game, index))}
+              {this.props.games.map((game: Game, index) => {
+                const isActiveGame = this.state.activeGame !== null && game.name === this.state.activeGame.name;
+                return (
+                  <Tile
+                    key={game.name}
+                    game={game}
+                    className={classNames(
+                      { animated: isShownFirst || isExitGameShowStarted },
+                      { fadeIn: isShownFirst },
+                      { flash: isExitGameShowStarted },
+                    )}
+                    style={{
+                      animationIterationCount: isExitGameShowStarted ? 'infinite' : '',
+                      animationDelay: isShownFirst ? `${(index + 1) * 0.5}s` : '',
+                    }}
+                    isActive={isActiveGame}
+                    isChosen={isActiveGame && !isStarted}
+                  />
+                );
+              })}
             </div>
 
             <div className={styles.ControlBar}>
