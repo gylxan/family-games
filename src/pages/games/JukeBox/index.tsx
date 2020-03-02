@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, LinearProgress } from '@material-ui/core';
-import { PauseCircleFilled, PlayCircleFilled } from '@material-ui/icons';
+import { PauseCircleFilled, PlayCircleFilled, RemoveRedEye } from '@material-ui/icons';
 import classNames from 'classnames';
 
 import GameDescription, { Props as GameDescriptionProps } from '../../../components/GameDescription';
@@ -17,12 +17,14 @@ const MAX_ROUNDS = 10;
 export interface State {
   hasData: boolean;
   isAudioPlaying: boolean;
+  showSong: boolean;
 }
 
 class JukeBox extends React.PureComponent<State> {
   state = {
     hasData: false,
     isAudioPlaying: false,
+    showSong: false,
   };
   tracks: string[];
   audio: HTMLAudioElement = new Audio();
@@ -41,6 +43,9 @@ class JukeBox extends React.PureComponent<State> {
   };
 
   startPlaying = (): void => {
+    this.setState({
+      showSong: false,
+    });
     this.audio.src = this.tracks.shift();
     this.toggleAudio();
   };
@@ -64,6 +69,18 @@ class JukeBox extends React.PureComponent<State> {
     });
   };
 
+  getCurrentSong = (): string => {
+    const indexOfLastSlash = this.audio.src.lastIndexOf('%2F') + 3;
+    const lengthToShow = this.audio.src.lastIndexOf('.') - indexOfLastSlash;
+    return this.audio.src.substr(indexOfLastSlash, lengthToShow).replace(/%20/g, ' ');
+  };
+
+  handleShowSong = (): void => {
+    this.setState({
+      showSong: true,
+    });
+  };
+
   renderGamePlay(): JSX.Element {
     return (
       <>
@@ -79,6 +96,13 @@ class JukeBox extends React.PureComponent<State> {
             <PlayCircleFilled style={{ color: 'white' }} />
           )}
         </Button>
+        {this.state.showSong ? (
+          <span>{this.getCurrentSong()}</span>
+        ) : (
+          <Button color={'primary'} onClick={this.handleShowSong}>
+            <RemoveRedEye style={{ color: 'white', fontSize: '4em' }} />
+          </Button>
+        )}
       </>
     );
   }

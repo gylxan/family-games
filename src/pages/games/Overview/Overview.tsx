@@ -19,7 +19,6 @@ const GAMES_BEFORE_EXIT = 5;
 //GUIDO
 //TODO Just One Bei zwei begriffen wird nicht richtig getrennt
 // TODO Jukebox: Eventuell noch button zum auflösen
-// Wenn nur noch ein spiel, sofort verwenden
 
 export interface Props {
   isShownFirst: boolean;
@@ -264,7 +263,6 @@ class Overview extends React.PureComponent<Props, State> {
 
   render(): JSX.Element {
     const { isExitGameShowStarted, showExitGame } = this.state;
-    const { games } = this.props;
     const isLastGame = this.isLastGame();
     return (
       <div className={styles.Container}>
