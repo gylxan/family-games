@@ -13,6 +13,8 @@ const WORDS = [
   'Lampenfassung',
   'U-Boot',
   'Glühwein',
+  'Taschendieb',
+  'Sonnenbrand',
 ];
 
 export interface State {
