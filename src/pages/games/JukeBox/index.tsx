@@ -7,7 +7,7 @@ import GameDescription, { Props as GameDescriptionProps } from '../../../compone
 import GameFlow from '../../../components/GameFlow';
 import { GameMode } from '../../../components/GameFlow/GameFlow';
 
-import { getJukeboxAudios } from '../../../services/utils/firebaseStorage';
+import { getJukeboxStorageElements } from '../../../services/utils/firebaseStorage';
 import { shuffle } from '../../../services/utils/array';
 
 import styles from './JukeBox.module.css';
@@ -18,6 +18,12 @@ export interface State {
   hasData: boolean;
   isAudioPlaying: boolean;
   showSong: boolean;
+  currentTrack: Track | null;
+}
+
+interface Track {
+  url: string;
+  name: string;
 }
 
 class JukeBox extends React.PureComponent<State> {
@@ -25,19 +31,31 @@ class JukeBox extends React.PureComponent<State> {
     hasData: false,
     isAudioPlaying: false,
     showSong: false,
+    currentTrack: null,
   };
-  tracks: string[];
+  tracks: Track[];
   audio: HTMLAudioElement = new Audio();
 
   componentDidMount(): void {
     this.loadTracks();
   }
 
+  getTrackName = (element: any): string => element.name.substr(0, element.name.lastIndexOf('.'));
+
+  // TODO Maybe some things can be moved to the firebaseStorage?
   loadTracks = (): void => {
-    getJukeboxAudios().then(urls => {
-      this.tracks = shuffle(urls);
-      this.setState({
-        hasData: true,
+    getJukeboxStorageElements().then(elements => {
+      const downloadUrls = elements.map(element => element.getDownloadURL());
+      Promise.all(downloadUrls).then(urls => {
+        const urlsAndTracks = urls.map((url: string, index: number) => ({
+          url,
+          name: this.getTrackName(elements[index]),
+        }));
+        this.tracks = shuffle(urlsAndTracks);
+
+        this.setState({
+          hasData: true,
+        });
       });
     });
   };
@@ -46,8 +64,14 @@ class JukeBox extends React.PureComponent<State> {
     this.setState({
       showSong: false,
     });
-    this.audio.src = this.tracks.shift();
-    this.toggleAudio();
+    const audio = this.tracks.shift();
+    if (!!audio) {
+      this.setState({
+        currentTrack: audio,
+      });
+      this.audio.src = audio.url;
+      this.toggleAudio();
+    }
   };
 
   endAudio = (): void => {
@@ -67,12 +91,6 @@ class JukeBox extends React.PureComponent<State> {
     this.setState({
       isAudioPlaying: !this.audio.paused,
     });
-  };
-
-  getCurrentSong = (): string => {
-    const indexOfLastSlash = this.audio.src.lastIndexOf('%2F') + 3;
-    const lengthToShow = this.audio.src.lastIndexOf('.') - indexOfLastSlash;
-    return this.audio.src.substr(indexOfLastSlash, lengthToShow).replace(/%20/g, ' ');
   };
 
   handleShowSong = (): void => {
@@ -97,7 +115,7 @@ class JukeBox extends React.PureComponent<State> {
           )}
         </Button>
         {this.state.showSong ? (
-          <span>{this.getCurrentSong()}</span>
+          <span>{this.state.currentTrack && this.state.currentTrack.name}</span>
         ) : (
           <Button color={'primary'} onClick={this.handleShowSong}>
             <RemoveRedEye style={{ color: 'white', fontSize: '4em' }} />
