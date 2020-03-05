@@ -5,16 +5,17 @@ import { getRandomIndex } from '../../../services/utils/array';
 const WORDS = [
   'Lichterkette',
   'Treppenhaus',
-  'Gießkanne',
   'Drehbuch',
   'Schaukelpferd',
   'Geschenkpapier',
-  'Rasierschaum',
   'Lampenfassung',
   'U-Boot',
   'Glühwein',
   'Taschendieb',
   'Sonnenbrand',
+  'Schneeketten',
+  'Reisepass',
+  'Grill',
 ];
 
 export interface State {
