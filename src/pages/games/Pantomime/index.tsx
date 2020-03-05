@@ -21,7 +21,7 @@ class Pantomime extends React.PureComponent {
         </p>
         <p>
           <strong>Beschreibung:</strong> Der Körperklaus erhält einen geheimen Begriff. Diesen Begriff stellt er seinen
-          Teammitgliedern innerhalb einer Minute unter vollem Körpereinsatz dar. Es dürfen keine Hilfsmittel verwendet
+          Teammitgliedern innerhalb <strong>einer Minute</strong> unter vollem Körpereinsatz dar. Es dürfen keine Hilfsmittel verwendet
           werden.
         </p>
       </GameDescription>
