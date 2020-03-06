@@ -1,3 +1,6 @@
+export const STORAGE_KEY_TEAMS = 'teams';
+export const STORAGE_KEY_GAMES = 'games';
+
 export default class CacheManager<DataType> {
   storageKey: string | null = null;
   constructor(key: string) {
