@@ -3,11 +3,11 @@ import { Game } from '../../interfaces/Game';
 import { AnyAction, Reducer } from 'redux';
 import { GAMES } from '../actionTypes';
 import { getRandomGamesWithColors } from '../../services/utils/game';
-import CacheManager from '../../services/CacheManager';
+import CacheManager, { STORAGE_KEY_GAMES } from '../../services/CacheManager';
 import config, { Environment } from '../../services/config';
 import { EXIT_NAME, STATIC_GAMES } from '../../services/constants/game';
 
-const cacheManager = new CacheManager<GameState>('games');
+const cacheManager = new CacheManager<GameState>(STORAGE_KEY_GAMES);
 if (config.env === Environment.Development) {
   cacheManager.delete();
 }
@@ -20,16 +20,18 @@ export interface GameState {
   isExitGamePlayed: boolean;
 }
 
-const initialState: GameState = Object.freeze(
-  cachedData !== null
+const getInitialData = (cachedData: GameState | null): GameState => {
+  return cachedData !== null
     ? cachedData
     : {
         byName: getRandomGamesWithColors(),
         isShownFirst: true,
         currentGame: undefined,
         isExitGamePlayed: false,
-      },
-);
+      };
+};
+
+const initialState: GameState = Object.freeze(getInitialData(cachedData));
 
 const gameReducer: Reducer<GameState> = (state: GameState = initialState, action: AnyAction): GameState => {
   let newState, game: Game;
@@ -81,6 +83,12 @@ const gameReducer: Reducer<GameState> = (state: GameState = initialState, action
         },
         isShownFirst: false,
       };
+      cacheManager.save(newState);
+      return newState;
+
+    case GAMES.RESET:
+      cacheManager.delete();
+      newState = getInitialData(null);
       cacheManager.save(newState);
       return newState;
     default:

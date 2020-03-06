@@ -11,3 +11,7 @@ export const addPoints = (id: string, points: number): AnyAction => ({
   type: TEAMS.UPDATE,
   payload: { id, points },
 });
+
+export const resetTeams = (): AnyAction => ({
+  type: TEAMS.RESET,
+});

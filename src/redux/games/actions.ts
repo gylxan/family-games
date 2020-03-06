@@ -10,3 +10,7 @@ export const setCurrentGameByUrl = (url: string): AnyAction => ({
   type: GAMES.SET_CURRENT_BY_URL,
   payload: { url },
 });
+
+export const resetGames = (): AnyAction => ({
+  type: GAMES.RESET,
+});

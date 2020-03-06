@@ -1,17 +1,17 @@
 import { AnyAction, Reducer } from 'redux';
 import { TEAMS } from '../actionTypes';
 import Team from '../../interfaces/Team';
-import CacheManager from '../../services/CacheManager';
+import CacheManager, { STORAGE_KEY_TEAMS } from '../../services/CacheManager';
 
-const cacheManager = new CacheManager<TeamState>('teams');
+const cacheManager = new CacheManager<TeamState>(STORAGE_KEY_TEAMS);
 const cachedData = cacheManager.load();
 
 export interface TeamState {
   data: Team[];
 }
 
-const initialState: TeamState = Object.freeze(
-  cachedData !== null
+const getInitialData = (cachedData: TeamState | null): TeamState => {
+  return cachedData !== null
     ? cachedData
     : {
         data: [
@@ -28,8 +28,10 @@ const initialState: TeamState = Object.freeze(
             points: 0,
           },
         ],
-      },
-);
+      };
+};
+
+const initialState: TeamState = Object.freeze(getInitialData(cachedData));
 
 const teamReducer: Reducer<TeamState> = (state: TeamState = initialState, action: AnyAction): TeamState => {
   let newState;
@@ -39,6 +41,11 @@ const teamReducer: Reducer<TeamState> = (state: TeamState = initialState, action
         ...state,
         data: state.data.map(team => (team.id === action.payload.id ? action.payload : team)),
       };
+      cacheManager.save(newState);
+      return newState;
+    case TEAMS.RESET:
+      cacheManager.delete();
+      newState = getInitialData(null);
       cacheManager.save(newState);
       return newState;
     default:
