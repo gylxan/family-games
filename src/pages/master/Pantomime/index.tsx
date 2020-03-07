@@ -16,6 +16,9 @@ const WORDS = [
   'Schneeketten',
   'Reisepass',
   'Grill',
+  'Versuchskaninchen',
+  'Pfauenfeder',
+  'Yoga',
 ];
 
 export interface State {
